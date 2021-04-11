@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-server
--- Waktu pembuatan: 11 Apr 2021 pada 08.54
+-- Waktu pembuatan: 11 Apr 2021 pada 14.38
 -- Versi server: 8.0.23
 -- Versi PHP: 7.4.16
 
@@ -42,8 +42,9 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id_barang`, `nama_barang`, `stok`, `satuan`, `keterangan`, `total_masuk`, `total_keluar`) VALUES
-(2028, 'ada', 0, 'ada', NULL, 12, 12),
-(2029, 'aduh', 0, 'aduh', NULL, 0, 0);
+(2028, 'ada', 12, 'ada', NULL, 12, 12),
+(2029, 'aduh', 0, 'aduh', NULL, 0, 0),
+(2031, 'tes', 20, 'tes', NULL, 20, 0);
 
 -- --------------------------------------------------------
 
@@ -69,22 +70,6 @@ INSERT INTO `barang_keluar` (`id_barang_keluar`, `id_penerima`, `id_barang`, `ju
 (6, 37, 2028, 1, '2021-04-11', 'hgfh'),
 (7, 37, 2028, 1, '2021-04-30', '');
 
---
--- Trigger `barang_keluar`
---
-DELIMITER $$
-CREATE TRIGGER `kurang_stok_keluar` AFTER INSERT ON `barang_keluar` FOR EACH ROW BEGIN UPDATE barang SET stok=stok-new.jumlah_keluar , total_keluar=total_keluar+new.jumlah_keluar
-WHERE id_barang=new.id_barang;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `tambah_stok_keluar` AFTER DELETE ON `barang_keluar` FOR EACH ROW BEGIN UPDATE barang SET stok=stok+old.jumlah_keluar , total_keluar=total_keluar-old.jumlah_keluar
-WHERE id_barang=old.id_barang;
-END
-$$
-DELIMITER ;
-
 -- --------------------------------------------------------
 
 --
@@ -105,23 +90,9 @@ CREATE TABLE `barang_masuk` (
 --
 
 INSERT INTO `barang_masuk` (`id_barang_masuk`, `id_pemberi`, `id_barang`, `jumlah`, `tgl_masuk`, `keterangan_masuk`) VALUES
-(201, 12, 2028, 12, '2021-04-11', '');
-
---
--- Trigger `barang_masuk`
---
-DELIMITER $$
-CREATE TRIGGER `kurang_stok` AFTER DELETE ON `barang_masuk` FOR EACH ROW BEGIN UPDATE barang SET stok=stok-old.jumlah , total_masuk=total_masuk-old.jumlah
-WHERE id_barang=old.id_barang;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `tambah_stok_jenis` AFTER INSERT ON `barang_masuk` FOR EACH ROW BEGIN UPDATE barang SET stok=stok+NEW.jumlah ,total_masuk=total_masuk+NEW.jumlah
-WHERE id_barang=NEW.id_barang;
-END
-$$
-DELIMITER ;
+(201, 12, 2028, 12, '2021-04-11', ''),
+(208, 13, 2031, 10, '2021-04-11', ''),
+(209, 13, 2031, 10, '2021-04-11', '');
 
 -- --------------------------------------------------------
 
@@ -236,19 +207,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2030;
+  MODIFY `id_barang` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2032;
 
 --
 -- AUTO_INCREMENT untuk tabel `barang_keluar`
 --
 ALTER TABLE `barang_keluar`
-  MODIFY `id_barang_keluar` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_barang_keluar` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `barang_masuk`
 --
 ALTER TABLE `barang_masuk`
-  MODIFY `id_barang_masuk` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202;
+  MODIFY `id_barang_masuk` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=210;
 
 --
 -- AUTO_INCREMENT untuk tabel `pemberi`

@@ -2,381 +2,363 @@
 
 class Admin extends CI_Controller {
 
-	function __construct(){
-		parent::__construct();
+	function __construct() {
+		parent:: __construct();
 		$this->load->model('model_admin');
 
 	}
-	
-	function tes(){
 
-                $a['page']	= "home";
-                $a['title']	= "Admin";
-                $a['data']	= $this->model_admin->tampil_barang_all();
-                $a['isi']	= "admin/barang/list";
-                
-                $this->load->view('template/wrapper', $a);
-            }
-
-	function index(){
-$this->check_login->check();
-
-		$a['barang_masuk']	= $this->model_admin->total_barang_masuk()->num_rows(); 
-		$a['barang_keluar']	= $this->model_admin->total_barang_keluar()->num_rows();
-		$a['pemberi']	= $this->model_admin->total_pemberi()->num_rows();
-		$a['barang']	= $this->model_admin->total_barang()->num_rows();
-		$a['penerima']	= $this->model_admin->total_penerima()->num_rows();
-		$a['user']	= $this->model_admin->total_user()->num_rows();
-		$a['page']	= "home";
-		$a['title']	= "Admin";
-		
-		$this->load->view('admin/index', $a);
-	}	
-
-function barang_masuk(){
+	function index() {
 		$this->check_login->check();
-		$a['data']	= $this->model_admin->tampil_barang_masuk1();
-		$a['pemberi']	= $this->model_admin->tampil_pemberi();
-		$a['page']	= "barang_masuk/home_barang_masuk";
-			$a['title'] = "barang Masuk";
-			$this->session->set_userdata('TAG',0);
+
+		$a['barang_masuk']=$this->model_admin->total_barang_masuk()->num_rows();
+		$a['barang_keluar']=$this->model_admin->total_barang_keluar()->num_rows();
+		$a['pemberi']=$this->model_admin->total_pemberi()->num_rows();
+		$a['barang']=$this->model_admin->total_barang()->num_rows();
+		$a['penerima']=$this->model_admin->total_penerima()->num_rows();
+		$a['user']=$this->model_admin->total_user()->num_rows();
+		$a['page']="home";
+		$a['title']="Admin";
+
 		$this->load->view('admin/index', $a);
 	}
 
-	function tambah_barang_masuk($id=0){
+	function barang_masuk() {
+		$this->check_login->check();
+		$a['data']=$this->model_admin->tampil_barang_masuk1();
+		$a['pemberi']=$this->model_admin->tampil_pemberi();
+		$a['page']="barang_masuk/home_barang_masuk";
+		$a['title']="barang Masuk";
+		$this->session->set_userdata('TAG', 0);
+		$this->load->view('admin/index', $a);
+	}
+
+	function tambah_barang_masuk($id=0) {
 		$this->check_login->check();
 		$a['pemberi']=$this->model_admin->tampil_pemberi();
 		$a['barang']=$this->model_admin->tampil_barang_all();
-		$a['data']	= $this->model_admin->tampil_barang_masuk($id);
-		$a['nama_pemberi']	= $this->model_admin->detailpemberi($id);
+		$a['data']=$this->model_admin->tampil_barang_masuk($id);
+		$a['nama_pemberi']=$this->model_admin->detailpemberi($id);
 		$a['id_pemberi']=$id;
-		$a['page']	= "barang_masuk/barang_masuk";
-		$a['title'] = "Tambah barang Masuk";
-		$this->session->set_userdata('id_pemberi',$id);
+		$a['page']="barang_masuk/barang_masuk";
+		$a['title']="Tambah barang Masuk";
+		$this->session->set_userdata('id_pemberi', $id);
 		$this->load->view('admin/index', $a);
 	}
 
-function insert_barang_masuk(){
+	function insert_barang_masuk() {
 		$this->check_login->check();
-                    $i=$this->input;
-					$object = array(
-			  	     		
-					 		 'id_pemberi' =>$i->post('id_pemberi'),
-				  			'id_barang' =>$i->post('id_barang'),
-				  			'jumlah' =>$i->post('jumlah'),
-				  			'keterangan_masuk' =>$i->post('keterangan'),
-				  			'tgl_masuk' => $i->post('tgl_masuk')
-					  );
+		$i=$this->input;
+		$id_barang=$i->post('id_barang');
+		$jumlah=$i->post('jumlah');
+		$object=array('id_pemberi'=>$i->post('id_pemberi'),
+			'id_barang'=>$id_barang,
+			'jumlah'=>$jumlah,
+			'keterangan_masuk'=>$i->post('keterangan'),
+			'tgl_masuk'=> $i->post('tgl_masuk'));
 		$this->db->insert('barang_masuk', $object);
-		$this->session->set_flashdata("msg","Data berhasil ditambah");
-		redirect('admin/tambah_barang_masuk/'.$i->post('id_pemberi'),'refresh');
-                
-}
 
-
-		function update_barang_masuk(){
-			$this->check_login->check();
-			$id=$this->input->post('id_barang_masuk');
-	
-		                   		$i=$this->input;
-						$object = array(
-			  	     		'tgl_masuk' =>$i->post('tanggal_masuk'),
-			  	     		'keterangan_masuk' =>$i->post('keterangan')
-				  		
-					  );
-		$this->db->where('id_barang_masuk', $id);
-		$this->db->update('barang_masuk', $object); 
-  $this->session->set_flashdata('msg','Data Berhasil di Update'); 
-						$id_pemberi=$this->session->userdata('id_pemberi');	
-	redirect('admin/tambah_barang_masuk/'.$id_pemberi,'refresh');
+		$barang=$this->model_admin->detailjenis($id_barang);
+		$data_barang=array('total_masuk'=> $barang->total_masuk +=$jumlah,
+			'stok'=> $barang->stok +=$jumlah);
+		$this->db->where('id_barang', $id_barang);
+		$this->db->update('barang', $data_barang);
+		$this->session->set_flashdata("msg", "Data berhasil ditambah");
+		redirect('admin/tambah_barang_masuk/'.$i->post('id_pemberi'), 'refresh');
 
 	}
 
-	
-	
-	function hapus_barang_masuk($id){
-		$this->check_login->check();
-		$id_pemberi=$this->session->userdata('id_pemberi');	
-		
 
-		$id_barang=$this->model_admin->detailbarang($id);
-		$barang=$this->model_admin->detailjenis($id_barang->id_barang);
-		// $id_pemberi=$this->session->userdata('id_pemberi');
-		// redirect('admin/tambah_barang_masuk/'.$id_pemberi,'refresh');
-		if (($barang->total_masuk-$id_barang->jumlah)<$barang->total_keluar) {
-			$this->session->set_flashdata("error","Jenis barang ".'<strong>'.$barang->nama_barang.'</strong>'." Sudah Terbarang");
-			
-		} else {
-			$this->model_admin->hapus_barang_masuk($id);
-			$this->session->set_flashdata("msg","Data berhasil dihapus");
-				
+	function update_barang_masuk() {
+		$this->check_login->check();
+		$id=$this->input->post('id_barang_masuk');
+
+		$i=$this->input;
+		$object=array('tgl_masuk'=>$i->post('tanggal_masuk'),
+			'keterangan_masuk'=>$i->post('keterangan'));
+		$this->db->where('id_barang_masuk', $id);
+		$this->db->update('barang_masuk', $object);
+		$this->session->set_flashdata('msg', 'Data Berhasil di Update');
+		$id_pemberi=$this->session->userdata('id_pemberi');
+		redirect('admin/tambah_barang_masuk/'.$id_pemberi, 'refresh');
+
+	}
+
+
+
+	function hapus_barang_masuk($id) {
+		$this->check_login->check();
+		$id_pemberi=$this->session->userdata('id_pemberi');
+
+
+		$id_masuk=$this->model_admin->detailbarang($id);
+		$barang=$this->model_admin->detailjenis($id_masuk->id_barang);
+
+		if ($this->model_admin->hapus_barang_masuk($id)) {
+			$data_barang=array('total_masuk'=> $barang->total_masuk -=$id_masuk->jumlah,
+				'stok'=> $barang->stok -=$id_masuk->jumlah);
+			$this->db->where('id_barang', $barang->id_barang);
+			$this->db->update('barang', $data_barang);
 		}
-		
-	redirect('admin/tambah_barang_masuk/'.$id_pemberi,'refresh');
-		
+
+		$this->session->set_flashdata("msg", "Data berhasil dihapus");
+		redirect('admin/tambah_barang_masuk/'.$id_pemberi);
+
 	}
 
 
 
 	// function barang barang
 
-	function barang_keluar(){
+	function barang_keluar() {
 		$this->check_login->check();
 		// $a['data']	= $this->model_admin->tampil_barang_keluar();
-		$a['dataprint']	= $this->model_admin->tampil_barang_print();
-		$a['penerima']	= $this->model_admin->tampil_penerima();
+		$a['dataprint']=$this->model_admin->tampil_barang_print();
+		$a['penerima']=$this->model_admin->tampil_penerima();
 
 		// $a['print']	= $this->model_admin->tampil_barang();
-		$a['page']	= "barang_keluar/home_barang_keluar";
-			$a['title'] = "Distribusi barang";
+		$a['page']="barang_keluar/home_barang_keluar";
+		$a['title']="Distribusi barang";
 		$this->load->view('admin/index', $a);
 	}
 
-		function tambah_barang_keluar($id=0){
+	function tambah_barang_keluar($id=0) {
 		$this->check_login->check();
 		$a['penerima']=$this->model_admin->tampil_penerima();
 		$a['barang']=$this->model_admin->tampil_barang1();
-		$a['data']	= $this->model_admin->tampil_barang_keluar($id);
-		$a['nama_penerima']	= $this->model_admin->detailpenerima($id);
+		$a['data']=$this->model_admin->tampil_barang_keluar($id);
+		$a['nama_penerima']=$this->model_admin->detailpenerima($id);
 		$a['id_penerima']=$id;
-		$a['page']	= "barang_keluar/barang_keluar";
-		$a['title'] = "Tambah Distribusi barang";
-		
-		$this->session->set_userdata('id_penerima',$id);
+		$a['page']="barang_keluar/barang_keluar";
+		$a['title']="Tambah Distribusi barang";
+
+		$this->session->set_userdata('id_penerima', $id);
 		$this->load->view('admin/index', $a);
 	}
-	function update_barang_keluar(){
-			$this->check_login->check();
-			$id=$this->input->post('id_barang_keluar');
-	
-		                   		$i=$this->input;
-						$object = array(
-			  	     		'tgl_keluar' =>$i->post('tanggal_keluar'),
-			  	     		'keterangan_keluar' =>$i->post('keterangan_keluar')
-				  		
-					  );
+
+	function update_barang_keluar() {
+		$this->check_login->check();
+		$id=$this->input->post('id_barang_keluar');
+
+		$i=$this->input;
+		$object=array('tgl_keluar'=>$i->post('tanggal_keluar'),
+			'keterangan_keluar'=>$i->post('keterangan_keluar'));
 		$this->db->where('id_barang_keluar', $id);
-		$this->db->update('barang_keluar', $object); 
-  $this->session->set_flashdata('msg','Data Berhasil di Update'); 
-						$id_penerima=$this->session->userdata('id_penerima');	
-	redirect('admin/tambah_barang_keluar/'.$id_penerima,'refresh');
+		$this->db->update('barang_keluar', $object);
+		$this->session->set_flashdata('msg', 'Data Berhasil di Update');
+		$id_penerima=$this->session->userdata('id_penerima');
+		redirect('admin/tambah_barang_keluar/'.$id_penerima, 'refresh');
 
 	}
 
 
-function insert_barang_keluar(){  
-       $i=$this->input;
+	function insert_barang_keluar() {
+		$i=$this->input;
+		$id_barang=$i->post('id_barang');
+		if ($id_barang !="") {
+			# code... $this->check_login->check();
+			$valid=$this->form_validation;
+			
+			$barang = $this->model_admin->detailjenis($id_barang);
+			$jumlah = $i->post('jumlah');
 
-if ($i->post('id_barang')!="") {
-       	# code...
-             
-		$this->check_login->check();
-		$valid=$this->form_validation;
-		$stok=$this->model_admin->detailjenis($this->input->post('id_barang'));
-	
-                    	$object = array(
-			  	     		
-				  			'id_penerima' =>$i->post('id_penerima'),
-				  			'id_barang' =>$i->post('id_barang'),
+			$object=array('id_penerima'=>$i->post('id_penerima'),
+				'id_barang'=>$id_barang,
+				'jumlah_keluar'=> $jumlah,
+				'tgl_keluar'=> $i->post('tgl_keluar'),
+				'keterangan_keluar'=> $i->post('keterangan'));
+			
+			if (($barang->stok)>=$jumlah) {
+				if ($this->db->insert('barang_keluar', $object)) {
+					$data_barang=array(
+						'total_keluar'=> $barang->total_keluar +=$jumlah,
+						'stok'=> $barang->stok -=$jumlah
+					);
+					$this->db->where('id_barang', $id_barang);
+					$this->db->update('barang', $data_barang);
+				}
 
-				  			'jumlah_keluar' =>$i->post('jumlah'),
-				  			'tgl_keluar' => $i->post('tgl_keluar'),
-				  			'keterangan_keluar' => $i->post('keterangan')
-					  );
-                    $id_barang=$i->post('id_barang');
-if (($stok->stok)>=$this->input->post('jumlah')) {
-$this->db->insert('barang_keluar', $object);
-$this->session->set_flashdata("msg","Data berhasil ditambah");
-} else {
-	  $this->session->set_flashdata('error',"stok kurang"); 
-		redirect('admin/tambah_barang_keluar/'.$i->post('id_penerima'),'refresh'); 
-	
-}
+				$this->session->set_flashdata("msg", "Data berhasil ditambah");
+			}
 
+			else {
+				$this->session->set_flashdata('error', "stok kurang");
+				redirect('admin/tambah_barang_keluar/'.$i->post('id_penerima'));
 
-                    		
-		// redirect('admin/tambah_barang_keluar/'.$i->post('id_penerima'),'refresh');    
-                    	
-		redirect('admin/tambah_barang_keluar/'.$i->post('id_penerima'),'refresh');   
-		}  else{
+			}
+			redirect('admin/tambah_barang_keluar/'.$i->post('id_penerima'));
+		}
 
-		redirect('admin/tambah_barang_keluar/'.$i->post('id_penerima'),'refresh');  
+		else {
 
-		} 
-}
+			redirect('admin/tambah_barang_keluar/'.$i->post('id_penerima'));
 
-	function hapus_barang_keluar($id){
-		// http://192.168.43.25/penerima_bumn/index.php/admin/tambah_barang_keluar/1
-		
+		}
+	}
+
+	function hapus_barang_keluar($id) {
 		$segment3=$this->session->userdata('id_penerima');
-		$this->check_login->check();		
-		$this->model_admin->hapus_barang_keluar($id);
-		// redirect($segment1.'/'.$segment2.'/'.$segment3);
-		// $id_pemberi=$this->session->userdata('id_pemberi');
-		$this->session->set_flashdata("msg","Data berhasil dihapus");
-		redirect('admin/tambah_barang_keluar/'.$segment3,'refresh');
+		$this->check_login->check();
+		$id_keluar=$this->model_admin->detailbarangkeluar($id);
+		$barang=$this->model_admin->detailjenis($id_keluar->id_barang);
+
+		if ($this->model_admin->hapus_barang_keluar($id)) {
+			$data_barang=array(
+				'total_keluar'=> $barang->total_keluar -=$id_keluar->jumlah_keluar,
+				'stok'=> $barang->stok +=$id_keluar->jumlah_keluar);
+			$this->db->where('id_barang', $barang->id_barang);
+			$this->db->update('barang', $data_barang);
+		}
+		$this->session->set_flashdata("msg", "Data berhasil dihapus");
+		redirect('admin/tambah_barang_keluar/'.$segment3);
 	}
 
 
 
 
-// Fungsi pemberi
-	function pemberi(){
+	// Fungsi pemberi
+	function pemberi() {
 		$this->check_login->check();
-		$a['data']	= $this->model_admin->tampil_pemberi();
-		$a['page']	= "pemberi/pemberi";
-			$a['title'] = "pemberi";
+		$a['data']=$this->model_admin->tampil_pemberi();
+		$a['page']="pemberi/pemberi";
+		$a['title']="pemberi";
 		$this->load->view('admin/index', $a);
 	}
 
-	function tambah_pemberi(){
+	function tambah_pemberi() {
 		$this->check_login->check();
-		$a['page']	= "pemberi/tambah_pemberi";
-		$a['title'] = "Tambah pemberi";
-		
+		$a['page']="pemberi/tambah_pemberi";
+		$a['title']="Tambah pemberi";
+
 		$this->load->view('admin/index', $a);
 	}
 
-	function insert_pemberi(){
+	function insert_pemberi() {
 		$this->check_login->check();
-                    $i=$this->input;
-					$object = array(
-			  	     		 
-					 		
-				  			'nama_pemberi' =>$i->post('nama_pemberi'),
-				  			'nama' =>$i->post('nama')
-				  			
-					  );
+		$i=$this->input;
+		$object=array('nama_pemberi'=>$i->post('nama_pemberi'),
+			'nama'=>$i->post('nama'));
 		$this->db->insert('pemberi', $object);
-		  $this->session->set_flashdata('msg','Data Berhasil di Tambah'); 
-		redirect('admin/pemberi','refresh');
-                }
+		$this->session->set_flashdata('msg', 'Data Berhasil di Tambah');
+		redirect('admin/pemberi', 'refresh');
+	}
 
-	
 
-	function edit_pemberi($id){
-		 
+
+	function edit_pemberi($id) {
+
 		$this->check_login->check();
-		$a['editdata']	= $this->db->get_where('pemberi',array('id_pemberi'=>$id))->result_object();		
-		$a['page']	= "pemberi/edit_pemberi";
+		$a['editdata']=$this->db->get_where('pemberi', array('id_pemberi'=>$id))->result_object();
+		$a['page']="pemberi/edit_pemberi";
 		$a['title']="Edit pemberi";
-		
+
 		$this->load->view('admin/index', $a);
 	}
 
-		function update_pemberi(){
-			$this->check_login->check();
-			$id=$this->input->post('id');
-	
-		                   		$i=$this->input;
-						$object = array(
-			  	     		'nama_pemberi' =>$i->post('nama_pemberi'),
-			  	     		'nama' =>$i->post('nama')
-				  		
-					  );
+	function update_pemberi() {
+		$this->check_login->check();
+		$id=$this->input->post('id');
+
+		$i=$this->input;
+		$object=array('nama_pemberi'=>$i->post('nama_pemberi'),
+			'nama'=>$i->post('nama'));
 		$this->db->where('id_pemberi', $id);
-		$this->db->update('pemberi', $object); 
-  $this->session->set_flashdata('msg','Data Berhasil di Update'); 
-							// echo "ini tidak kosong";
-		redirect('admin/pemberi/pemberi','refresh');
+		$this->db->update('pemberi', $object);
+		$this->session->set_flashdata('msg', 'Data Berhasil di Update');
+		// echo "ini tidak kosong";
+		redirect('admin/pemberi/pemberi', 'refresh');
 
 	}
-	function hapus_pemberi($id){
+
+	function hapus_pemberi($id) {
 		$this->check_login->check();
-			
+
 		$this->model_admin->hapus_pemberi($id);
-		  $this->session->set_flashdata('msg','Data Berhasil di Hapus'); 
-		redirect('admin/pemberi/pemberi','refresh');
+		$this->session->set_flashdata('msg', 'Data Berhasil di Hapus');
+		redirect('admin/pemberi/pemberi', 'refresh');
 	}
 
 
 
 
-// ==========================Fungsi Jenis barang==========================================
-	function get_detail_barang(){
-        $id['id_barang']=$this->input->post('id_barang');
-        $data=array(
-            'detail_barang'=>$this->model_admin->getSelectedData('barang',$id)->result(),
-        );
-        $this->load->view('pages/ajax_detail_barang',$data);
-    }
-
-	function total_barang(){
-		$this->check_login->check();
-		$a['data']	= $this->model_admin->tampil_barang_all();
-		$a['page']	= "barang/barang_total";
-			$a['title'] = "barang Masuk Dan Distribusi";
-		$this->load->view('admin/index', $a);
+	// ==========================Fungsi Jenis barang==========================================
+	function get_detail_barang() {
+		$id['id_barang']=$this->input->post('id_barang');
+		$data=array('detail_barang'=>$this->model_admin->getSelectedData('barang', $id)->result(),
+		);
+		$this->load->view('pages/ajax_detail_barang', $data);
 	}
-	function barang(){
+
+	function total_barang() {
 		$this->check_login->check();
-		$a['data']	= $this->model_admin->tampil_barang_all();
-		$a['page']	= "barang/barang";
-			$a['title'] = "Jenis barang";
+		$a['data']=$this->model_admin->tampil_barang_all();
+		$a['page']="barang/barang_total";
+		$a['title']="barang Masuk Dan Distribusi";
 		$this->load->view('admin/index', $a);
 	}
 
-	function tambah_barang(){
+	function barang() {
 		$this->check_login->check();
-		$a['page']	= "barang/tambah_barang";
-		$a['title'] = "Tambah Jenis barang";
-		
+		$a['data']=$this->model_admin->tampil_barang_all();
+		$a['page']="barang/barang";
+		$a['title']="Jenis barang";
 		$this->load->view('admin/index', $a);
 	}
 
-	function insert_barang(){
+	function tambah_barang() {
 		$this->check_login->check();
-                    $i=$this->input;
-					$object = array(
-			  	     		 
-					 		
-				  			'nama_barang' =>$i->post('nama_barang'),
-				  			'satuan' =>$i->post('satuan'),
-				  			'stok' =>0
-				  			
-					  );
+		$a['page']="barang/tambah_barang";
+		$a['title']="Tambah Jenis barang";
+
+		$this->load->view('admin/index', $a);
+	}
+
+	function insert_barang() {
+		$this->check_login->check();
+		$i=$this->input;
+		$object=array('nama_barang'=>$i->post('nama_barang'),
+			'satuan'=>$i->post('satuan'),
+			'stok'=>0);
 		$this->db->insert('barang', $object);
-		  $this->session->set_flashdata('msg','Data Berhasil di Tambah'); 
-		redirect('admin/barang','refresh');
-                }
+		$this->session->set_flashdata('msg', 'Data Berhasil di Tambah');
+		redirect('admin/barang', 'refresh');
+	}
 
 
-	
 
-	function edit_barang($id){
-		 
+
+	function edit_barang($id) {
+
 		$this->check_login->check();
-		$a['editdata']	= $this->db->get_where('barang',array('id_barang'=>$id))->result_object();		
-		$a['page']	= "barang/edit_barang";
+		$a['editdata']=$this->db->get_where('barang', array('id_barang'=>$id))->result_object();
+		$a['page']="barang/edit_barang";
 		$a['title']="Edit Jenis barang";
-		 
+
 		$this->load->view('admin/index', $a);
 	}
 
-		function update_barang(){
-			$this->check_login->check();
-			$id=$this->input->post('id');
-	
-		                   		$i=$this->input;
-						$object = array(
-			  	     		'nama_barang' =>$i->post('nama_barang'),
-			  	     		'satuan' =>$i->post('satuan')
-				  		
-					  );
+	function update_barang() {
+		$this->check_login->check();
+		$id=$this->input->post('id');
+
+		$i=$this->input;
+		$object=array('nama_barang'=>$i->post('nama_barang'),
+			'satuan'=>$i->post('satuan'));
 		$this->db->where('id_barang', $id);
-		$this->db->update('barang', $object); 
- $this->session->set_flashdata('msg','Data Berhasil di Update'); 
+		$this->db->update('barang', $object);
+		$this->session->set_flashdata('msg', 'Data Berhasil di Update');
 
-							// echo "ini tidak kosong";
-		redirect('admin/barang/barang','refresh');
+		// echo "ini tidak kosong";
+		redirect('admin/barang/barang', 'refresh');
 
 	}
-	function hapus_barang($id){
+
+	function hapus_barang($id) {
 		$this->check_login->check();
-			
+
 		$this->model_admin->hapus_barang($id);
-		 $this->session->set_flashdata('msg','Data Berhasil di Hapus'); 
-		redirect('admin/barang/barang','refresh');
+		$this->session->set_flashdata('msg', 'Data Berhasil di Hapus');
+		redirect('admin/barang/barang', 'refresh');
 	}
 
 
@@ -384,167 +366,154 @@ $this->session->set_flashdata("msg","Data berhasil ditambah");
 
 
 
-// ===========================Fungsi penerima======================================
-	function penerima(){
+	// ===========================Fungsi penerima======================================
+	function penerima() {
 		$this->check_login->check();
-		$a['data']	= $this->model_admin->tampil_penerima();
-		$a['page']	= "penerima/penerima";
-			$a['title'] = "penerima";
+		$a['data']=$this->model_admin->tampil_penerima();
+		$a['page']="penerima/penerima";
+		$a['title']="penerima";
 		$this->load->view('admin/index', $a);
 	}
 
-	function tambah_penerima(){
+	function tambah_penerima() {
 		$this->check_login->check();
-		$a['page']	= "penerima/tambah_penerima";
-		$a['title'] = "Tambah penerima";
-		
+		$a['page']="penerima/tambah_penerima";
+		$a['title']="Tambah penerima";
+
 		$this->load->view('admin/index', $a);
 	}
 
-	function insert_penerima(){
+	function insert_penerima() {
 		$this->check_login->check();
-                    $i=$this->input;
-					$object = array(
-			  	     		 
-					 		
-				  			'nama_penerima' =>$i->post('nama_penerima'),
-				  			'alamat' =>$i->post('alamat')
-				  			
-					  );
+		$i=$this->input;
+		$object=array('nama_penerima'=>$i->post('nama_penerima'),
+			'alamat'=>$i->post('alamat'));
 		$this->db->insert('penerima', $object);
-		 $this->session->set_flashdata('msg','Data Berhasil di Tambah'); 
-		redirect('admin/penerima','refresh');
-                }
+		$this->session->set_flashdata('msg', 'Data Berhasil di Tambah');
+		redirect('admin/penerima', 'refresh');
+	}
 
-	
 
-	function edit_penerima($id){
-		 
+
+	function edit_penerima($id) {
+
 		$this->check_login->check();
-		$a['editdata']	= $this->db->get_where('penerima',array('id_penerima'=>$id))->result_object();		
-		$a['page']	= "penerima/edit_penerima";
+		$a['editdata']=$this->db->get_where('penerima', array('id_penerima'=>$id))->result_object();
+		$a['page']="penerima/edit_penerima";
 		$a['title']="Edit penerima";
-		
+
 		$this->load->view('admin/index', $a);
 	}
 
-		function update_penerima(){
-			$this->check_login->check();
-			$id=$this->input->post('id');
-	
-		                   		$i=$this->input;
-						$object = array(
-			  	     		'nama_penerima' =>$i->post('nama_penerima'),
-			  	     		'alamat' =>$i->post('alamat')
-				  		
-					  );
+	function update_penerima() {
+		$this->check_login->check();
+		$id=$this->input->post('id');
+
+		$i=$this->input;
+		$object=array('nama_penerima'=>$i->post('nama_penerima'),
+			'alamat'=>$i->post('alamat'));
 		$this->db->where('id_penerima', $id);
-		$this->db->update('penerima', $object); 
- $this->session->set_flashdata('msg','Data Berhasil di Update'); 
-							// echo "ini tidak kosong";
-		redirect('admin/penerima/penerima','refresh');
+		$this->db->update('penerima', $object);
+		$this->session->set_flashdata('msg', 'Data Berhasil di Update');
+		// echo "ini tidak kosong";
+		redirect('admin/penerima/penerima', 'refresh');
 
 	}
-	function hapus_penerima($id){
+
+	function hapus_penerima($id) {
 		$this->check_login->check();
-			
+
 		$this->model_admin->hapus_penerima($id);
-		 $this->session->set_flashdata('msg','Data Berhasil di Hapus'); 
-		redirect('admin/penerima/penerima','refresh');
+		$this->session->set_flashdata('msg', 'Data Berhasil di Hapus');
+		redirect('admin/penerima/penerima', 'refresh');
 	}
 
 
-// ===========================Fungsi inventory======================================
-	function inventory(){
+	// ===========================Fungsi inventory======================================
+	function inventory() {
 		$this->check_login->check();
-		$a['data']	= $this->model_admin->tampil_inventory();
-		$a['page']	= "inventory/inventory";
-			$a['title'] = "Inventory";
+		$a['data']=$this->model_admin->tampil_inventory();
+		$a['page']="inventory/inventory";
+		$a['title']="Inventory";
 		$this->load->view('admin/index', $a);
 	}
 
-	
+
 
 	/* ========================Fungsi Manage User============================= */
-	function manage_user(){
+	function manage_user() {
 		$this->check_login->check();
-		$a['data']	= $this->model_admin->tampil_user()->result_object();
-		$a['page']	= "user/manage_user";
+		$a['data']=$this->model_admin->tampil_user()->result_object();
+		$a['page']="user/manage_user";
 		$a['title']="User";
-		
+
 		$this->load->view('admin/index', $a);
 	}
 
-	function tambah_user(){
+	function tambah_user() {
 		$this->check_login->check();
-		$a['page']	= "user/tambah_user";
+		$a['page']="user/tambah_user";
 		$a['title']="Tambah User";
-		
+
 		$this->load->view('admin/index', $a);
 	}
 
-	function insert_user(){
+	function insert_user() {
 
 		$this->check_login->check();
-		$username 	  = $this->input->post('username');
-		$password = $this->input->post('password');
-		$status = $this->input->post('status');
+		$username=$this->input->post('username');
+		$password=$this->input->post('password');
+		$status=$this->input->post('status');
 
 
-		$object = array(
-			
-			'username' => $username,
-			'password' => sha1($password),
-			'status' => $status
-				
-			);
+		$object=array('username'=> $username,
+			'password'=> sha1($password),
+			'status'=> $status);
 		$this->model_admin->insert_user($object);
- $this->session->set_flashdata('msg','Data Berhasil di Tambah'); 
-		redirect('admin/manage_user','refresh');
+		$this->session->set_flashdata('msg', 'Data Berhasil di Tambah');
+		redirect('admin/manage_user', 'refresh');
 	}
 
-	function edit_user($id){
+	function edit_user($id) {
 		$this->check_login->check();
-		$a['editdata']	= $this->model_admin->edit_user($id)->result_object();		
-		$a['page']	= "user/edit_user";
+		$a['editdata']=$this->model_admin->edit_user($id)->result_object();
+		$a['page']="user/edit_user";
 		$a['title']="Edit User";
-		
+
 		$this->load->view('admin/index', $a);
 	}
 
-	function update_user(){
+	function update_user() {
 		$this->check_login->check();
-		$id 	  = $this->input->post('id');
-		$username 	  = $this->input->post('username');
-		$password = $this->input->post('password');
-		$pass_old = $this->input->post('pass_old');
-		$status = $this->input->post('status');
+		$id=$this->input->post('id');
+		$username=$this->input->post('username');
+		$password=$this->input->post('password');
+		$pass_old=$this->input->post('pass_old');
+		$status=$this->input->post('status');
 
 
 		if (empty($password)) {
-			$object = array(
-			'username' => $username,
-			'password' => $pass_old
-			);
-		}else{
-			$object = array(
-			'username' => $username,
-			'password' => sha1($password)
-			);
+			$object=array('username'=> $username,
+				'password'=> $pass_old);
 		}
 
-		
+		else {
+			$object=array('username'=> $username,
+				'password'=> sha1($password));
+		}
+
+
 		$this->model_admin->update_user($id, $object);
- $this->session->set_flashdata('msg','Data Berhasil di Update'); 
-		redirect('admin/manage_user','refresh');
+		$this->session->set_flashdata('msg', 'Data Berhasil di Update');
+		redirect('admin/manage_user', 'refresh');
 	}
 
-	function hapus_user($id){
+	function hapus_user($id) {
 		$this->check_login->check();
 		$this->model_admin->hapus_user($id);
-		 $this->session->set_flashdata('msg','Data Berhasil di Hapus'); 
-		redirect('admin/manage_user','refresh');
-	}	
+		$this->session->set_flashdata('msg', 'Data Berhasil di Hapus');
+		redirect('admin/manage_user', 'refresh');
+	}
 
 
 

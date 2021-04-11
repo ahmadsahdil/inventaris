@@ -25,7 +25,7 @@
     <tr style="margin: 20px">
 
 
-      <td style="margin-right: 10px;text-align: right; margin-bottom: 50px" width="40%">Jenis Bantuan : </td>
+      <td style="margin-right: 10px;text-align: right; margin-bottom: 50px" width="40%">Nama Barang : </td>
       <td style="text-align: left"><input type="text" class="form-control" width="100%" name="barang" placeholder="Nama edit_barang_masuk" value="<?php echo $jenis->nama_barang ?>" required readonly></td>
     </tr>
    
@@ -39,7 +39,7 @@
     </tr>
     <tr>
       <td style="margin-right: 10px;text-align: right;" width="40%">Keterangan : </td>
-      <td style="text-align: left"><input type="text" class="form-control" name="keterangan" value="<?php echo $lihat->keterangan_barang ?>"></td>
+      <td style="text-align: left"><input type="text" class="form-control" name="keterangan" value="<?php echo $lihat->keterangan_masuk ?>"></td>
     </tr>
     <tr>
       <td style="margin-right: 10px;text-align: right;" width="40%">Tanggal Masuk : </td>

@@ -199,6 +199,15 @@ public function total_jenis_penerima($idpenerima,$idjenisbarang)
 		return $query->row();
 	}
 	// detail jenis untuk Distribusi barang
+
+	public  function detailbarangkeluar($idjenis){
+		$this->db->select('*');
+		$this->db->from('barang_keluar');
+		$this->db->where('id_barang_keluar',$idjenis);
+		$this->db->order_by('id_barang_keluar');
+		$query=$this->db->get();
+		return $query->row();
+	}
 	
 
 	public  function detailpemberi($idpemberi){

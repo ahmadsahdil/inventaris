@@ -21,6 +21,7 @@
                 <div class="box-header">
                   <h3 class="box-title">
                   <a href="<?php echo base_url(); ?>admin/tambah_barang" class="btn btn-sm btn-primary " style="margin-right: 20px "><i class="fa fa-plus"></i> Tambah</a>          
+                  <a href="<?php echo base_url(); ?>report/excel_barang" class="btn btn-sm btn-primary " style="margin-right: 20px "><i class="fa fa-print"></i> Excel</a>          
                   </h3>
                   <div class="box-tools">
 

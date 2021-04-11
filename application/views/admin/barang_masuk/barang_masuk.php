@@ -207,7 +207,7 @@
                           <td><?php echo $lihat->nama_barang ?></td>
                           <td><?php echo $lihat->jumlah ?></td>
                           <td><?php echo $lihat->satuan ?></td>
-                           <td><?php echo $lihat->keterangan_barang ?></td>
+                           <td><?php echo $lihat->keterangan_masuk ?></td>
 <td>
 
                            <?php include 'edit_barang_masuk.php'; ?>

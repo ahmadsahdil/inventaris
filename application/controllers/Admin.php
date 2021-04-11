@@ -64,7 +64,7 @@ function insert_barang_masuk(){
 					 		 'id_pemberi' =>$i->post('id_pemberi'),
 				  			'id_barang' =>$i->post('id_barang'),
 				  			'jumlah' =>$i->post('jumlah'),
-				  			'keterangan_barang' =>$i->post('keterangan'),
+				  			'keterangan_masuk' =>$i->post('keterangan'),
 				  			'tgl_masuk' => $i->post('tgl_masuk')
 					  );
 		$this->db->insert('barang_masuk', $object);
@@ -81,7 +81,7 @@ function insert_barang_masuk(){
 		                   		$i=$this->input;
 						$object = array(
 			  	     		'tgl_masuk' =>$i->post('tanggal_masuk'),
-			  	     		'keterangan_barang' =>$i->post('keterangan')
+			  	     		'keterangan_masuk' =>$i->post('keterangan')
 				  		
 					  );
 		$this->db->where('id_barang_masuk', $id);

@@ -91,7 +91,8 @@ public function getSelectedData($table,$data)
 		$this->db->join('penerima','penerima.id_penerima=barang_keluar.id_penerima','LEFT');
 		$this->db->join('barang','barang.id_barang=barang_keluar.id_barang','LEFT');
 		// error kerika dipakai
-		// $this->db->group_by('id_penerima');
+		// $this->db->group_by('barang_keluar.id_penerima');
+// $this->db->order_by('id_penerima', 'asc');
 		$query=$this->db->get();
 		return $query->result();
 	}

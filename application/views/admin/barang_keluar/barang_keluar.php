@@ -96,7 +96,7 @@
       echo '</div>';
       }
  ?>
-              <label name="nama_penerima" id="nama_penerima" style="font-size: 20px" ><?php echo "Posko : ". $nama_penerima->nama_penerima?></label>
+              <label name="nama_penerima" id="nama_penerima" style="font-size: 20px" ><?php echo "Penerima : ". $nama_penerima->nama_penerima?></label>
   
                     </div>
  

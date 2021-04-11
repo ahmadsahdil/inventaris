@@ -23,7 +23,7 @@
                 <div class="box-header">
                   <h3 class="box-title">
                     
-                    <a href="<?php echo site_url('report/excel_barang/') ?>" class="btn btn-primary "><i class="fa fa-file-excel-o"></i> Export Excel</a>
+                    <a href="<?php echo site_url('report/excel_masuk') ?>" class="btn btn-primary "><i class="fa fa-file-excel-o"></i> Export Excel</a>
                     
                   </h3>
 

@@ -343,7 +343,11 @@ class Admin extends CI_Controller {
 
 		$i=$this->input;
 		$object=array('nama_barang'=>$i->post('nama_barang'),
-			'satuan'=>$i->post('satuan'));
+			'satuan'=>$i->post('satuan'),
+			'total_masuk'=>$i->post('total_masuk'),
+			'total_keluar'=>$i->post('total_keluar'),
+			'stok'=>$i->post('stok'),
+		);
 		$this->db->where('id_barang', $id);
 		$this->db->update('barang', $object);
 		$this->session->set_flashdata('msg', 'Data Berhasil di Update');

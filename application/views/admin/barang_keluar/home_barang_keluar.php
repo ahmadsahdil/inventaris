@@ -33,7 +33,7 @@
                   <table id="example1" class="table table-bordered table-hover dataTable">
                     <thead>
                       <tr>
-                      <th>ID</th>
+                      <th>No</th>
                         <th>Pihak Yang Menerima</th>
                         <th>Alamat</th>
                         <th>Aksi</th>

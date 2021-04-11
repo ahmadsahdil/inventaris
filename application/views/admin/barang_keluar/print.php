@@ -15,7 +15,7 @@
                     <select name="penerima" class="form-control" >
                     <option value="">--Pilih--</option>
                     <!-- <option value="semua">Semua</option> -->
-                        <?php foreach ($dataprint as $lihat) {?>   
+                        <?php foreach ($penerima as $lihat) {?>   
 
                      <option value="<?php 
                       echo $lihat->id_penerima?>"><?php echo $lihat->nama_penerima?></option>
@@ -23,7 +23,7 @@
                       </select>
                       </div>
                       <br>
-                       <input type="date" class="form-control" value="<?= date("mm/dd/yyyy"); ?> name="tgl_keluar"  />
+                       <input type="date" class="form-control" value="<?= date("mm/dd/yyyy"); ?>" name="tgl_keluar"  />
                        <br>
                         <!--  <button type="submit" name="simpan" class="btn btn-outline  pull-right" id="simpan" ><i class="fa fa-print"></i>  Download</button> -->
                          <button type="submit" name="export" class="btn btn-outline  pull-right"  id="export" ><i class="fa fa-file-excel-o"></i>  Export Excel</button>

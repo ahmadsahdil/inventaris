@@ -1,0 +1,203 @@
+<!-- 
+Programmer : Ahmad dan Indra
+Programmer Support : Muhammad (ketikanmd.tech)
+ -->
+<?php 
+$user_id=$this->session->userdata('user_id');
+$user = $this->model_admin->detail($user_id);
+ ?>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title><?php echo $title; ?></title>
+  
+<link rel="shortcut icon" href="<?php echo base_url('assets/gambar/pins.jpg') ?>">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="<?php echo base_url()?>/assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="<?php echo base_url()?>/assets/bower_components/font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="<?php echo base_url()?>/assets/bower_components/Ionicons/css/ionicons.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="<?php echo base_url()?>/assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="<?php echo base_url()?>/assets/dist/css/AdminLTE.min.css">
+
+  <link rel="stylesheet" href="<?php echo base_url()?>/assets/dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="<?php echo base_url()?>/assets/datatables.min.css">
+
+   
+</head>
+  
+<header class="main-header">
+    <!-- Logo -->
+    <a href="<?php echo base_url('admin')?>" class="logo">
+      <span class="logo-mini"><b>JKS</b></span>
+      <span class="logo-lg"><b>Inventaris NTB</b></span>
+    </a>
+    <nav class="navbar navbar-static-top">
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Nusa Tenggara Barat</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <li><a href="<?php echo base_url() ?>" title="Dasbor" >
+          <i class="fa fa-home"></i>Beranda</a></li>
+          <li class="dropdown user user-menu" >
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              
+          <span class="hidden-xs"><?php echo ucwords($user->username) ?>  </span>
+            </a>
+            <ul class="dropdown-menu">
+               <li class="user-footer" >
+                
+                <div class="pull-right">
+                  <a href="<?php echo base_url('login/logout') ?>" class="btn btn-success btn-flat"><i class="fa fa-sign-out"></i> Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+
+        
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <body class="hold-transition skin-green sidebar-mini">
+  <aside class="main-sidebar">
+  <section class="sidebar">
+
+ <div class="user-panel">
+ <div class="pull-left image">  
+<img src="  <?php  echo base_url() ?>assets/gambar/avatar.png" class="img-circle"> 
+ </div>
+ <div class="pull-left info">  
+  <p> <?php echo ucwords($user->username) ?></p>
+<i class="fa fa-circle text-success"> </i> Online
+
+
+ </div>  
+
+ </div>
+          <ul class="sidebar-menu" data-widget="tree">
+            <li class="header">MAIN NAVIGATION</li>
+              <li class="treeview">
+          <a href="#">
+            <i class="fa fa-user"></i> <span><?php echo ucwords($user->username) ?></span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+             <li>  <a href="<?php echo base_url('login/logout') ?>"><i class="fa fa-sign-out"></i> Sign out</a></li>
+           
+            
+          </ul>
+        </li>  
+             <li class="<?php if($page == 'pemberi/pemberi'){echo 'active';} ?>">
+              <a href="<?php echo base_url(); ?>admin/pemberi">
+                <i class="fa  fa-users"></i> <span>Pemberi</span>
+              </a>
+            </li>    
+
+             <li class="treeview">
+          <a href="#">
+            <i class="fa fa-gift"></i> <span>Barang</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+             <li><a href="<?php echo base_url('admin/barang') ?>"><i class="fa fa-plus"></i> Barang</a></li> 
+            <li><a href="<?php echo base_url('admin/total_barang') ?>"><i class="fa fa-table"></i> Total Masuk/Keluar</a></li>
+           
+            
+          </ul>
+        </li>  
+              <li class="<?php if($page == 'penerima/penerima'){echo 'active';} ?>">
+              <a href="<?php echo base_url(); ?>admin/penerima">
+                <i class="fa fa-university"></i> <span>Penerima</span>
+              </a>
+            </li>           
+            <li class="<?php if($page == 'barang_masuk/home_barang_masuk'){echo 'active';} ?>">
+              <a href="<?php echo base_url(); ?>admin/barang_masuk">
+                <i class="fa fa-medkit"></i> <span>Barang Masuk</span>
+              </a>
+            </li>
+
+            <li class="<?php if($page == 'barang_keluar/home_barang_keluar'){echo 'active';} ?>">
+              <a href="<?php echo base_url(); ?>admin/barang_keluar">
+                <i class="fa fa-ambulance"></i> <span>Barang Keluar</span>
+              </a>
+            </li>
+
+             <?php if($this->session->userdata('user_status')=="Admin") {?>
+             <li class="<?php if($page == 'user/manage_user'){echo 'active';} ?>">
+              <a href="<?php echo base_url(); ?>admin/manage_user">
+                <i class="fa fa-user-plus"></i> <span>User</span>
+              </a>
+            </li>
+          
+           <li class="treeview">
+
+   
+            
+            <?php }; ?>
+           
+            
+          </ul>
+
+        </li>  
+</section>
+      </aside>
+ 
+      
+  <?php $this->load->view('admin/'.$page); ?>  
+
+      <p>&nbsp;</p>
+      <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+          <b>Version</b> 1.0
+        </div>
+        <strong>Copyright &copy; <?php echo date('Y') ?> .</strong> All rights reserved.
+      </footer>
+    </div>
+
+  <script src="<?php echo base_url()?>/assets/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="<?php echo base_url()?>/assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url()?>/assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url()?>/assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="<?php echo base_url()?>/assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="<?php echo base_url()?>/assets/bower_components/fastclick/lib/fastclick.js"></script>
+<script src="<?php echo base_url()?>/assets/dist/js/adminlte.min.js"></script>
+<script src="<?php echo base_url()?>/assets/dist/js/demo.js"></script>
+<!-- <script src="<?php echo base_url()?>/assets/print.js"></script> -->
+
+<script>
+  $(function () {
+    $('#example1').DataTable()
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false,
+      'dom': 'Bfrtip',
+        'buttons': [
+            'print'
+        ]
+    })
+  })
+
+ 
+</script>
+</body>
+</html>

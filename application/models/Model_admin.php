@@ -6,6 +6,20 @@ public function getSelectedData($table,$data)
         return $this->db->get_where($table, $data);
     }
 	
+	public function tampil_infrastruktur_wilayah($id_wilayah)
+	{
+		$this->db->select('infrastruktur.*,
+						wilayah.*');
+		$this->db->from('infrastruktur');
+		$this->db->join('wilayah','wilayah.id_infrastruktur=infrastruktur.id_infrastruktur','LEFT');
+		$this->db->where('wilayah.id_wilayah',$id_wilayah);
+
+		// $this->db->order_by('tgl_keluar');
+		$query=$this->db->get();
+		return $query->result();
+	}
+
+
 	public function tampil_barang()
 	{
 		$this->db->select('barang_masuk.*,
@@ -113,6 +127,42 @@ public function getSelectedData($table,$data)
 	// 	return $query->result();
 	// }
 
+// ========================Infrastruktur======================
+public function tampil_infra_wilayah($id_wilayah)
+{
+	$this->db->select('*'
+						);
+	$this->db->from('infrastruktur');
+	$this->db->where('id_wilayah',$id_wilayah);
+	$this->db->order_by('id_infrastruktur','DESC');
+	$query=$this->db->get();
+	return $query->result();
+}
+
+public function tampil_infrastruktur()
+{
+	$this->db->select('*'
+						);
+	$this->db->from('infrastruktur');
+	
+	$this->db->order_by('id_infrastruktur','DESC');
+	$query=$this->db->get();
+	return $query->result();
+}
+public function tampil_wilayah()
+{
+	$this->db->select('*'
+						);
+	$this->db->from('wilayah');
+	
+	$this->db->order_by('id_wilayah','DESC');
+	$query=$this->db->get();
+	return $query->result();
+}
+
+
+
+
 public function total_jenis_penerima($idpenerima,$idjenisbarang)
 	{
 		$this->db->select('barang_masuk.*,
@@ -200,6 +250,14 @@ public function total_jenis_penerima($idpenerima,$idjenisbarang)
 	}
 	// detail jenis untuk Distribusi barang
 
+	public  function detailinfrastruktur($id){
+		$this->db->select('*');
+		$this->db->from('infrastruktur');
+		$this->db->where('id_infrastruktur',$id);
+		$this->db->order_by('id_infrastruktur');
+		$query=$this->db->get();
+		return $query->row();
+	}
 	public  function detailbarangkeluar($idjenis){
 		$this->db->select('*');
 		$this->db->from('barang_keluar');
@@ -224,6 +282,14 @@ public function total_jenis_penerima($idpenerima,$idjenisbarang)
 		$this->db->from('penerima');
 		$this->db->where('id_penerima',$idpenerima);
 		$this->db->order_by('id_penerima');
+		$query=$this->db->get();
+		return $query->row();
+	}
+	public  function detailwilayah($idwilayah){
+		$this->db->select('*');
+		$this->db->from('wilayah');
+		$this->db->where('id_wilayah',$idwilayah);
+		$this->db->order_by('id_wilayah');
 		$query=$this->db->get();
 		return $query->row();
 	}
@@ -285,6 +351,14 @@ public function total_jenis_penerima($idpenerima,$idjenisbarang)
 		public function hapus_penerima($id)
 	{
 		return $this->db->delete('penerima', array('id_penerima' => $id));
+	}
+		public function hapus_infrastruktur($id)
+	{
+		return $this->db->delete('infrastruktur', array('id_infrastruktur' => $id));
+	}
+		public function hapus_wilayah($id)
+	{
+		return $this->db->delete('wilayah', array('id_wilayah' => $id));
 	}
 
 

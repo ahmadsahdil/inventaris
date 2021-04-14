@@ -301,14 +301,14 @@ class Admin extends CI_Controller {
 		$this->check_login->check();
 		$a['data']=$this->model_admin->tampil_barang_all();
 		$a['page']="barang/barang";
-		$a['title']="Jenis barang";
+		$a['title']="Barang";
 		$this->load->view('admin/index', $a);
 	}
 
 	function tambah_barang() {
 		$this->check_login->check();
 		$a['page']="barang/tambah_barang";
-		$a['title']="Tambah Jenis barang";
+		$a['title']="Tambah barang";
 
 		$this->load->view('admin/index', $a);
 	}
@@ -334,7 +334,7 @@ class Admin extends CI_Controller {
 		$this->check_login->check();
 		$a['editdata']=$this->db->get_where('barang', array('id_barang'=>$id))->result_object();
 		$a['page']="barang/edit_barang";
-		$a['title']="Edit Jenis barang";
+		$a['title']="Edit Barang";
 
 		$this->load->view('admin/index', $a);
 	}
@@ -529,6 +529,161 @@ class Admin extends CI_Controller {
 	}
 
 
+// ========================== Infrasktruktur =================================
+function infrastruktur() {
+	$this->check_login->check();
+	$a['data']=$this->model_admin->tampil_infrastruktur();
+	$a['page']="infrastruktur/infrastruktur";
+	$a['title']="Infrastruktur";
+	$this->load->view('admin/index', $a);
+}
 
+function tambah_infrastruktur() {
+	$this->check_login->check();
+	$a['page']="infrastruktur/tambah_infrastruktur";
+	$a['title']="Tambah Infrastruktur";
+	$a['wilayah']=$this->model_admin->tampil_wilayah();
+	$this->load->view('admin/index', $a);
+}
+
+function insert_infrastruktur() {
+	$this->check_login->check();
+	$i=$this->input;
+	$object=array(
+		'nama_barang'=>$i->post('nama_barang'),
+		'merk'=>$i->post('merk'),
+		'mac'=>$i->post('mac'),
+		'jumlah'=>$i->post('jumlah'),
+		'satuan'=>$i->post('satuan'),
+		'kondisi'=>$i->post('kondisi'),
+		'keterangan'=>$i->post('keterangan'),
+		'id_wilayah'=>$i->post('wilayah')
+	);
+	$this->db->insert('infrastruktur', $object);
+	$this->session->set_flashdata('msg', 'Data Berhasil di Tambah');
+	redirect('admin/infrastruktur');
+}
+
+
+
+
+function edit_infrastruktur($id) {
+
+	$this->check_login->check();
+	$a['editdata']=$this->db->get_where('infrastruktur', array('id_infrastruktur'=>$id))->result_object();
+	$a['wilayah']=$this->model_admin->tampil_wilayah();
+	$a['page']="infrastruktur/edit_infrastruktur";
+	$a['title']="Edit Infrastruktur";
+
+	$this->load->view('admin/index', $a);
+}
+
+function update_infrastruktur() {
+	$this->check_login->check();
+	$id=$this->input->post('id');
+
+	$i=$this->input;
+	$object=array(
+		'nama_barang'=>$i->post('nama_barang'),
+		'merk'=>$i->post('merk'),
+		'mac'=>$i->post('mac'),
+		'jumlah'=>$i->post('jumlah'),
+		'satuan'=>$i->post('satuan'),
+		'kondisi'=>$i->post('kondisi'),
+		'keterangan'=>$i->post('keterangan'),
+		'id_wilayah'=>$i->post('wilayah')
+	);
+	$this->db->where('id_infrastruktur', $id);
+	$this->db->update('infrastruktur', $object);
+	$this->session->set_flashdata('msg', 'Data Berhasil di Update');
+	// echo "ini tidak kosong";
+	redirect('admin/infrastruktur/infrastruktur');
+
+}
+
+function hapus_infrastruktur($id) {
+	$this->check_login->check();
+
+	$this->model_admin->hapus_infrastruktur($id);
+	$this->session->set_flashdata('msg', 'Data Berhasil di Hapus');
+	redirect('admin/infrastruktur/infrastruktur');
+}
+
+
+// ========================== Wilayah =================================
+function wilayah() {
+	$this->check_login->check();
+	$a['data']=$this->model_admin->tampil_wilayah();
+	$a['page']="wilayah/wilayah";
+	$a['title']="Wilayah";
+	$this->load->view('admin/index', $a);
+}
+
+function tambah_wilayah() {
+	$this->check_login->check();
+	$a['page']="wilayah/tambah_wilayah";
+	$a['title']="Tambah Wilayah";
+
+	$this->load->view('admin/index', $a);
+}
+
+function insert_wilayah() {
+	$this->check_login->check();
+	$i=$this->input;
+	$object=array(
+		'nama_wilayah'=>$i->post('nama_wilayah'),
+	);
+	$this->db->insert('wilayah', $object);
+	$this->session->set_flashdata('msg', 'Data Berhasil di Tambah');
+	redirect('admin/wilayah');
+}
+
+
+
+function edit_wilayah($id) {
+
+	$this->check_login->check();
+	$a['editdata']=$this->db->get_where('wilayah', array('id_wilayah'=>$id))->result_object();
+	$a['page']="wilayah/edit_wilayah";
+	$a['title']="Edit Wilayah";
+
+	$this->load->view('admin/index', $a);
+}
+
+function update_wilayah() {
+	$this->check_login->check();
+	$id=$this->input->post('id');
+
+	$i=$this->input;
+	$object=array(
+		'nama_wilayah'=>$i->post('nama_wilayah'),
+
+	);
+	$this->db->where('id_wilayah', $id);
+	$this->db->update('wilayah', $object);
+	$this->session->set_flashdata('msg', 'Data Berhasil di Update');
+	// echo "ini tidak kosong";
+	redirect('admin/wilayah/wilayah');
+
+}
+
+function hapus_wilayah($id) {
+	$this->check_login->check();
+
+	$this->model_admin->hapus_wilayah($id);
+	$this->session->set_flashdata('msg', 'Data Berhasil di Hapus');
+	redirect('admin/wilayah/wilayah');
+}
+
+function lihat_infra($id) {
+
+	$this->check_login->check();
+	$a['data']=$this->model_admin->tampil_infra_wilayah($id);
+	$a['wilayah']=$this->model_admin->tampil_wilayah();
+	$a['page']="wilayah/infrastruktur";
+	$a['title']="Lihat Infrastruktur";
+
+	$this->load->view('admin/index', $a);
+}
 
 }

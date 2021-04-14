@@ -11,8 +11,6 @@ function tambah_jenis(){
 		$this->check_login->check();
                     $i=$this->input;
 					$object = array(
-			  	     		 
-					 		
 				  			'nama_barang' =>$i->post('nama_barang'),
 				  			'satuan' =>$i->post('satuan'),
 				  			'stok' =>0
@@ -36,11 +34,20 @@ function tambah_jenis(){
                             <input type="text" name="id_barang" value="'.$barang->id_barang.'" hidden> 
                     <div class="form-group">
                       <label class="control-label col-md-3" 
-                        for="nama_barang">Nama jenis barang :</label>
+                        for="nama_barang">Nama barang :</label>
                       <div class="col-md-8">
                         <input type="text" class="form-control reset" 
                             name="nama_barang" id="nama_barang" 
                             readonly="readonly" value="'.$barang->nama_barang.'" required>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3" 
+                        for="merk">Merk/Type :</label>
+                      <div class="col-md-8">
+                        <input type="text" class="form-control reset" 
+                            name="merk" id="merk" 
+                            readonly="readonly" value="'.$barang->merk_barang.'" required>
                       </div>
                     </div>
                      <!-- <div id="barang"> -->
@@ -62,10 +69,18 @@ function tambah_jenis(){
 	    	echo ' 
                     <div class="form-group">
                       <label class="control-label col-md-3" 
-                        for="nama_barang">Nama jenis barang :</label>
+                        for="nama_barang">Nama barang :</label>
                       <div class="col-md-8">
                         <input type="text" class="form-control reset" 
                             name="nama_barang" id="nama_barang" 
+                            readonly="readonly" required>
+                      </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3" 
+                        for="merk">Type/Merk :</label>
+                      <div class="col-md-8">
+                        <input type="text" class="form-control reset" 
+                            name="merk" id="merk" 
                             readonly="readonly" required>
                       </div>
                     
@@ -108,11 +123,20 @@ function tambah_jenis(){
                     <input type="text" name="id_barang" value="'.$barang->id_barang.'" hidden> 
                     <div class="form-group">
                       <label class="control-label col-md-3" 
-                        for="nama_barang">Nama jenis barang :</label>
+                        for="nama_barang">Nama barang :</label>
                       <div class="col-md-8">
                         <input type="text" class="form-control reset" 
                             name="nama_barang" id="nama_barang" 
                             readonly="readonly" value="'.$barang->nama_barang.'" required>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3" 
+                        for="merk">Merk/Type :</label>
+                      <div class="col-md-8">
+                        <input type="text" class="form-control reset" 
+                            name="merk" id="merk" 
+                            readonly="readonly" value="'.$barang->merk_barang.'" required>
                       </div>
                     </div>
                      <!-- <div id="barang"> -->
@@ -146,10 +170,19 @@ function tambah_jenis(){
 	    		  <input type="text" name="id_barang"  hidden> 
                     <div class="form-group">
                       <label class="control-label col-md-3" 
-                        for="nama_barang">Nama jenis barang :</label>
+                        for="nama_barang">Nama barang :</label>
                       <div class="col-md-8">
                         <input type="text" class="form-control reset" 
                             name="nama_barang" id="nama_barang" 
+                            readonly="readonly" required>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3" 
+                        for="merk">Merk/Type :</label>
+                      <div class="col-md-8">
+                        <input type="text" class="form-control reset" 
+                            name="merk" id="merk" 
                             readonly="readonly" required>
                       </div>
                     </div>

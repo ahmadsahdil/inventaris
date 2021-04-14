@@ -32,6 +32,10 @@
                    <label>Pihak Yang Menerima</label>
                       <input type="text" class="form-control" name="nama_penerima" placeholder="Masukkan Nama Penerima" required />
                   </div>
+                  <div class="form-group">
+                   <label>Atas Nama</label>
+                      <input type="text" class="form-control" name="atas_nama" placeholder="Masukkan Atas Nama" required />
+                  </div>
                    <div class="form-group">
                    <label>Alamat</label>
                       <input type="text" class="form-control" name="alamat" placeholder="Masukkan Alamat"  />

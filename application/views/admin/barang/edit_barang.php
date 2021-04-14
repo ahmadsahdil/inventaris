@@ -36,6 +36,10 @@
                       <input type="text" class="form-control" name="satuan" value="<?php echo $data->satuan ?>" required />
                   </div>
                  <div class="form-group">
+                    <label for="merk">Merk/Type</label>
+                      <input type="text" class="form-control" name="merk" value="<?php echo $data->merk_barang ?>" required />
+                  </div>
+                 <div class="form-group">
                     <label for="total_masuk">Total Masuk</label>
                       <input type="number" class="form-control" name="total_masuk" value="<?php echo $data->total_masuk ?>" required />
                   </div>
@@ -46,6 +50,10 @@
                  <div class="form-group">
                     <label for="stok">Stok</label>
                       <input type="number" class="form-control" name="stok" value="<?php echo $data->stok ?>" required />
+                  </div>
+                 <div class="form-group">
+                    <label for="keterangan">Keterangan</label>
+                      <input type="text" class="form-control" name="keterangan" value="<?php echo $data->keterangan ?>" />
                   </div>
                    
                   

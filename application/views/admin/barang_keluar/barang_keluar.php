@@ -112,9 +112,8 @@
                       <datalist id="list_barang">
                        <?php  
                          foreach ($barang as $barang): ?>
-                            <option value="<?= $barang->id_barang ?>"><?= $barang->nama_barang ?> | <?= $barang->satuan ?></option>
+                                                         <option value="<?= $barang->id_barang ?>"><?= $barang->nama_barang ?> | <?= $barang->merk_barang ?> | <?= $barang->satuan ?></option>
                         <?php endforeach ?>
-                        
                       </datalist>
                   </div>
                   <div class="col-md-1">
@@ -133,6 +132,15 @@
                     </div>
                     <div class="form-group">
                       <label class="control-label col-md-3" 
+                        for="merk">Merk/Type :</label>
+                      <div class="col-md-8">
+                        <input type="text" class="form-control reset" 
+                            name="merk" id="merk" 
+                            readonly="readonly" required>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3" 
                         for="satuan">Satuan :</label>
                       <div class="col-md-8">
                         <input type="text" class="form-control reset" 
@@ -142,7 +150,6 @@
                     </div>
 
                       </div>
-                      
                   <div class="form-group">
                   <label class="control-label col-md-3" 
                     for="Keterangan">Keterangan:</label>
@@ -186,6 +193,7 @@
                         <th>No</th>
                         <th>Tanggal Keluar</th>
                         <th>Nama Barang</th>
+                        <th>Merk/Type</th>
                         <th>Jumlah</th>
                         <th>Satuan</th>
                         <th>Keterangan</th>
@@ -203,6 +211,7 @@
                         <td><?php echo $no++ ?></td>
                           <td><?php echo date('d M Y',strtotime($lihat->tgl_keluar)) ?></td>
                           <td><?php echo $lihat->nama_barang ?></td>
+                          <td><?php echo $lihat->merk_barang ?></td>
                           <td><?php echo $lihat->jumlah_keluar ?></td>
                           <td><?php echo $lihat->satuan ?></td>
                            <td><?php echo $lihat->keterangan_keluar ?></td>
@@ -231,6 +240,7 @@
 
         if (str == "") {
             $('#nama_barang').val('');
+            $('#merk').val('');
             $('#satuan').val('');
             $('#jumlah').val('');
             $('#reset').hide();

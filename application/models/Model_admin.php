@@ -36,7 +36,7 @@ public function getSelectedData($table,$data)
 		// end join
 	$this->db->where('barang_masuk.id_pemberi',$id_pemberi);
 
-		$this->db->order_by('tgl_masuk');
+		$this->db->order_by('tgl_masuk','DESC');
 		$query=$this->db->get();
 		return $query->result();
 	}
@@ -79,7 +79,7 @@ public function getSelectedData($table,$data)
 		$this->db->join('barang','barang.id_barang=barang_keluar.id_barang','LEFT');
 		
 
-		$this->db->order_by('id_barang_keluar');
+		$this->db->order_by('tgl_keluar','DESC');
 		$query=$this->db->get();
 		return $query->result();
 	}

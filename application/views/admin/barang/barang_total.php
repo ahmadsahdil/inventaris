@@ -32,12 +32,14 @@
                   <table id="example1" class="table table-bordered table-hover dataTable">
                     <thead>
                       <tr>
-                      <th>ID</th>
+                      <th>No</th>
                         <th>Nama barang</th>
+                        <th>Merk/Type</th>
                         <th>Satuan</th>
-                        <th>Total Barang Masuk</th>
-                        <th>Total Barang Keluar</th>
+                        <th>Barang Masuk</th>
+                        <th>Barang Keluar</th>
                         <th>Stok</th>
+                        <th>Keterangan</th>
                     </thead>
                     <tbody>
                         <?php  
@@ -47,10 +49,12 @@
                       <tr>
                         <td><?php echo $no++ ?></td>
                         <td><?php echo $lihat->nama_barang ?></td>
+                        <td><?php echo $lihat->merk_barang ?></td>
                         <td><?php echo $lihat->satuan ?></td>
                         <td><?php echo $lihat->total_masuk ?></td>
                         <td><?php echo $lihat->total_keluar ?></td>
                         <td><?php echo $lihat->stok ?></td>
+                        <td><?php echo $lihat->keterangan ?></td>
                         
                           
                        

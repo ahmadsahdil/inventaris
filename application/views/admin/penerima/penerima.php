@@ -46,6 +46,7 @@
                       <tr>
                       <th>ID</th>
                         <th>Pihak Yang Menerima</th>
+                        <th>Atas Nama</th>
                         <th>Alamat</th>
                         <th>Aksi</th>
                     </thead>
@@ -57,6 +58,7 @@
                     	<tr>
                         <td><?php echo $no++ ?></td>
                         <td><?php echo $lihat->nama_penerima ?></td>
+                        <td><?php echo $lihat->atas_nama ?></td>
                         <td><?php echo $lihat->alamat ?></td>
                           
                         <td align="center">

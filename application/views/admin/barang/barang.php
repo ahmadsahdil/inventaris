@@ -45,6 +45,7 @@
                       <tr>
                       <th>ID</th>
                         <th>Nama barang</th>
+                        <th>Merk/Type</th>
                         <th>Satuan</th>
                        
                        
@@ -58,6 +59,7 @@
                       <tr>
                         <td><?php echo $no++ ?></td>
                         <td><?php echo $lihat->nama_barang ?></td>
+                        <td><?php echo $lihat->merk_barang ?></td>
                         <td><?php echo $lihat->satuan ?></td>
                       
                         

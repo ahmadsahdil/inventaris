@@ -26,6 +26,7 @@ table,th,td{
                         <th style="border:1px solid #000;width:250;color: white">Pihak yang menyerahkan</th>
                         <th style="border:1px solid #000;width:120px;color: white">Tanggal</th>
                         <th style="border:1px solid #000;width:250;color: white">Nama Barang</th>
+                        <th style="border:1px solid #000;width:250;color: white">Merk/Type</th>
                         <th style="border:1px solid #000;width:70px;color: white">Jumlah</th>
                         <th style="border:1px solid #000;width:70px;color: white">satuan</th>
                         <th style="border:1px solid #000;width:150px;color: white">Keterangan</th>
@@ -43,6 +44,7 @@ table,th,td{
                         </td>
                           <td><?php echo date('d M Y',strtotime($lihat->tgl_masuk)) ?></td>
                           <td><?php echo $lihat->nama_barang ?></td>
+                          <td><?php echo $lihat->merk_barang ?></td>
                           <td><?php echo $lihat->jumlah ?></td>
                           <td><?php echo $lihat->satuan ?></td>
                            <td><?php echo $lihat->keterangan_masuk ?></td>

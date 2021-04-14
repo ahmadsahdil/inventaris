@@ -26,7 +26,10 @@
                 <?php echo form_open('admin/insert_barang'); ?>
                   <div class="form-group">
                    <label>Nama barang</label>
-                      <input type="text" class="form-control" name="nama_barang" placeholder="Masukkan Nama Jenis barang" required />
+                      <input type="text" class="form-control" name="nama_barang" placeholder="Masukkan Nama barang" required />
+                  </div>
+                   <label>Merk/Type</label>
+                      <input type="text" class="form-control" name="merk" placeholder="Masukkan Merk/Type barang" required />
                   </div>
                   <div class="form-group">
                    <label>Satuan</label>

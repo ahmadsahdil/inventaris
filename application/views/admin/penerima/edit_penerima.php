@@ -32,6 +32,10 @@
                       <input type="text" class="form-control" name="nama_penerima" value="<?php echo $data->nama_penerima ?>" required />
                   </div>
                   <div class="form-group">
+                    <label for="atas_nama">Atas Nama</label>
+                      <input type="text" class="form-control" name="atas_nama" value="<?php echo $data->atas_nama ?>" required />
+                  </div>
+                  <div class="form-group">
                     <label for="alamat">Alamat</label>
                       <input type="text" class="form-control" name="alamat" value="<?php echo $data->alamat ?>"  />
                   </div>

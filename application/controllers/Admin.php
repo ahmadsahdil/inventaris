@@ -118,7 +118,7 @@ class Admin extends CI_Controller {
 
 		// $a['print']	= $this->model_admin->tampil_barang();
 		$a['page']="barang_keluar/home_barang_keluar";
-		$a['title']="Distribusi barang";
+		$a['title']="Barang Keluar";
 		$this->load->view('admin/index', $a);
 	}
 
@@ -130,7 +130,7 @@ class Admin extends CI_Controller {
 		$a['nama_penerima']=$this->model_admin->detailpenerima($id);
 		$a['id_penerima']=$id;
 		$a['page']="barang_keluar/barang_keluar";
-		$a['title']="Tambah Distribusi barang";
+		$a['title']="Tambah Barang Keluar";
 
 		$this->session->set_userdata('id_penerima', $id);
 		$this->load->view('admin/index', $a);
@@ -293,7 +293,7 @@ class Admin extends CI_Controller {
 		$this->check_login->check();
 		$a['data']=$this->model_admin->tampil_barang_all();
 		$a['page']="barang/barang_total";
-		$a['title']="barang Masuk Dan Distribusi";
+		$a['title']="barang Masuk Dan Keluar";
 		$this->load->view('admin/index', $a);
 	}
 
@@ -316,7 +316,9 @@ class Admin extends CI_Controller {
 	function insert_barang() {
 		$this->check_login->check();
 		$i=$this->input;
-		$object=array('nama_barang'=>$i->post('nama_barang'),
+		$object=array(
+			'nama_barang'=>$i->post('nama_barang'),
+			'merk_barang'=>$i->post('merk'),
 			'satuan'=>$i->post('satuan'),
 			'stok'=>0);
 		$this->db->insert('barang', $object);
@@ -342,11 +344,14 @@ class Admin extends CI_Controller {
 		$id=$this->input->post('id');
 
 		$i=$this->input;
-		$object=array('nama_barang'=>$i->post('nama_barang'),
+		$object=array(
+			'nama_barang'=>$i->post('nama_barang'),
+			'merk_barang'=>$i->post('merk'),
 			'satuan'=>$i->post('satuan'),
 			'total_masuk'=>$i->post('total_masuk'),
 			'total_keluar'=>$i->post('total_keluar'),
 			'stok'=>$i->post('stok'),
+			'keterangan'=>$i->post('keterangan'),
 		);
 		$this->db->where('id_barang', $id);
 		$this->db->update('barang', $object);
@@ -390,7 +395,9 @@ class Admin extends CI_Controller {
 	function insert_penerima() {
 		$this->check_login->check();
 		$i=$this->input;
-		$object=array('nama_penerima'=>$i->post('nama_penerima'),
+		$object=array(
+			'nama_penerima'=>$i->post('nama_penerima'),
+			'atas_nama'=>$i->post('atas_nama'),
 			'alamat'=>$i->post('alamat'));
 		$this->db->insert('penerima', $object);
 		$this->session->set_flashdata('msg', 'Data Berhasil di Tambah');
@@ -414,7 +421,9 @@ class Admin extends CI_Controller {
 		$id=$this->input->post('id');
 
 		$i=$this->input;
-		$object=array('nama_penerima'=>$i->post('nama_penerima'),
+		$object=array(
+			'nama_penerima'=>$i->post('nama_penerima'),
+			'atas_nama'=>$i->post('atas_nama'),
 			'alamat'=>$i->post('alamat'));
 		$this->db->where('id_penerima', $id);
 		$this->db->update('penerima', $object);

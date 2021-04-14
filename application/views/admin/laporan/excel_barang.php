@@ -24,6 +24,7 @@ table,th,td{
                       <tr style="background-color:blue;text-decoration-color: white">
                         <th style="border:1px solid #000;width:30px;color: white">No</th>
                         <th style="border:1px solid #000;width:250;color: white">Nama barang</th>
+                        <th style="border:1px solid #000;width:250;color: white">Merk/Type</th>
                         <th style="border:1px solid #000;width:120px;color: white">Stok</th>
                         <th style="border:1px solid #000;width:70px;color: white">satuan</th>
                         <th style="border:1px solid #000;width:150px;color: white">Keterangan</th>
@@ -37,6 +38,7 @@ table,th,td{
                     	<tr>
                         <td><?php echo $no++ ?></td>
                           <td><?php echo $lihat->nama_barang ?></td>
+                          <td><?php echo $lihat->merk_barang ?></td>
                           <td><?php echo $lihat->stok ?></td>
                           <td><?php echo $lihat->satuan ?></td>
                            <td><?php echo $lihat->keterangan ?></td>

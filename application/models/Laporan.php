@@ -91,9 +91,9 @@ public function tampil_barang_masuk($id_pemberi)
 		$this->db->from('barang_keluar');
 		$this->db->join('penerima','penerima.id_penerima=barang_keluar.id_penerima','LEFT');
 		$this->db->join('barang','barang.id_barang=barang_keluar.id_barang','LEFT');
-	
-$this->db->order_by('tgl_keluar');
-$this->db->order_by('barang_keluar.id_penerima');
+		
+		$this->db->order_by('barang_keluar.id_penerima');
+		$this->db->order_by('tgl_keluar');
 		
 		$query=$this->db->get();
 		return $query->result();

@@ -4,12 +4,13 @@ class Admin extends CI_Controller {
 
 	function __construct() {
 		parent:: __construct();
+		cek_not_login();
 		$this->load->model('model_admin');
 
 	}
 
 	function index() {
-		$this->check_login->check();
+		
 
 		$a['barang_masuk']=$this->model_admin->total_barang_masuk()->num_rows();
 		$a['barang_keluar']=$this->model_admin->total_barang_keluar()->num_rows();
@@ -24,7 +25,7 @@ class Admin extends CI_Controller {
 	}
 
 	function barang_masuk() {
-		$this->check_login->check();
+		
 		$a['data']=$this->model_admin->tampil_barang_masuk1();
 		$a['pemberi']=$this->model_admin->tampil_pemberi();
 		$a['page']="barang_masuk/home_barang_masuk";
@@ -34,7 +35,7 @@ class Admin extends CI_Controller {
 	}
 
 	function tambah_barang_masuk($id=0) {
-		$this->check_login->check();
+		
 		$a['pemberi']=$this->model_admin->tampil_pemberi();
 		$a['barang']=$this->model_admin->tampil_barang_all();
 		$a['data']=$this->model_admin->tampil_barang_masuk($id);
@@ -47,7 +48,7 @@ class Admin extends CI_Controller {
 	}
 
 	function insert_barang_masuk() {
-		$this->check_login->check();
+		
 		$i=$this->input;
 		$id_barang=$i->post('id_barang');
 		$jumlah=$i->post('jumlah');
@@ -70,7 +71,7 @@ class Admin extends CI_Controller {
 
 
 	function update_barang_masuk() {
-		$this->check_login->check();
+		
 		$id=$this->input->post('id_barang_masuk');
 
 		$i=$this->input;
@@ -87,7 +88,7 @@ class Admin extends CI_Controller {
 
 
 	function hapus_barang_masuk($id) {
-		$this->check_login->check();
+		
 		$id_pemberi=$this->session->userdata('id_pemberi');
 
 
@@ -111,7 +112,7 @@ class Admin extends CI_Controller {
 	// function barang barang
 
 	function barang_keluar() {
-		$this->check_login->check();
+		
 		// $a['data']	= $this->model_admin->tampil_barang_keluar();
 		$a['dataprint']=$this->model_admin->tampil_barang_print();
 		$a['penerima']=$this->model_admin->tampil_penerima();
@@ -123,7 +124,7 @@ class Admin extends CI_Controller {
 	}
 
 	function tambah_barang_keluar($id=0) {
-		$this->check_login->check();
+		
 		$a['penerima']=$this->model_admin->tampil_penerima();
 		$a['barang']=$this->model_admin->tampil_barang1();
 		$a['data']=$this->model_admin->tampil_barang_keluar($id);
@@ -137,7 +138,7 @@ class Admin extends CI_Controller {
 	}
 
 	function update_barang_keluar() {
-		$this->check_login->check();
+		
 		$id=$this->input->post('id_barang_keluar');
 
 		$i=$this->input;
@@ -156,7 +157,7 @@ class Admin extends CI_Controller {
 		$i=$this->input;
 		$id_barang=$i->post('id_barang');
 		if ($id_barang !="") {
-			# code... $this->check_login->check();
+			# code... 
 			$valid=$this->form_validation;
 			
 			$barang = $this->model_admin->detailjenis($id_barang);
@@ -198,7 +199,7 @@ class Admin extends CI_Controller {
 
 	function hapus_barang_keluar($id) {
 		$segment3=$this->session->userdata('id_penerima');
-		$this->check_login->check();
+		
 		$id_keluar=$this->model_admin->detailbarangkeluar($id);
 		$barang=$this->model_admin->detailjenis($id_keluar->id_barang);
 
@@ -218,7 +219,7 @@ class Admin extends CI_Controller {
 
 	// Fungsi pemberi
 	function pemberi() {
-		$this->check_login->check();
+		
 		$a['data']=$this->model_admin->tampil_pemberi();
 		$a['page']="pemberi/pemberi";
 		$a['title']="pemberi";
@@ -226,7 +227,7 @@ class Admin extends CI_Controller {
 	}
 
 	function tambah_pemberi() {
-		$this->check_login->check();
+		
 		$a['page']="pemberi/tambah_pemberi";
 		$a['title']="Tambah pemberi";
 
@@ -234,7 +235,7 @@ class Admin extends CI_Controller {
 	}
 
 	function insert_pemberi() {
-		$this->check_login->check();
+		
 		$i=$this->input;
 		$object=array('nama_pemberi'=>$i->post('nama_pemberi'),
 			'nama'=>$i->post('nama'));
@@ -247,7 +248,7 @@ class Admin extends CI_Controller {
 
 	function edit_pemberi($id) {
 
-		$this->check_login->check();
+		
 		$a['editdata']=$this->db->get_where('pemberi', array('id_pemberi'=>$id))->result_object();
 		$a['page']="pemberi/edit_pemberi";
 		$a['title']="Edit pemberi";
@@ -256,7 +257,7 @@ class Admin extends CI_Controller {
 	}
 
 	function update_pemberi() {
-		$this->check_login->check();
+		
 		$id=$this->input->post('id');
 
 		$i=$this->input;
@@ -271,7 +272,7 @@ class Admin extends CI_Controller {
 	}
 
 	function hapus_pemberi($id) {
-		$this->check_login->check();
+		
 
 		$this->model_admin->hapus_pemberi($id);
 		$this->session->set_flashdata('msg', 'Data Berhasil di Hapus');
@@ -290,7 +291,7 @@ class Admin extends CI_Controller {
 	}
 
 	function total_barang() {
-		$this->check_login->check();
+		
 		$a['data']=$this->model_admin->tampil_barang_all();
 		$a['page']="barang/barang_total";
 		$a['title']="barang Masuk Dan Keluar";
@@ -298,7 +299,7 @@ class Admin extends CI_Controller {
 	}
 
 	function barang() {
-		$this->check_login->check();
+		
 		$a['data']=$this->model_admin->tampil_barang_all();
 		$a['page']="barang/barang";
 		$a['title']="Barang";
@@ -306,7 +307,7 @@ class Admin extends CI_Controller {
 	}
 
 	function tambah_barang() {
-		$this->check_login->check();
+		
 		$a['page']="barang/tambah_barang";
 		$a['title']="Tambah barang";
 
@@ -314,7 +315,7 @@ class Admin extends CI_Controller {
 	}
 
 	function insert_barang() {
-		$this->check_login->check();
+		
 		$i=$this->input;
 		$object=array(
 			'nama_barang'=>$i->post('nama_barang'),
@@ -331,7 +332,7 @@ class Admin extends CI_Controller {
 
 	function edit_barang($id) {
 
-		$this->check_login->check();
+		
 		$a['editdata']=$this->db->get_where('barang', array('id_barang'=>$id))->result_object();
 		$a['page']="barang/edit_barang";
 		$a['title']="Edit Barang";
@@ -340,7 +341,7 @@ class Admin extends CI_Controller {
 	}
 
 	function update_barang() {
-		$this->check_login->check();
+		
 		$id=$this->input->post('id');
 
 		$i=$this->input;
@@ -363,7 +364,7 @@ class Admin extends CI_Controller {
 	}
 
 	function hapus_barang($id) {
-		$this->check_login->check();
+		
 
 		$this->model_admin->hapus_barang($id);
 		$this->session->set_flashdata('msg', 'Data Berhasil di Hapus');
@@ -377,7 +378,7 @@ class Admin extends CI_Controller {
 
 	// ===========================Fungsi penerima======================================
 	function penerima() {
-		$this->check_login->check();
+		
 		$a['data']=$this->model_admin->tampil_penerima();
 		$a['page']="penerima/penerima";
 		$a['title']="penerima";
@@ -385,7 +386,7 @@ class Admin extends CI_Controller {
 	}
 
 	function tambah_penerima() {
-		$this->check_login->check();
+		
 		$a['page']="penerima/tambah_penerima";
 		$a['title']="Tambah penerima";
 
@@ -393,7 +394,7 @@ class Admin extends CI_Controller {
 	}
 
 	function insert_penerima() {
-		$this->check_login->check();
+		
 		$i=$this->input;
 		$object=array(
 			'nama_penerima'=>$i->post('nama_penerima'),
@@ -408,7 +409,7 @@ class Admin extends CI_Controller {
 
 	function edit_penerima($id) {
 
-		$this->check_login->check();
+		
 		$a['editdata']=$this->db->get_where('penerima', array('id_penerima'=>$id))->result_object();
 		$a['page']="penerima/edit_penerima";
 		$a['title']="Edit penerima";
@@ -417,7 +418,7 @@ class Admin extends CI_Controller {
 	}
 
 	function update_penerima() {
-		$this->check_login->check();
+		
 		$id=$this->input->post('id');
 
 		$i=$this->input;
@@ -434,7 +435,7 @@ class Admin extends CI_Controller {
 	}
 
 	function hapus_penerima($id) {
-		$this->check_login->check();
+		
 
 		$this->model_admin->hapus_penerima($id);
 		$this->session->set_flashdata('msg', 'Data Berhasil di Hapus');
@@ -444,7 +445,7 @@ class Admin extends CI_Controller {
 
 	// ===========================Fungsi inventory======================================
 	function inventory() {
-		$this->check_login->check();
+		
 		$a['data']=$this->model_admin->tampil_inventory();
 		$a['page']="inventory/inventory";
 		$a['title']="Inventory";
@@ -453,85 +454,10 @@ class Admin extends CI_Controller {
 
 
 
-	/* ========================Fungsi Manage User============================= */
-	function manage_user() {
-		$this->check_login->check();
-		$a['data']=$this->model_admin->tampil_user()->result_object();
-		$a['page']="user/manage_user";
-		$a['title']="User";
-
-		$this->load->view('admin/index', $a);
-	}
-
-	function tambah_user() {
-		$this->check_login->check();
-		$a['page']="user/tambah_user";
-		$a['title']="Tambah User";
-
-		$this->load->view('admin/index', $a);
-	}
-
-	function insert_user() {
-
-		$this->check_login->check();
-		$username=$this->input->post('username');
-		$password=$this->input->post('password');
-		$status=$this->input->post('status');
-
-
-		$object=array('username'=> $username,
-			'password'=> sha1($password),
-			'status'=> $status);
-		$this->model_admin->insert_user($object);
-		$this->session->set_flashdata('msg', 'Data Berhasil di Tambah');
-		redirect('admin/manage_user', 'refresh');
-	}
-
-	function edit_user($id) {
-		$this->check_login->check();
-		$a['editdata']=$this->model_admin->edit_user($id)->result_object();
-		$a['page']="user/edit_user";
-		$a['title']="Edit User";
-
-		$this->load->view('admin/index', $a);
-	}
-
-	function update_user() {
-		$this->check_login->check();
-		$id=$this->input->post('id');
-		$username=$this->input->post('username');
-		$password=$this->input->post('password');
-		$pass_old=$this->input->post('pass_old');
-		$status=$this->input->post('status');
-
-
-		if (empty($password)) {
-			$object=array('username'=> $username,
-				'password'=> $pass_old);
-		}
-
-		else {
-			$object=array('username'=> $username,
-				'password'=> sha1($password));
-		}
-
-
-		$this->model_admin->update_user($id, $object);
-		$this->session->set_flashdata('msg', 'Data Berhasil di Update');
-		redirect('admin/manage_user', 'refresh');
-	}
-
-	function hapus_user($id) {
-		$this->check_login->check();
-		$this->model_admin->hapus_user($id);
-		$this->session->set_flashdata('msg', 'Data Berhasil di Hapus');
-		redirect('admin/manage_user', 'refresh');
-	}
-
 
 // ========================== Infrasktruktur =================================
 function infrastruktur() {
-	$this->check_login->check();
+	
 	$a['data']=$this->model_admin->tampil_infrastruktur();
 	$a['page']="infrastruktur/infrastruktur";
 	$a['title']="Infrastruktur";
@@ -539,7 +465,7 @@ function infrastruktur() {
 }
 
 function tambah_infrastruktur() {
-	$this->check_login->check();
+	
 	$a['page']="infrastruktur/tambah_infrastruktur";
 	$a['title']="Tambah Infrastruktur";
 	$a['wilayah']=$this->model_admin->tampil_wilayah();
@@ -547,7 +473,7 @@ function tambah_infrastruktur() {
 }
 
 function insert_infrastruktur() {
-	$this->check_login->check();
+	
 	$i=$this->input;
 	$object=array(
 		'nama_barang'=>$i->post('nama_barang'),
@@ -569,7 +495,7 @@ function insert_infrastruktur() {
 
 function edit_infrastruktur($id) {
 
-	$this->check_login->check();
+	
 	$a['editdata']=$this->db->get_where('infrastruktur', array('id_infrastruktur'=>$id))->result_object();
 	$a['wilayah']=$this->model_admin->tampil_wilayah();
 	$a['page']="infrastruktur/edit_infrastruktur";
@@ -579,7 +505,7 @@ function edit_infrastruktur($id) {
 }
 
 function update_infrastruktur() {
-	$this->check_login->check();
+	
 	$id=$this->input->post('id');
 
 	$i=$this->input;
@@ -602,7 +528,7 @@ function update_infrastruktur() {
 }
 
 function hapus_infrastruktur($id) {
-	$this->check_login->check();
+	
 
 	$this->model_admin->hapus_infrastruktur($id);
 	$this->session->set_flashdata('msg', 'Data Berhasil di Hapus');
@@ -612,7 +538,7 @@ function hapus_infrastruktur($id) {
 
 // ========================== Wilayah =================================
 function wilayah() {
-	$this->check_login->check();
+	
 	$a['data']=$this->model_admin->tampil_wilayah();
 	$a['page']="wilayah/wilayah";
 	$a['title']="Wilayah";
@@ -620,7 +546,7 @@ function wilayah() {
 }
 
 function tambah_wilayah() {
-	$this->check_login->check();
+	
 	$a['page']="wilayah/tambah_wilayah";
 	$a['title']="Tambah Wilayah";
 
@@ -628,7 +554,7 @@ function tambah_wilayah() {
 }
 
 function insert_wilayah() {
-	$this->check_login->check();
+	
 	$i=$this->input;
 	$object=array(
 		'nama_wilayah'=>$i->post('nama_wilayah'),
@@ -642,7 +568,7 @@ function insert_wilayah() {
 
 function edit_wilayah($id) {
 
-	$this->check_login->check();
+	
 	$a['editdata']=$this->db->get_where('wilayah', array('id_wilayah'=>$id))->result_object();
 	$a['page']="wilayah/edit_wilayah";
 	$a['title']="Edit Wilayah";
@@ -651,7 +577,7 @@ function edit_wilayah($id) {
 }
 
 function update_wilayah() {
-	$this->check_login->check();
+	
 	$id=$this->input->post('id');
 
 	$i=$this->input;
@@ -668,7 +594,7 @@ function update_wilayah() {
 }
 
 function hapus_wilayah($id) {
-	$this->check_login->check();
+	
 
 	$this->model_admin->hapus_wilayah($id);
 	$this->session->set_flashdata('msg', 'Data Berhasil di Hapus');
@@ -677,7 +603,7 @@ function hapus_wilayah($id) {
 
 function lihat_infra($id) {
 
-	$this->check_login->check();
+	
 	$a['data']=$this->model_admin->tampil_infra_wilayah($id);
 	$a['wilayah']=$this->model_admin->tampil_wilayah();
 	$a['page']="wilayah/infrastruktur";

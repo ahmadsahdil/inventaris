@@ -4,6 +4,7 @@
         <section class="content-header">
           <h1>
             Manage User
+            <?= $this->session->userdata('_username'); ?>
                     </h1>
           <ol class="breadcrumb">
             <li><a href="index"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -19,7 +20,7 @@
           		<div class="box">
                 <div class="box-header">
                   <h3 class="box-title">
-                  	<a href="<?php echo base_url(); ?>admin/tambah_user" class="btn btn-sm btn-primary "><i class="fa fa-plus"></i> Tambah</a>
+                  	<a href="<?php echo base_url(); ?>user/tambah_user" class="btn btn-sm btn-primary "><i class="fa fa-plus"></i> Tambah</a>
                   </h3>
                   <div class="box-tools">
                  
@@ -58,8 +59,10 @@
                         <td><?php echo ucwords($lihat->status)?></td>
                     	
                         <td align="center">
-                         
-                            <a href="<?php echo base_url(); ?>admin/edit_user/<?php echo $lihat->id_user ?>" class="btn btn-sm btn-primary "><i class="fa fa-edit"></i> Edit</a>
+                        <?php if($this->session->userdata('_status')=="Admin") {?>
+                            <a onclick="return confirm('yakin?')" href="<?php echo base_url(); ?>user/reset_password/<?php echo $lihat->id_user ?>" class="btn btn-sm btn-success "><i class="fa fa-edit"></i> Reset PWD</a>
+                            <?php } ?>
+                            <a href="<?php echo base_url(); ?>user/edit_user/<?php echo $lihat->id_user ?>" class="btn btn-sm btn-primary "><i class="fa fa-edit"></i> Edit</a>
                             <?php include 'hapus_user.php'; ?>
 
                       

@@ -16,7 +16,7 @@
         <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
            <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">Tidak, batalkan
            </button>
-        <a href="<?php echo base_url('admin/hapus_user/'.$lihat->id_user) ?>" class="btn btn-outline pull-right"><i class="fa fa-trash-o"></i>Ya, Hapus Data Ini</a>
+        <a href="<?php echo base_url('user/hapus_user/'.$lihat->id_user) ?>" class="btn btn-outline pull-right"><i class="fa fa-trash-o"></i>Ya, Hapus Data Ini</a>
 
       </div>
     </div>

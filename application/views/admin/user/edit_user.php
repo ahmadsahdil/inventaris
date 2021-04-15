@@ -8,7 +8,7 @@
             </h1>
             <ol class="breadcrumb">
               <li><i class="fa fa-dashboard"></i> Home</a></li>
-              <li><a href="<?php echo base_url(); ?>admin/manage_user">Manage User</a></li>
+              <li><a href="<?php echo base_url(); ?>user/manage_user">Manage User</a></li>
               <li class="active">Edit</li>
 
             </ol>
@@ -22,7 +22,7 @@
               </div>
               <div class="box-body">
                 <!-- form start -->
-                <?php echo form_open('admin/update_user'); ?>
+                <?php echo form_open('user/update_user'); ?>
                 <?php  
                 foreach ($editdata as $data):
                 ?>
@@ -31,8 +31,12 @@
                       <input type="text" class="form-control" name="username" value="<?php echo $data->username ?>" />
                   </div>
                   <div class="form-group">
-                    <label for="password">Password</label>
-                      <input type="password" class="form-control" name="password" placeholder="Password"/>
+                    <label for="password">Password Baru</label>
+                      <input type="password" class="form-control" name="password" placeholder="Password Baru"/>
+                  </div>
+                  <div class="form-group">
+                    <label for="password_lama">Password Lama</label>
+                      <input type="password" class="form-control" name="password_lama" placeholder="Password Lama"/>
                   </div>
                   <div class="form-group">
                     <label>Status</label>
@@ -43,7 +47,7 @@
                   </div>
                   <input type="hidden" name="id" value="<?php echo $data->id_user ?>">
                   <input type="hidden" name="pass_old" value="<?php echo $data->password ?>">
-                  <a href="<?php echo base_url(); ?>admin/manage_user" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Batal</a>
+                  <a href="<?php echo base_url(); ?>user" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Batal</a>
                   <button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Simpan</button>
                 <?php endforeach ?>
                 <?php echo form_close(); ?>

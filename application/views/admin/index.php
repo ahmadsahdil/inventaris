@@ -2,17 +2,12 @@
 Programmer : Ahmad dan Indra
 Programmer Support : Muhammad (ketikanmd.tech)
  -->
-<?php 
-$user_id=$this->session->userdata('user_id');
-$user = $this->model_admin->detail($user_id);
- ?>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title><?php echo $title; ?></title>
-  
 <link rel="shortcut icon" href="<?php echo base_url('assets/gambar/pins.jpg') ?>">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -36,7 +31,7 @@ $user = $this->model_admin->detail($user_id);
     <!-- Logo -->
     <a href="<?php echo base_url('admin')?>" class="logo">
       <span class="logo-mini"><b>JKS</b></span>
-      <span class="logo-lg"><b>Inventaris NTB</b></span>
+      <span class="logo-lg"><b>JKS NTB</b></span>
     </a>
     <nav class="navbar navbar-static-top">
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
@@ -53,7 +48,7 @@ $user = $this->model_admin->detail($user_id);
           <li class="dropdown user user-menu" >
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               
-          <span class="hidden-xs"><?php echo ucwords($user->username) ?>  </span>
+          <span class="hidden-xs"><?php echo ucwords($this->session->userdata('_username')) ?>  </span>
             </a>
             <ul class="dropdown-menu">
                <li class="user-footer" >
@@ -79,7 +74,7 @@ $user = $this->model_admin->detail($user_id);
 <img src="  <?php  echo base_url() ?>assets/gambar/avatar.png" class="img-circle"> 
  </div>
  <div class="pull-left info">  
-  <p> <?php echo ucwords($user->username) ?></p>
+  <p> <?php echo ucwords($this->session->userdata('_username')) ?></p>
 <i class="fa fa-circle text-success"> </i> Online
 
 
@@ -90,7 +85,7 @@ $user = $this->model_admin->detail($user_id);
             <li class="header">MAIN NAVIGATION</li>
               <li class="treeview">
           <a href="#">
-            <i class="fa fa-user"></i> <span><?php echo ucwords($user->username) ?></span>
+            <i class="fa fa-user"></i> <span><?php echo ucwords($this->session->userdata('_username')) ?></span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -152,9 +147,9 @@ $user = $this->model_admin->detail($user_id);
               </a>
             </li>
 
-             <?php if($this->session->userdata('user_status')=="Admin") {?>
+             <?php if($this->session->userdata('_status')=="Admin") {?>
              <li class="<?php if($page == 'user/manage_user'){echo 'active';} ?>">
-              <a href="<?php echo base_url(); ?>admin/manage_user">
+              <a href="<?php echo base_url(); ?>user">
                 <i class="fa fa-user-plus"></i> <span>User</span>
               </a>
             </li>

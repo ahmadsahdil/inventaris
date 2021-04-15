@@ -8,7 +8,7 @@
             </h1>
             <ol class="breadcrumb">
               <li><i class="fa fa-dashboard"></i> Home</a></li>
-              <li><a href="<?php echo base_url(); ?>admin/manage_user">Manage User</a></li>
+              <li><a href="<?php echo base_url(); ?>user/manage_user">Manage User</a></li>
               <li class="active">Tambah</li>
             </ol>
           </section>
@@ -20,8 +20,20 @@
                 <h3 class="box-title">Form Data Tambah User</h3>
               </div>
               <div class="box-body">
+              <div style="text-align: center;">
+                <?php  if($this->session->flashdata('msg')){
+       echo '<div class="alert alert-success">';
+      echo $this->session->flashdata('msg');
+      echo '</div>';
+    }else if($this->session->flashdata('error')){
+  echo '<div class="alert alert-danger">';
+      echo $this->session->flashdata('error');
+      echo '</div>';
+
+      }?>
+      </div>
                 <!-- form start -->
-                <?php echo form_open('admin/insert_user'); ?>
+                <?php echo form_open('user/insert_user'); ?>
                    <div class="form-group">
                     <label for="username">Username</label>
                       <input type="text" class="form-control" name="username" placeholder="Username"/>
@@ -37,7 +49,7 @@
                       <option value="Operator">Operator</option>
                     </select>
                   </div>
-                  <a href="<?php echo base_url(); ?>admin/manage_user" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Batal</a>
+                  <a href="<?php echo base_url(); ?>user" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Batal</a>
                   <button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Simpan</button>
                 <?php echo form_close(); ?>
                 

@@ -368,54 +368,6 @@ public function total_jenis_penerima($idpenerima,$idjenisbarang)
 
 
 
-
-	public function cek_user($user, $pass)
-	{
-		$array = array('username' => $user, 'password' => $pass);
-
-		$query = $this->db->where($array);
-
-		$query = $this->db->get('user');
-
-		return $query;
-	}
-
-	public function tampil_user()
-	{
-		return $this->db->get('user');
-	}
-
-	public function insert_user($object)
-	{
-		$this->db->insert('user', $object);
-	}
-
-	public function edit_user($id)
-	{
-		return $this->db->get_where('user',array('id_user'=>$id));
-	}
-
-	public function update_user($id, $object)
-	{
-		$this->db->where('id_user', $id);
-		$this->db->update('user', $object); 
-	}
-
-	public function hapus_user($id)
-	{
-		return $this->db->delete('user', array('id_user' => $id));
-	}
-
-	public function detail($IdUser)
-	{
-		$this->db->select('*');
-		$this->db->from('user');
-		$this->db->where('id_user',$IdUser);
-		$this->db->order_by('id_user');
-		$query=$this->db->get();
-		return $query->row();
-	}
-
 	public function detail_jenis($id_barang)
 	{
 		$this->db->select('*');

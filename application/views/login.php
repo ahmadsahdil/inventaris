@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>App Posko BUMN | Login Page</title>
+    <title><?= $title ?></title>
     <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/icon.ico">
     <link rel="shortcut icon" href="<?php echo base_url('assets/gambar/pins.jpg') ?>">
     <!-- Tell the browser to be responsive to screen width -->
@@ -36,18 +36,19 @@
       <div class="login-box-body">
      
         <p class="login-box-msg" style="font-size: 24px">Silahkan Login</p>
-       <?php  if($this->session->flashdata('k')){
-       echo '<div class="alert alert-success">';
-      echo $this->session->flashdata('k');
+       <?php  if($this->session->flashdata('message')){
+       echo '<div class="alert alert-danger">';
+      echo $this->session->flashdata('message');
       echo '</div>';
     }?>
         <?php echo form_open('login/do_login'); ?>
+        <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
           <div class="form-group has-feedback">
-            <input type="text" name="user" autofocus required="" class="form-control" placeholder="Username">
+            <input type="text" name="_username" autofocus required="" class="form-control" placeholder="Username">
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-            <input type="password" name="pass" required="" class="form-control" placeholder="Password">
+            <input type="password" name="_password" required="" class="form-control" placeholder="Password">
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
           <div class="row">

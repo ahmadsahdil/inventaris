@@ -29,7 +29,7 @@ class Login extends CI_Controller {
 				$this->session->set_userdata('_user_id', $this->encryption->encrypt($user->id_user));
 				$this->session->set_userdata('_username', $user->username);
 				$this->session->set_userdata('_status', $user->status);
-				redirect('admin');
+				redirect('admin1');
 			} else {
 				$this->session->set_flashdata('message', 'Username atau password salah');
 				redirect('login','refresh');

@@ -14,11 +14,7 @@
 
             </ol>
           </section>
- <?php  if($this->session->flashdata('alert')){
-       echo '<div class="alert alert-danger">';
-      echo $this->session->flashdata('alert');
-      echo '</div>';
-    }?>
+
           <!-- Main content -->
           <section class="content">
             <div class="box box-info">

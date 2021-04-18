@@ -64,7 +64,10 @@ class Admin extends CI_Controller {
 			'stok'=> $barang->stok +=$jumlah);
 		$this->db->where('id_barang', $id_barang);
 		$this->db->update('barang', $data_barang);
-		$this->session->set_flashdata("msg", "Data berhasil ditambah");
+		$this->session->set_flashdata(array(
+			'msg'=> 'Data Berhasil di Tambah',
+			'status'=> 'success'
+		));
 		redirect('admin/tambah_barang_masuk/'.$i->post('id_pemberi'), 'refresh');
 
 	}
@@ -79,7 +82,10 @@ class Admin extends CI_Controller {
 			'keterangan_masuk'=>$i->post('keterangan'));
 		$this->db->where('id_barang_masuk', $id);
 		$this->db->update('barang_masuk', $object);
-		$this->session->set_flashdata('msg', 'Data Berhasil di Update');
+		$this->session->set_flashdata(array(
+			'msg'=> 'Data Berhasil di Ubah',
+			'status'=> 'success'
+		));
 		$id_pemberi=$this->session->userdata('id_pemberi');
 		redirect('admin/tambah_barang_masuk/'.$id_pemberi, 'refresh');
 
@@ -102,7 +108,10 @@ class Admin extends CI_Controller {
 			$this->db->update('barang', $data_barang);
 		}
 
-		$this->session->set_flashdata("msg", "Data berhasil dihapus");
+		$this->session->set_flashdata(array(
+			'msg'=> 'Data Berhasil di Hapus',
+			'status'=> 'success'
+		));
 		redirect('admin/tambah_barang_masuk/'.$id_pemberi);
 
 	}
@@ -146,7 +155,10 @@ class Admin extends CI_Controller {
 			'keterangan_keluar'=>$i->post('keterangan_keluar'));
 		$this->db->where('id_barang_keluar', $id);
 		$this->db->update('barang_keluar', $object);
-		$this->session->set_flashdata('msg', 'Data Berhasil di Update');
+		$this->session->set_flashdata(array(
+			'msg'=> 'Data Berhasil di Ubah',
+			'status'=> 'success'
+		));
 		$id_penerima=$this->session->userdata('id_penerima');
 		redirect('admin/tambah_barang_keluar/'.$id_penerima, 'refresh');
 
@@ -179,11 +191,17 @@ class Admin extends CI_Controller {
 					$this->db->update('barang', $data_barang);
 				}
 
-				$this->session->set_flashdata("msg", "Data berhasil ditambah");
+				$this->session->set_flashdata(array(
+					'msg'=> 'Data Berhasil di Tambah',
+					'status'=> 'success'
+				));
 			}
 
 			else {
-				$this->session->set_flashdata('error', "stok kurang");
+				$this->session->set_flashdata(array(
+					'msg'=> 'Stok Kurang',
+					'status'=> 'error'
+				));
 				redirect('admin/tambah_barang_keluar/'.$i->post('id_penerima'));
 
 			}
@@ -210,7 +228,10 @@ class Admin extends CI_Controller {
 			$this->db->where('id_barang', $barang->id_barang);
 			$this->db->update('barang', $data_barang);
 		}
-		$this->session->set_flashdata("msg", "Data berhasil dihapus");
+		$this->session->set_flashdata(array(
+			'msg'=> 'Data Berhasil di Hapus',
+			'status'=> 'success'
+		));
 		redirect('admin/tambah_barang_keluar/'.$segment3);
 	}
 
@@ -244,7 +265,10 @@ class Admin extends CI_Controller {
 			'tgl_pemberi'=>$i->post('tgl_pemberi')
 		);
 		$this->db->insert('pemberi', $object);
-		$this->session->set_flashdata('msg', 'Data Berhasil di Tambah');
+		$this->session->set_flashdata(array(
+			'msg'=> 'Data Berhasil di Tambah',
+			'status'=> 'success'
+		));
 		redirect('admin/barang_masuk', 'refresh');
 	}
 
@@ -272,7 +296,10 @@ class Admin extends CI_Controller {
 		);
 		$this->db->where('id_pemberi', $id);
 		$this->db->update('pemberi', $object);
-		$this->session->set_flashdata('msg', 'Data Berhasil di Update');
+		$this->session->set_flashdata(array(
+			'msg'=> 'Data Berhasil di Ubah',
+			'status'=> 'success'
+		));
 		// echo "ini tidak kosong";
 		redirect('admin/barang_masuk', 'refresh');
 
@@ -282,7 +309,10 @@ class Admin extends CI_Controller {
 		
 
 		$this->model_admin->hapus_pemberi($id);
-		$this->session->set_flashdata('msg', 'Data Berhasil di Hapus');
+		$this->session->set_flashdata(array(
+			'msg'=> 'Data Berhasil di Hapus',
+			'status'=> 'success'
+		));
 		redirect('admin/barang_masuk', 'refresh');
 	}
 
@@ -330,7 +360,10 @@ class Admin extends CI_Controller {
 			'satuan'=>$i->post('satuan'),
 			'stok'=>0);
 		$this->db->insert('barang', $object);
-		$this->session->set_flashdata('msg', 'Data Berhasil di Tambah');
+		$this->session->set_flashdata(array(
+			'msg'=> 'Data Berhasil di Tambah',
+			'status'=> 'success'
+		));
 		redirect('admin/barang', 'refresh');
 	}
 
@@ -363,7 +396,10 @@ class Admin extends CI_Controller {
 		);
 		$this->db->where('id_barang', $id);
 		$this->db->update('barang', $object);
-		$this->session->set_flashdata('msg', 'Data Berhasil di Update');
+		$this->session->set_flashdata(array(
+			'msg'=> 'Data Berhasil di Ubah',
+			'status'=> 'success'
+		));
 
 		// echo "ini tidak kosong";
 		redirect('admin/barang/barang', 'refresh');
@@ -374,7 +410,10 @@ class Admin extends CI_Controller {
 		
 
 		$this->model_admin->hapus_barang($id);
-		$this->session->set_flashdata('msg', 'Data Berhasil di Hapus');
+		$this->session->set_flashdata(array(
+			'msg'=> 'Data Berhasil di Hapus',
+			'status'=> 'success'
+		));
 		redirect('admin/barang/barang', 'refresh');
 	}
 
@@ -411,7 +450,10 @@ class Admin extends CI_Controller {
 			'tgl_penerima'=>$i->post('tgl_penerima')
 		);
 		$this->db->insert('penerima', $object);
-		$this->session->set_flashdata('msg', 'Data Berhasil di Tambah');
+		$this->session->set_flashdata(array(
+			'msg'=> 'Data Berhasil di Tambah',
+			'status'=> 'success'
+		));
 		redirect('admin/barang_keluar', 'refresh');
 	}
 
@@ -441,7 +483,10 @@ class Admin extends CI_Controller {
 		);
 		$this->db->where('id_penerima', $id);
 		$this->db->update('penerima', $object);
-		$this->session->set_flashdata('msg', 'Data Berhasil di Update');
+		$this->session->set_flashdata(array(
+			'msg'=> 'Data Berhasil di Ubah',
+			'status'=> 'success'
+		));
 		// echo "ini tidak kosong";
 		redirect('admin/barang_keluar', 'refresh');
 
@@ -451,7 +496,10 @@ class Admin extends CI_Controller {
 		
 
 		$this->model_admin->hapus_penerima($id);
-		$this->session->set_flashdata('msg', 'Data Berhasil di Hapus');
+		$this->session->set_flashdata(array(
+			'msg'=> 'Data Berhasil di Hapus',
+			'status'=> 'success'
+		));
 		redirect('admin/barang_keluar', 'refresh');
 	}
 
@@ -499,7 +547,10 @@ function insert_infrastruktur() {
 		'id_wilayah'=>$i->post('wilayah')
 	);
 	$this->db->insert('infrastruktur', $object);
-	$this->session->set_flashdata('msg', 'Data Berhasil di Tambah');
+	$this->session->set_flashdata(array(
+		'msg'=> 'Data Berhasil di Tambah',
+		'status'=> 'success'
+	));
 	redirect('admin/infrastruktur');
 }
 
@@ -534,7 +585,10 @@ function update_infrastruktur() {
 	);
 	$this->db->where('id_infrastruktur', $id);
 	$this->db->update('infrastruktur', $object);
-	$this->session->set_flashdata('msg', 'Data Berhasil di Update');
+	$this->session->set_flashdata(array(
+		'msg'=> 'Data Berhasil di Ubah',
+		'status'=> 'success'
+	));
 	// echo "ini tidak kosong";
 	redirect('admin/infrastruktur/infrastruktur');
 
@@ -544,7 +598,10 @@ function hapus_infrastruktur($id) {
 	
 
 	$this->model_admin->hapus_infrastruktur($id);
-	$this->session->set_flashdata('msg', 'Data Berhasil di Hapus');
+	$this->session->set_flashdata(array(
+		'msg'=> 'Data Berhasil di Hapus',
+		'status'=> 'success'
+	));;
 	redirect('admin/infrastruktur/infrastruktur');
 }
 
@@ -573,7 +630,10 @@ function insert_wilayah() {
 		'nama_wilayah'=>$i->post('nama_wilayah'),
 	);
 	$this->db->insert('wilayah', $object);
-	$this->session->set_flashdata('msg', 'Data Berhasil di Tambah');
+	$this->session->set_flashdata(array(
+		'msg'=> 'Data Berhasil di Tambah',
+		'status'=> 'success'
+	));
 	redirect('admin/wilayah');
 }
 
@@ -600,7 +660,10 @@ function update_wilayah() {
 	);
 	$this->db->where('id_wilayah', $id);
 	$this->db->update('wilayah', $object);
-	$this->session->set_flashdata('msg', 'Data Berhasil di Update');
+	$this->session->set_flashdata(array(
+		'msg'=> 'Data Berhasil di Ubah',
+		'status'=> 'success'
+	));
 	// echo "ini tidak kosong";
 	redirect('admin/wilayah/wilayah');
 
@@ -610,7 +673,10 @@ function hapus_wilayah($id) {
 	
 
 	$this->model_admin->hapus_wilayah($id);
-	$this->session->set_flashdata('msg', 'Data Berhasil di Hapus');
+	$this->session->set_flashdata(array(
+		'msg'=> 'Data Berhasil di Hapus',
+		'status'=> 'success'
+	));
 	redirect('admin/wilayah/wilayah');
 }
 

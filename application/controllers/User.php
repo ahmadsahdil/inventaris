@@ -15,7 +15,6 @@ class User extends CI_Controller {
 		$a['data']=$this->user_model->tampil_user()->result_object();
 		$a['page']="user/manage_user";
 		$a['title']="User";
-
 		$this->load->view('admin/index', $a);
 	}
 
@@ -36,7 +35,11 @@ class User extends CI_Controller {
 		$user=$this->user_model->login($username);
 
 		if ($user) {
-			$this->session->set_flashdata('error', 'Username sudah ada');
+			// $this->session->set_flashdata('error', 'Username sudah ada');
+			$this->session->set_flashdata(array(
+				'msg'=> 'Username sudah ada',
+				'status'=> 'error'
+			));
 			redirect('user/tambah_user');
 		}
 
@@ -45,7 +48,10 @@ class User extends CI_Controller {
 				'password'=> password_hash($password, PASSWORD_DEFAULT),
 				'status'=> $status);
 			$this->user_model->insert_user($object);
-			$this->session->set_flashdata('msg', 'Data Berhasil di Tambah');
+			$this->session->set_flashdata(array(
+				'msg'=> 'Data Berhasil di Tambah',
+				'status'=> 'success'
+			));
 			redirect('user');
 
 		}
@@ -72,12 +78,18 @@ class User extends CI_Controller {
 
 		if (password_verify(xss_clean(htmlspecialchars($i->post('password_lama'))), $user->password)) {
 			$this->user_model->update_user($edit_id, $data);
-			$this->session->set_flashdata('msg', 'Data Berhasil di Update');
+			$this->session->set_flashdata(array(
+				'msg'=> 'Data Berhasil di Ubah',
+				'status'=> 'success'
+			));
 			redirect('user');
 		}
 
 		else {
-			$this->session->set_flashdata('msg', 'Data Gagal di Update');
+			$this->session->set_flashdata(array(
+				'msg'=> 'Data Gagal di Ubah',
+				'status'=> 'error'
+			));
 			redirect('user');
 		}
 
@@ -88,16 +100,32 @@ class User extends CI_Controller {
 	function hapus_user($id) {
 
 		$this->user_model->hapus_user($id);
-		$this->session->set_flashdata('msg', 'Data Berhasil di Hapus');
+		$this->session->set_flashdata(array(
+			'msg'=> 'Data Berhasil di Hapus',
+			'status'=> 'success'
+		));
 		redirect('user');
 	}
 
 	function reset_password($id) {
 		$user=$this->user_model->detail($id)->row();	
 		$data=array('password'=> password_hash($user->username, PASSWORD_DEFAULT));
-		$this->user_model->update_user($id, $data);
-		$this->session->set_flashdata('msg', 'Password Berhasil di Reset');
-		redirect('user');
+		if($this->user_model->update_user($id, $data)){
+			$this->session->set_flashdata(array(
+				'msg'=> 'Password Berhasil di Reset',
+				'status'=> 'success'
+			));
+			redirect('user');
+		}else{
+			$this->session->set_flashdata(array(
+				'msg'=> 'Password Berhasil di Reset',
+				'status'=> 'success'
+			));
+			redirect('user');
+
+		}
+		
+		
 	}
 
 

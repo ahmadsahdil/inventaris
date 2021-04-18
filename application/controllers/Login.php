@@ -31,12 +31,18 @@ class Login extends CI_Controller {
 				$this->session->set_userdata('_status', $user->status);
 				redirect('admin');
 			} else {
-				$this->session->set_flashdata('message', 'Username atau password salah');
-				redirect('login','refresh');
+				$this->session->set_flashdata(array(
+					'msg'=> 'Username atau password salah',
+					'status'=> 'error'
+				));
+				redirect('login');
 			}
 		} else {
-			$this->session->set_flashdata('message', 'Username atau password salah');
-			redirect('login','refresh');
+			$this->session->set_flashdata(array(
+				'msg'=> 'Username atau password salah',
+				'status'=> 'error'
+			));
+			redirect('login');
 		}
 	}
 

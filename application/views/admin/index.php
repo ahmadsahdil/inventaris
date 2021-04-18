@@ -23,6 +23,8 @@ Programmer Support : Muhammad (ketikanmd.tech)
 
   <link rel="stylesheet" href="<?php echo base_url()?>/assets/dist/css/skins/_all-skins.min.css">
   <link rel="stylesheet" href="<?php echo base_url()?>/assets/datatables.min.css">
+  <link rel="stylesheet" href="<?php echo base_url()?>/assets/toastr.min.css">
+  <link rel="stylesheet" href="<?php echo base_url()?>/assets/sweetalert2.min.css">
 
    
 </head>
@@ -176,6 +178,8 @@ Programmer Support : Muhammad (ketikanmd.tech)
 <script src="<?php echo base_url()?>/assets/bower_components/fastclick/lib/fastclick.js"></script>
 <script src="<?php echo base_url()?>/assets/dist/js/adminlte.min.js"></script>
 <script src="<?php echo base_url()?>/assets/dist/js/demo.js"></script>
+<script src="<?php echo base_url()?>/assets/toastr.min.js"></script>
+<script src="<?php echo base_url()?>/assets/sweetalert2.min.js"></script>
 <!-- <script src="<?php echo base_url()?>/assets/print.js"></script> -->
 
 <script>
@@ -194,8 +198,22 @@ Programmer Support : Muhammad (ketikanmd.tech)
         ]
     })
   })
+var status = "<?= $this->session->flashdata('status')?>";
+  if (status == "success") {
+ Swal.fire({
+              icon: 'success',
+              title: '<?= $this->session->flashdata('msg')?>',
+              showConfirmButton: false,
+              timer: 2500
+            })
 
- 
+  }else if(status == "error"){
+    Swal.fire({
+              icon: 'error',
+              title: '<?= $this->session->flashdata('msg')?>',
+              showConfirmButton: false,
+              timer: 2500
+            })}
 </script>
 </body>
 </html>

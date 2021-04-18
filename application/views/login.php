@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/css/AdminLTE.min.css">
     <!-- iCheck -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/iCheck/square/blue.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/sweetalert2.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -36,11 +37,6 @@
       <div class="login-box-body">
      
         <p class="login-box-msg" style="font-size: 24px">Silahkan Login</p>
-       <?php  if($this->session->flashdata('message')){
-       echo '<div class="alert alert-danger">';
-      echo $this->session->flashdata('message');
-      echo '</div>';
-    }?>
         <?php echo form_open('login/do_login'); ?>
         <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
           <div class="form-group has-feedback">
@@ -67,6 +63,7 @@
     <script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap.min.js"></script>
     <!-- iCheck -->
     <script src="<?php echo base_url(); ?>assets/plugins/iCheck/icheck.min.js"></script>
+    <script src="<?php echo base_url()?>/assets/sweetalert2.min.js"></script>
     <script>
       $(function () {
         $('input').iCheck({
@@ -75,6 +72,22 @@
           increaseArea: '20%' // optional
         });
       });
+      var status = "<?= $this->session->flashdata('status')?>";
+  if (status == "success") {
+ Swal.fire({
+              icon: 'success',
+              title: '<?= $this->session->flashdata('msg')?>',
+              showConfirmButton: false,
+              timer: 2500
+            })
+
+  }else if(status == "error"){
+    Swal.fire({
+              icon: 'error',
+              title: '<?= $this->session->flashdata('msg')?>',
+              showConfirmButton: false,
+              timer: 2500
+            })}
     </script>
   </body>
 </html>

@@ -27,18 +27,7 @@
 
                   </div>
                 </div>
-                         <div style="text-align: center;">
-                 <?php  if($this->session->flashdata('msg')){
-       echo '<div class="alert alert-success">';
-      echo $this->session->flashdata('msg');
-      echo '</div>';
-    }else if($this->session->flashdata('error')){
-  echo '<div class="alert alert-danger">';
-      echo $this->session->flashdata('error');
-      echo '</div>';
-
-      }?>
-      </div>
+                         
                 <div class="box-body table-responsive no-padding">
                   <table id="example1" class="table table-bordered table-hover dataTable">
                     <thead>

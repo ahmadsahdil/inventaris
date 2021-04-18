@@ -84,18 +84,6 @@
          <div class="panel-body form-horizontal" >
          
            <div class="form-group" style="text-align: center;">
-            <?php  if($this->session->flashdata('error')){
-        
- echo '<div class="alert alert-danger">';
-      echo $this->session->flashdata('error');
-      echo '</div>';
-    }elseif ($this->session->flashdata('msg')) {
-               
- echo '<div class="alert alert-success">';
-      echo $this->session->flashdata('msg');
-      echo '</div>';
-      }
- ?>
               <label name="nama_penerima" id="nama_penerima" style="font-size: 20px" ><?php echo "Penerima : ". $nama_penerima->nama_penerima?></label>
   
                     </div>

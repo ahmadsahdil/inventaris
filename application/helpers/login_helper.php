@@ -13,7 +13,10 @@ function cek_not_login()
     $ci = &get_instance();
     $user = $ci->encryption->decrypt($ci->session->userdata('_user_id'));
     if ($ci->check_login->check()->id_user !== $user) {
-        $ci->session->set_flashdata('message', 'Anda belum login');
+        $ci->session->set_flashdata(array(
+            'msg'=> 'Anda belum login',
+            'status'=> 'error'
+        ));
         redirect('login');
     }
 }

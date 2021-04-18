@@ -84,16 +84,7 @@
          <div class="panel-body form-horizontal">
          
            <div class="form-group" style="text-align: center;">
-           <?php  if($this->session->flashdata('msg')){ 
-       echo '<div class="alert alert-success">';
-      echo $this->session->flashdata('msg');
-      echo '</div>';
-    }else if ($this->session->flashdata('error')) {
-       echo '<div class="alert alert-danger">';
-      echo $this->session->flashdata('error');
-      echo '</div>';
-    } ?>
-              <label name="nama_pemberi" id="nama_pemberi" style="font-size: 20px" ><?php echo $nama_pemberi->nama_pemberi?></label>
+                         <label name="nama_pemberi" id="nama_pemberi" style="font-size: 20px" ><?php echo $nama_pemberi->nama_pemberi?></label>
     
                     </div>
  

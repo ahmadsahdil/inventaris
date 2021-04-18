@@ -23,7 +23,7 @@
           <section class="content">
             <div class="box box-info">
               <div class="box-header with-border">
-                <h3 class="box-title">Form Data Tambah pemberi</h3>
+                <h3 class="box-title">Form Data Tambah Supplier</h3>
               </div>
               <div class="box-body">
                 <!-- form start -->
@@ -36,9 +36,13 @@
                     <label for="nama">Atas Nama</label>
                       <input type="text" class="form-control" name="nama" placeholder="Masukkan Nama"  />
                   </div>
+                   <div class="form-group">
+                    <label for="keterangan">Keterangan</label>
+                      <input type="text" class="form-control" name="keterangan" placeholder="Masukkan Keterangan"  />
+                  </div>
+             
                  
-                 
-                  <a href="<?php echo base_url(); ?>admin/supplier" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Batal</a>
+                  <a href="<?php echo base_url(); ?>admin/barang_masuk" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Batal</a>
                   <button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Simpan</button>
                 <?php echo form_close(); ?>
                 

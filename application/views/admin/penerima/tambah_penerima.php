@@ -40,10 +40,19 @@
                    <label>Alamat</label>
                       <input type="text" class="form-control" name="alamat" placeholder="Masukkan Alamat"  />
                   </div>
+                  <div class="form-group">
+                    <label for="keterangan">Keterangan</label>
+                      <input type="text" class="form-control" name="keterangan" placeholder="Masukkan Keterangan"  />
+                  </div>
+                  <div class="form-group">
+                  <label for="tgl_penerima">Tanggal :</label>
+                    <input type="date" class="form-control" 
+                        name="tgl_penerima" id="tgl_penerima" value="<?php echo date("Y-m-d"); ?>" required >bulan/tanggal/tahun
+                </div>
                  
                  
                  
-                  <a href="<?php echo base_url(); ?>admin/penerima/penerima" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Batal</a>
+                  <a href="<?php echo base_url(); ?>admin/penerima" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Batal</a>
                   <button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Simpan</button>
                 <?php echo form_close(); ?>
                 

@@ -38,9 +38,14 @@
                     <label for="nama">Atas Nama</label>
                       <input type="text" class="form-control" name="nama" value="<?php echo $data->nama ?>"  />
                   </div>
-                
+                  </div>
+                    <div class="form-group">
+                    <label for="keterangan">Keterangan</label>
+                      <input type="text" class="form-control" name="keterangan" value="<?php echo $data->keterangan_pemberi ?>"  />
+                  </div>
+               
                   <input type="hidden" name="id" value="<?php echo $data->id_pemberi ?>">
-                  <a href="<?php echo base_url(); ?>admin/supplier" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Batal</a>
+                  <a href="<?php echo base_url(); ?>admin/barang_masuk" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Batal</a>
                   <button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Ubah</button>
                 <?php endforeach ?>
                 <?php echo form_close(); ?>

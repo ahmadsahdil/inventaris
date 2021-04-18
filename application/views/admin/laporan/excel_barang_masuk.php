@@ -15,7 +15,7 @@ table,th,td{
 </style>
 
 <div style="text-align: center;">
-<span style="margin-left: 20px;font-size: 20px"><b>Data Bantuan Masuk</b></span>
+<span style="margin-left: 20px;font-size: 20px"><b>Data Barang Masuk</b></span>
 	
 </div>
 <br>
@@ -24,12 +24,14 @@ table,th,td{
                       <tr style="background-color:blue;">
                         <th style="border:1px solid #000;width:30px; color: white">No</th>
                         <th style="border:1px solid #000;width:250;color: white">Pihak yang menyerahkan</th>
+                        <th style="border:1px solid #000;width:250;color: white">Atas Nama</th>
+                        <th style="border:1px solid #000;width:250;color: white">Keterangan</th>
                         <th style="border:1px solid #000;width:120px;color: white">Tanggal</th>
                         <th style="border:1px solid #000;width:250;color: white">Nama Barang</th>
                         <th style="border:1px solid #000;width:250;color: white">Merk/Type</th>
                         <th style="border:1px solid #000;width:70px;color: white">Jumlah</th>
                         <th style="border:1px solid #000;width:70px;color: white">satuan</th>
-                        <th style="border:1px solid #000;width:150px;color: white">Keterangan</th>
+                        <th style="border:1px solid #000;width:150px;color: white">Keterangan Barang</th>
                        </tr>
                     </thead>
                     <tbody>
@@ -39,9 +41,9 @@ table,th,td{
                         ?>
                     	<tr>
                         <td><?php echo $no++ ?></td>
-                        <td><?php echo $lihat->nama_pemberi ?>
-                          <?php echo "( ". $lihat->nama ." )"?>
-                        </td>
+                        <td><?php echo $lihat->nama_pemberi ?></td>
+                        <td><?php echo $lihat->nama ?></td>
+                        <td><?php echo $lihat->keterangan_pemberi ?></td>
                           <td><?php echo date('d M Y',strtotime($lihat->tgl_masuk)) ?></td>
                           <td><?php echo $lihat->nama_barang ?></td>
                           <td><?php echo $lihat->merk_barang ?></td>

@@ -96,12 +96,6 @@ Programmer Support : Muhammad (ketikanmd.tech)
             
           </ul>
         </li>  
-             <li class="<?php if($page == 'pemberi/pemberi'){echo 'active';} ?>">
-              <a href="<?php echo base_url(); ?>admin/supplier">
-                <i class="fa  fa-users"></i> <span>Supplier</span>
-              </a>
-            </li>    
-
              <li class="treeview">
           <a href="#">
             <i class="fa fa-gift"></i> <span>Barang</span>
@@ -130,11 +124,6 @@ Programmer Support : Muhammad (ketikanmd.tech)
             
           </ul>
         </li>  
-              <li class="<?php if($page == 'penerima/penerima'){echo 'active';} ?>">
-              <a href="<?php echo base_url(); ?>admin/penerima">
-                <i class="fa fa-university"></i> <span>Penerima</span>
-              </a>
-            </li>           
             <li class="<?php if($page == 'barang_masuk/home_barang_masuk'){echo 'active';} ?>">
               <a href="<?php echo base_url(); ?>admin/barang_masuk">
                 <i class="fa fa-medkit"></i> <span>Barang Masuk</span>

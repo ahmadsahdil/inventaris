@@ -39,7 +39,11 @@
                     <label for="alamat">Alamat</label>
                       <input type="text" class="form-control" name="alamat" value="<?php echo $data->alamat ?>"  />
                   </div>
-                
+                  <div class="form-group">
+                    <label for="keterangan">Keterangan</label>
+                      <input type="text" class="form-control" name="keterangan" value="<?php echo $data->keterangan_penerima ?>"  />
+                  </div>
+               
                   <input type="hidden" name="id" value="<?php echo $data->id_penerima ?>">
                   <a href="<?php echo base_url(); ?>admin/penerima" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Batal</a>
                   <button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Simpan</button>

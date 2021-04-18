@@ -29,7 +29,7 @@ class Admin extends CI_Controller {
 		$a['data']=$this->model_admin->tampil_barang_masuk1();
 		$a['pemberi']=$this->model_admin->tampil_pemberi();
 		$a['page']="barang_masuk/home_barang_masuk";
-		$a['title']="barang Masuk";
+		$a['title']="Barang Masuk";
 		$this->session->set_userdata('TAG', 0);
 		$this->load->view('admin/index', $a);
 	}
@@ -237,11 +237,15 @@ class Admin extends CI_Controller {
 	function insert_supplier() {
 		
 		$i=$this->input;
-		$object=array('nama_pemberi'=>$i->post('nama_pemberi'),
-			'nama'=>$i->post('nama'));
+		$object=array(
+			'nama_pemberi'=>$i->post('nama_pemberi'),
+			'nama'=>$i->post('nama'),
+			'keterangan_pemberi'=>$i->post('keterangan'),
+			'tgl_pemberi'=>$i->post('tgl_pemberi')
+		);
 		$this->db->insert('pemberi', $object);
 		$this->session->set_flashdata('msg', 'Data Berhasil di Tambah');
-		redirect('admin/supplier', 'refresh');
+		redirect('admin/barang_masuk', 'refresh');
 	}
 
 
@@ -262,12 +266,15 @@ class Admin extends CI_Controller {
 
 		$i=$this->input;
 		$object=array('nama_pemberi'=>$i->post('nama_pemberi'),
-			'nama'=>$i->post('nama'));
+			'nama'=>$i->post('nama'),
+			'keterangan_pemberi'=>$i->post('keterangan'),
+			'tgl_pemberi'=>$i->post('tgl_pemberi')
+		);
 		$this->db->where('id_pemberi', $id);
 		$this->db->update('pemberi', $object);
 		$this->session->set_flashdata('msg', 'Data Berhasil di Update');
 		// echo "ini tidak kosong";
-		redirect('admin/supplier', 'refresh');
+		redirect('admin/barang_masuk', 'refresh');
 
 	}
 
@@ -276,7 +283,7 @@ class Admin extends CI_Controller {
 
 		$this->model_admin->hapus_pemberi($id);
 		$this->session->set_flashdata('msg', 'Data Berhasil di Hapus');
-		redirect('admin/supplier', 'refresh');
+		redirect('admin/barang_masuk', 'refresh');
 	}
 
 
@@ -399,10 +406,13 @@ class Admin extends CI_Controller {
 		$object=array(
 			'nama_penerima'=>$i->post('nama_penerima'),
 			'atas_nama'=>$i->post('atas_nama'),
-			'alamat'=>$i->post('alamat'));
+			'alamat'=>$i->post('alamat'),
+			'keterangan_penerima'=>$i->post('keterangan'),
+			'tgl_penerima'=>$i->post('tgl_penerima')
+		);
 		$this->db->insert('penerima', $object);
 		$this->session->set_flashdata('msg', 'Data Berhasil di Tambah');
-		redirect('admin/penerima', 'refresh');
+		redirect('admin/barang_keluar', 'refresh');
 	}
 
 
@@ -425,12 +435,15 @@ class Admin extends CI_Controller {
 		$object=array(
 			'nama_penerima'=>$i->post('nama_penerima'),
 			'atas_nama'=>$i->post('atas_nama'),
-			'alamat'=>$i->post('alamat'));
+			'alamat'=>$i->post('alamat'),
+			'keterangan_penerima'=>$i->post('keterangan'),
+			'tgl_penerima'=>$i->post('tgl_penerima')
+		);
 		$this->db->where('id_penerima', $id);
 		$this->db->update('penerima', $object);
 		$this->session->set_flashdata('msg', 'Data Berhasil di Update');
 		// echo "ini tidak kosong";
-		redirect('admin/penerima/penerima', 'refresh');
+		redirect('admin/barang_keluar', 'refresh');
 
 	}
 
@@ -439,7 +452,7 @@ class Admin extends CI_Controller {
 
 		$this->model_admin->hapus_penerima($id);
 		$this->session->set_flashdata('msg', 'Data Berhasil di Hapus');
-		redirect('admin/penerima/penerima', 'refresh');
+		redirect('admin/barang_keluar', 'refresh');
 	}
 
 

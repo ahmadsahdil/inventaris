@@ -45,6 +45,8 @@
                       <th>No</th>
                         <th>Pihak yang Menyerahkan</th>
                         <th>Atas Nama</th>
+                        <th>Keterangan</th>
+                        <th>Tanggal</th>
                         <th>Aksi</th>
                     </thead>
                     <tbody>
@@ -56,6 +58,8 @@
                         <td><?php echo $no++ ?></td>
                         <td><?php echo $lihat->nama_pemberi ?></td>
                         <td><?php echo $lihat->nama ?></td>
+                        <td><?php echo $lihat->keterangan ?></td>
+                        <td><?php echo $lihat->tgl_pemberi ?></td>
                           
                         <td align="center">
                           

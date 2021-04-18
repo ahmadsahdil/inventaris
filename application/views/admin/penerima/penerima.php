@@ -48,6 +48,8 @@
                         <th>Pihak Yang Menerima</th>
                         <th>Atas Nama</th>
                         <th>Alamat</th>
+                        <th>Keterangan</th>
+                        <th>Tanggal</th>
                         <th>Aksi</th>
                     </thead>
                     <tbody>
@@ -60,6 +62,8 @@
                         <td><?php echo $lihat->nama_penerima ?></td>
                         <td><?php echo $lihat->atas_nama ?></td>
                         <td><?php echo $lihat->alamat ?></td>
+                        <td><?php echo $lihat->keterangan ?></td>
+                        <td><?php echo $lihat->tgl_penerima ?></td>
                           
                         <td align="center">
                           

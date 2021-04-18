@@ -27,12 +27,14 @@ table,th,td{
                         <tr style="background-color:blue;">
                         <th style="border:1px solid #000;width:30px;color: white">No</th>
                          <th style="border:1px solid #000;width:250;color: white">Pihak Yang Menerima</th>
+                         <th style="border:1px solid #000;width:250;color: white">Atas Nama</th>
+                         <th style="border:1px solid #000;width:250;color: white">Keterangan</th>
                         <th style="border:1px solid #000;width:120px;color: white">Tanggal Keluar</th>
                         <th style="border:1px solid #000;width:250;color: white">Nama Barang</th>
                         <th style="border:1px solid #000;width:250;color: white">Merk/Type</th>
                         <th style="border:1px solid #000;width:70px;color: white">Jumlah</th>
                         <th style="border:1px solid #000;width:70px;color: white">satuan</th>
-                        <th style="border:1px solid #000;width:150px;color: white">Keterangan</th>
+                        <th style="border:1px solid #000;width:150px;color: white">Keterangan Barang</th>
                        </tr>
                     
                     </thead>
@@ -46,6 +48,8 @@ table,th,td{
                         <tr>
                         <td><?php echo $no++ ?></td>
                         <td><?php echo $lihat->nama_penerima ?></td>
+                        <td><?php echo $lihat->atas_nama ?></td>
+                        <td><?php echo $lihat->keterangan_penerima ?></td>
                           <td><?php echo date('d M Y',strtotime($lihat->tgl_keluar)) ?></td>
                           <td><?php echo $lihat->nama_barang ?></td>
                           <td><?php echo $lihat->merk_barang ?></td>

@@ -20,7 +20,7 @@
               <div class="box">
                 <div class="box-header">
                   <h3 class="box-title">
-                    
+                  <a href="<?php echo base_url(); ?>admin/tambah_penerima" class="btn btn-sm btn-primary " style="margin-right: 20px "><i class="fa fa-plus"></i> Tambah</a>
                   <?php include 'print.php'; ?>
                     
                   </h3>
@@ -29,6 +29,18 @@
 
                   </div>
                 </div>
+                <div style="text-align: center;">
+                       <?php  if($this->session->flashdata('msg')){
+       echo '<div class="alert alert-success">';
+      echo $this->session->flashdata('msg');
+      echo '</div>';
+    }else if($this->session->flashdata('error')){
+  echo '<div class="alert alert-danger">';
+      echo $this->session->flashdata('error');
+      echo '</div>';
+
+      }?>
+      </div>
                 <div class="box-body table-responsive no-padding">
                   <table id="example1" class="table table-bordered table-hover dataTable">
                     <thead>
@@ -37,6 +49,7 @@
                         <th>Pihak Yang Menerima</th>
                         <th>Atas Nama</th>
                         <th>Alamat</th>
+                        <th>Keterangan</th>
                         <th>Aksi</th>
                     </thead>
                     <tbody>
@@ -49,9 +62,11 @@
                         <td><?php echo $lihat->nama_penerima ?></td>
                         <td><?php echo $lihat->atas_nama ?></td>
                         <td><?php echo $lihat->alamat ?></td>
+                        <td><?php echo $lihat->keterangan_penerima ?></td>
                           
                         <td align="center">
-                          
+                        <a href="<?php echo base_url(); ?>admin/edit_penerima/<?php echo $lihat->id_penerima?>" class="btn btn-sm btn-primary "><i class="fa fa-edit"></i> Edit</a>
+                         <?php include 'hapus_penerima.php'; ?>
                             <a href="<?php echo base_url(); ?>admin/tambah_barang_keluar/<?php echo $lihat->id_penerima?>" class="btn btn-sm btn-primary "><i class="fa fa-check-square-o"></i> Pilih</a>
                            
                         

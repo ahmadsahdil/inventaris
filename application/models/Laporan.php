@@ -3,8 +3,8 @@
 class Laporan extends CI_Model {
 public function tampil_barang_masuk($id_pemberi)
 	{
-		$this->db->select('barang_masuk.*,pemberi.nama,
-							pemberi.nama_pemberi,barang.nama_barang,barang.satuan');
+		$this->db->select('barang_masuk.*,
+							pemberi.*,barang.*');
 		$this->db->from('barang_masuk');
 		
 		// join
@@ -20,7 +20,7 @@ public function tampil_barang_masuk($id_pemberi)
 	public function tampil_masuk()
 	{
 		$this->db->select('barang_masuk.*,
-							pemberi.nama_pemberi,pemberi.nama,barang.nama_barang,barang.satuan');
+							pemberi.*,barang.*');
 		$this->db->from('barang_masuk');
 		
 		// join
@@ -60,7 +60,7 @@ public function tampil_barang_masuk($id_pemberi)
 	public function tampil_barang_keluar($id_penerima)
 	{
 		$this->db->select('barang_keluar.*,
-						penerima.nama_penerima,barang.*');
+						penerima.*,barang.*');
 		$this->db->from('barang_keluar');
 		$this->db->join('penerima','penerima.id_penerima=barang_keluar.id_penerima','LEFT');
 		$this->db->join('barang','barang.id_barang=barang_keluar.id_barang','LEFT');
@@ -73,13 +73,15 @@ public function tampil_barang_masuk($id_pemberi)
 	public function tampil_keluar($id_penerima,$tgl_keluar)
 	{
 		$this->db->select('barang_keluar.*,
-						penerima.nama_penerima,barang.*');
+						penerima.*,barang.*');
 		$this->db->from('barang_keluar');
 		$this->db->join('penerima','penerima.id_penerima=barang_keluar.id_penerima','LEFT');
 		$this->db->join('barang','barang.id_barang=barang_keluar.id_barang','LEFT');
 
-		$this->db->where(array('barang_keluar.id_penerima'=>$id_penerima,
-						 'tgl_keluar'=>($tgl_keluar)));
+		// $this->db->where(array('barang_keluar.id_penerima'=>$id_penerima,
+		// 				 'tgl_keluar'=>($tgl_keluar)));
+		$this->db->where('barang_keluar.id_penerima', $id_penerima);
+		$this->db->or_where('tgl_keluar', $tgl_keluar);
 		$this->db->order_by('id_barang_keluar');
 		$query=$this->db->get();
 		return $query->result();
@@ -87,7 +89,7 @@ public function tampil_barang_masuk($id_pemberi)
 		public function tampil_semua_barang_keluar()
 	{
 		$this->db->select('barang_keluar.*,
-						penerima.nama_penerima,barang.*');
+						penerima.*,barang.*');
 		$this->db->from('barang_keluar');
 		$this->db->join('penerima','penerima.id_penerima=barang_keluar.id_penerima','LEFT');
 		$this->db->join('barang','barang.id_barang=barang_keluar.id_barang','LEFT');

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-server
--- Waktu pembuatan: 14 Apr 2021 pada 08.29
+-- Waktu pembuatan: 18 Apr 2021 pada 05.09
 -- Versi server: 8.0.23
 -- Versi PHP: 7.4.16
 
@@ -51,8 +51,8 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `merk_barang`, `stok`, `satuan
 (2037, 'Cable Patch Cord FO', 'SC - LC', 4, 'Pcs', NULL, 10, 8),
 (2038, 'Kabel UTP', 'Commscope Ca', 0, 'Roll', NULL, 0, 0),
 (2039, 'Kabel Fiber Optic', '2 Core 1 Seling', 0, 'Meter', NULL, 0, 0),
-(2040, 'SFP', 'Ericson', 3, 'Pcs', NULL, 0, 1),
-(2041, 'SFP', 'Cisco', 1, 'Pcs', NULL, 4, 3),
+(2040, 'SFP', 'Ericson', 2, 'Pcs', NULL, 0, 2),
+(2041, 'SFP', 'Cisco', 0, 'Pcs', NULL, 4, 4),
 (2042, 'SFP', 'Huawei', 4, 'Pcs', NULL, 0, 0),
 (2043, 'Grid Antena', 'Ubiquity M5', 18, 'Pcs', NULL, 0, 0),
 (2044, 'Horn', 'Ubiquity M5', 9, 'Pcs', NULL, 0, 0),
@@ -118,7 +118,9 @@ INSERT INTO `barang_keluar` (`id_barang_keluar`, `id_penerima`, `id_barang`, `ju
 (22, 39, 2072, 2, '2021-04-12', 'Penambahan Titik AP di Villa 7 dan Villa Baru'),
 (23, 38, 2069, 8, '2021-04-29', 'Barang perbaikan CCTV di TDC'),
 (24, 38, 2070, 8, '2021-03-29', 'Barang perbaikan CCTV di TDC'),
-(25, 37, 2047, 4, '2021-03-29', 'Masing\" 2 di shelter XL dan Pelanggan');
+(25, 37, 2047, 4, '2021-03-29', 'Masing\" 2 di shelter XL dan Pelanggan'),
+(26, 40, 2041, 1, '2021-04-17', 'Link baru Kominfo - disisi POP Selong'),
+(27, 40, 2040, 1, '2021-04-17', 'link baru kominfo - pemasangan disisi Sheter XL');
 
 -- --------------------------------------------------------
 
@@ -172,9 +174,9 @@ CREATE TABLE `infrastruktur` (
   `jumlah` int NOT NULL,
   `satuan` varchar(100) NOT NULL,
   `kondisi` text NOT NULL,
-  `keterangan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `keterangan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `id_wilayah` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `infrastruktur`
@@ -194,15 +196,18 @@ INSERT INTO `infrastruktur` (`id_infrastruktur`, `nama_barang`, `merk`, `mac`, `
 CREATE TABLE `pemberi` (
   `id_pemberi` int NOT NULL,
   `nama_pemberi` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `nama` varchar(255) DEFAULT NULL
+  `nama` varchar(255) DEFAULT NULL,
+  `keterangan_pemberi` text CHARACTER SET latin1 COLLATE latin1_swedish_ci,
+  `tgl_pemberi` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `pemberi`
 --
 
-INSERT INTO `pemberi` (`id_pemberi`, `nama_pemberi`, `nama`) VALUES
-(12, 'PT. Jaya Kartha Solusindo', '-');
+INSERT INTO `pemberi` (`id_pemberi`, `nama_pemberi`, `nama`, `keterangan_pemberi`, `tgl_pemberi`) VALUES
+(12, 'PT. Jaya Kartha Solusindo', '-', '', NULL),
+(18, 'jhghjg1', 'jhgjhg', 'jgjh', '2021-04-18');
 
 -- --------------------------------------------------------
 
@@ -214,18 +219,21 @@ CREATE TABLE `penerima` (
   `id_penerima` int NOT NULL,
   `nama_penerima` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `atas_nama` varchar(100) NOT NULL,
-  `alamat` varchar(255) DEFAULT NULL
+  `alamat` varchar(255) DEFAULT NULL,
+  `keterangan_penerima` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `tgl_penerima` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `penerima`
 --
 
-INSERT INTO `penerima` (`id_penerima`, `nama_penerima`, `atas_nama`, `alamat`) VALUES
-(36, 'NASA Net', '', 'Sukaraja Lombok Timur'),
-(37, 'NIYAZ Net', '', 'Aikmel LombokTimur'),
-(38, 'TDC', '', 'Gili Trawangan'),
-(39, 'Gili Eco', '', 'Gili Trawangan');
+INSERT INTO `penerima` (`id_penerima`, `nama_penerima`, `atas_nama`, `alamat`, `keterangan_penerima`, `tgl_penerima`) VALUES
+(36, 'NASA Net', '-', 'Sukaraja Lombok Timur', 'Instalasi dan Aktivasi ', '2021-04-24'),
+(37, 'NIYAZ Net', '', 'Aikmel LombokTimur', '', NULL),
+(38, 'TDC', '', 'Gili Trawangan', '', NULL),
+(39, 'Gili Eco', '', 'Gili Trawangan', '', NULL),
+(40, 'Kominfo', 'Randi', 'Selong Lombok Timur', 'Instalasi dan Aktivasi ', '2021-04-17');
 
 -- --------------------------------------------------------
 
@@ -245,8 +253,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `username`, `password`, `status`) VALUES
-(1, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'Admin'),
-(3, 'operator', 'fe96dd39756ac41b74283a9292652d366d73931f', 'Operator');
+(1, 'admin', '$2y$10$x01shpoCK5Dfp3WlOvyme.ApJ5G10Wn/NSh.RVvdkjpIcyQk7bkKO', 'Admin'),
+(3, 'operator', 'fe96dd39756ac41b74283a9292652d366d73931f', 'Operator'),
+(9, 'ahmad', '$2y$10$nU4buAatm.F4wxtprkQtSOjiBON/BynG6YnOoE2IaoT8RSIntMM0y', 'Admin');
 
 -- --------------------------------------------------------
 
@@ -257,7 +266,7 @@ INSERT INTO `user` (`id_user`, `username`, `password`, `status`) VALUES
 CREATE TABLE `wilayah` (
   `id_wilayah` int NOT NULL,
   `nama_wilayah` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `wilayah`
@@ -337,7 +346,7 @@ ALTER TABLE `barang`
 -- AUTO_INCREMENT untuk tabel `barang_keluar`
 --
 ALTER TABLE `barang_keluar`
-  MODIFY `id_barang_keluar` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_barang_keluar` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT untuk tabel `barang_masuk`
@@ -355,19 +364,19 @@ ALTER TABLE `infrastruktur`
 -- AUTO_INCREMENT untuk tabel `pemberi`
 --
 ALTER TABLE `pemberi`
-  MODIFY `id_pemberi` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_pemberi` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT untuk tabel `penerima`
 --
 ALTER TABLE `penerima`
-  MODIFY `id_penerima` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_penerima` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `wilayah`

@@ -10,7 +10,6 @@
               <li><i class="fa fa-dashboard"></i> Home</a></li>
               <li><a href="<?php echo base_url(); ?>user/manage_user">Manage User</a></li>
               <li class="active">Edit</li>
-
             </ol>
           </section>
 

@@ -33,20 +33,22 @@ class User extends CI_Controller {
 		$username=xss_clean($this->input->post('username'));
 		$password=xss_clean($this->input->post('password'));
 		$status=xss_clean($this->input->post('status'));
-        $user=$this->user_model->login($username);
+		$user=$this->user_model->login($username);
 
-if ($user) {
-    $this->session->set_flashdata('error', 'Username sudah ada');
-    redirect('user/tambah_user');
-}else{
-    $object=array('username'=> $username,
-        'password'=> password_hash($password, PASSWORD_DEFAULT),
-        'status'=> $status);
-    $this->user_model->insert_user($object);
-    $this->session->set_flashdata('msg', 'Data Berhasil di Tambah');
-    redirect('user');
+		if ($user) {
+			$this->session->set_flashdata('error', 'Username sudah ada');
+			redirect('user/tambah_user');
+		}
 
-}
+		else {
+			$object=array('username'=> $username,
+				'password'=> password_hash($password, PASSWORD_DEFAULT),
+				'status'=> $status);
+			$this->user_model->insert_user($object);
+			$this->session->set_flashdata('msg', 'Data Berhasil di Tambah');
+			redirect('user');
+
+		}
 	}
 
 	function edit_user($id) {
@@ -91,9 +93,8 @@ if ($user) {
 	}
 
 	function reset_password($id) {
-        $data=array(
-			'password'=> password_hash($this->session->userdata('_username'), PASSWORD_DEFAULT)
-		);
+		$user=$this->user_model->detail($id)->row();	
+		$data=array('password'=> password_hash($user->username, PASSWORD_DEFAULT));
 		$this->user_model->update_user($id, $data);
 		$this->session->set_flashdata('msg', 'Password Berhasil di Reset');
 		redirect('user');

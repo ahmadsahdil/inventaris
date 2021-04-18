@@ -217,46 +217,46 @@ class Admin extends CI_Controller {
 
 
 
-	// Fungsi pemberi
-	function pemberi() {
+	// Fungsi Supplier (pemberi)
+	function supplier() {
 		
 		$a['data']=$this->model_admin->tampil_pemberi();
 		$a['page']="pemberi/pemberi";
-		$a['title']="pemberi";
+		$a['title']="Supplier";
 		$this->load->view('admin/index', $a);
 	}
 
-	function tambah_pemberi() {
+	function tambah_supplier() {
 		
 		$a['page']="pemberi/tambah_pemberi";
-		$a['title']="Tambah pemberi";
+		$a['title']="Tambah Supplier";
 
 		$this->load->view('admin/index', $a);
 	}
 
-	function insert_pemberi() {
+	function insert_supplier() {
 		
 		$i=$this->input;
 		$object=array('nama_pemberi'=>$i->post('nama_pemberi'),
 			'nama'=>$i->post('nama'));
 		$this->db->insert('pemberi', $object);
 		$this->session->set_flashdata('msg', 'Data Berhasil di Tambah');
-		redirect('admin/pemberi', 'refresh');
+		redirect('admin/supplier', 'refresh');
 	}
 
 
 
-	function edit_pemberi($id) {
+	function edit_supplier($id) {
 
 		
 		$a['editdata']=$this->db->get_where('pemberi', array('id_pemberi'=>$id))->result_object();
 		$a['page']="pemberi/edit_pemberi";
-		$a['title']="Edit pemberi";
+		$a['title']="Edit Supplier";
 
 		$this->load->view('admin/index', $a);
 	}
 
-	function update_pemberi() {
+	function update_supplier() {
 		
 		$id=$this->input->post('id');
 
@@ -267,16 +267,16 @@ class Admin extends CI_Controller {
 		$this->db->update('pemberi', $object);
 		$this->session->set_flashdata('msg', 'Data Berhasil di Update');
 		// echo "ini tidak kosong";
-		redirect('admin/pemberi/pemberi', 'refresh');
+		redirect('admin/supplier', 'refresh');
 
 	}
 
-	function hapus_pemberi($id) {
+	function hapus_supplier($id) {
 		
 
 		$this->model_admin->hapus_pemberi($id);
 		$this->session->set_flashdata('msg', 'Data Berhasil di Hapus');
-		redirect('admin/pemberi/pemberi', 'refresh');
+		redirect('admin/supplier', 'refresh');
 	}
 
 

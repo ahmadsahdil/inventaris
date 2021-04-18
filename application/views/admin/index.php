@@ -8,7 +8,7 @@ Programmer Support : Muhammad (ketikanmd.tech)
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title><?php echo $title; ?></title>
-<link rel="shortcut icon" href="<?php echo base_url('assets/gambar/pins.jpg') ?>">
+<link rel="shortcut icon" href="<?php echo base_url('assets/JKS-192x192.png') ?>">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="<?php echo base_url()?>/assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -71,7 +71,7 @@ Programmer Support : Muhammad (ketikanmd.tech)
 
  <div class="user-panel">
  <div class="pull-left image">  
-<img src="  <?php  echo base_url() ?>assets/gambar/avatar.png" class="img-circle"> 
+<img src="  <?php  echo base_url() ?>assets/JKS-192x192.png" class="img-circle"> 
  </div>
  <div class="pull-left info">  
   <p> <?php echo ucwords($this->session->userdata('_username')) ?></p>
@@ -97,8 +97,8 @@ Programmer Support : Muhammad (ketikanmd.tech)
           </ul>
         </li>  
              <li class="<?php if($page == 'pemberi/pemberi'){echo 'active';} ?>">
-              <a href="<?php echo base_url(); ?>admin/pemberi">
-                <i class="fa  fa-users"></i> <span>Pemberi</span>
+              <a href="<?php echo base_url(); ?>admin/supplier">
+                <i class="fa  fa-users"></i> <span>Supplier</span>
               </a>
             </li>    
 

@@ -20,7 +20,7 @@
           		<div class="box">
                 <div class="box-header">
                   <h3 class="box-title">
-                  <a href="<?php echo base_url(); ?>admin/tambah_pemberi" class="btn btn-sm btn-primary " style="margin-right: 20px "><i class="fa fa-plus"></i> Tambah</a>
+                  <a href="<?php echo base_url(); ?>admin/tambah_supplier" class="btn btn-sm btn-primary " style="margin-right: 20px "><i class="fa fa-plus"></i> Tambah</a>
                   </h3>
                   <div class="box-tools">
 
@@ -59,7 +59,7 @@
                           
                         <td align="center">
                           
-                            <a href="<?php echo base_url(); ?>admin/edit_pemberi/<?php echo $lihat->id_pemberi?>" class="btn btn-sm btn-primary "><i class="fa fa-edit"></i> Edit</a>
+                            <a href="<?php echo base_url(); ?>admin/edit_supplier/<?php echo $lihat->id_pemberi?>" class="btn btn-sm btn-primary "><i class="fa fa-edit"></i> Edit</a>
                            <?php include 'hapus_pemberi.php'; ?>
                         
                         </td>    

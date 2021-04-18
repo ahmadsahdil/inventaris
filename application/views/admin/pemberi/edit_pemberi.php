@@ -8,7 +8,7 @@
             </h1>
             <ol class="breadcrumb">
               <li><i class="fa fa-dashboard"></i> Home</a></li>
-              <li><a href="<?php echo base_url(); ?>admin/pemberi">pemberi</a></li>
+              <li><a href="<?php echo base_url(); ?>admin/supplier">Supplier</a></li>
               <li class="active">Edit</li>
               <!--
               <li><a href="#">Layout</a></li>
@@ -21,11 +21,11 @@
           <section class="content">
             <div class="box box-info">
               <div class="box-header with-border">
-                <h3 class="box-title">Form Data Edit Pemberi</h3>
+                <h3 class="box-title">Form Data Edit Supplier</h3>
               </div>
               <div class="box-body">
                 <!-- form start -->
-                <?php echo form_open_multipart('admin/update_pemberi'); ?>
+                <?php echo form_open_multipart('admin/update_supplier'); ?>
                 <?php  
                 foreach ($editdata as $data):
                 ?>
@@ -40,8 +40,8 @@
                   </div>
                 
                   <input type="hidden" name="id" value="<?php echo $data->id_pemberi ?>">
-                  <a href="<?php echo base_url(); ?>admin/pemberi" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Batal</a>
-                  <button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Simpan</button>
+                  <a href="<?php echo base_url(); ?>admin/supplier" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Batal</a>
+                  <button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Ubah</button>
                 <?php endforeach ?>
                 <?php echo form_close(); ?>
               </div><!-- /.box-body -->

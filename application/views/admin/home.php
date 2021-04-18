@@ -22,7 +22,7 @@
               <div class="small-box bg-aqua">
                 <div class="inner">
                   <h3><?php echo $pemberi ?></h3>
-                  <p>Pemberi</p>
+                  <p>Supplier</p>
                 </div>
                 <div class="icon">
                   <i class="fa fa-users"></i>

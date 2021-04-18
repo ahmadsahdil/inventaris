@@ -5,11 +5,11 @@
           <section class="content-header">
             <h1>
               Tambah
-              <small>Pemberi</small>
+              <small>Supplier</small>
             </h1>
             <ol class="breadcrumb">
               <li><i class="fa fa-dashboard"></i> Home</a></li>
-              <li><a href="<?php echo base_url(); ?>admin/pemberi">Pemberi</a></li>
+              <li><a href="<?php echo base_url(); ?>admin/supplier">Supplier</a></li>
               <li class="active">Tambah</li>
 
             </ol>
@@ -27,10 +27,10 @@
               </div>
               <div class="box-body">
                 <!-- form start -->
-                <?php echo form_open('admin/insert_pemberi'); ?>
+                <?php echo form_open('admin/insert_supplier'); ?>
                   <div class="form-group">
                    <label>Pihak Yang Menyerahkan</label>
-                      <input type="text" class="form-control" name="nama_pemberi" placeholder="Masukkan Nama pemberi" required />
+                      <input type="text" class="form-control" name="nama_pemberi" placeholder="Masukkan Nama supplier" required />
                   </div>
                    <div class="form-group">
                     <label for="nama">Atas Nama</label>
@@ -38,7 +38,7 @@
                   </div>
                  
                  
-                  <a href="<?php echo base_url(); ?>admin/pemberi/pemberi" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Batal</a>
+                  <a href="<?php echo base_url(); ?>admin/supplier" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Batal</a>
                   <button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Simpan</button>
                 <?php echo form_close(); ?>
                 

@@ -150,7 +150,7 @@ Support by www.ketikanmd.tech
             </li>
              <li class="<?php if($page == 'log/log'){echo 'active';} ?>">
               <a href="<?php echo base_url(); ?>log">
-                <i class="fa fa-hard"></i> <span>Log</span>
+                <i class="fa fa-th-list"></i> <span>Log</span>
               </a>
             </li>
              

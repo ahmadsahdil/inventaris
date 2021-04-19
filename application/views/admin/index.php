@@ -1,6 +1,7 @@
 <!-- 
-Programmer : Ahmad dan Indra
+Programmer : Ahmad
 Programmer Support : Muhammad (ketikanmd.tech)
+Support by www.ketikanmd.tech
  -->
 <!DOCTYPE html>
 <html>

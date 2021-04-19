@@ -98,7 +98,7 @@ admin();
 		}
 
 		if ($hak == "personal") {
-			redirect('/');
+			redirect('admin');
 		} else {
 			redirect('user');
 		}

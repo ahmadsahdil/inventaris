@@ -44,9 +44,9 @@
                     if($data->status=="Admin"){
                       echo '<option value="Admin"  selected >Admin</option>';
                     }elseif($data->status=="Operator"){
-                      echo '<option value="Operator"  selected >Admin</option>';
+                      echo '<option value="Operator"  selected >Operator</option>';
                     }else{
-                      echo '<option value="Pelanggan"  selected >Admin</option>';
+                      echo '<option value="Pelanggan"  selected >Pelanggan</option>';
                     }
                     
                     ?>

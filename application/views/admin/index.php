@@ -26,6 +26,7 @@ Support by www.ketikanmd.tech
   <link rel="stylesheet" href="<?php echo base_url()?>/assets/datatables.min.css">
   <link rel="stylesheet" href="<?php echo base_url()?>/assets/toastr.min.css">
   <link rel="stylesheet" href="<?php echo base_url()?>/assets/sweetalert2.min.css">
+  <script src="<?php echo base_url()?>/assets/bower_components/jquery/dist/jquery.min.js"></script>
 
    
 </head>
@@ -100,20 +101,7 @@ Support by www.ketikanmd.tech
             
           </ul>
         </li>  
-             <li class="treeview">
-          <a href="#">
-            <i class="fa fa-gift"></i> <span>Barang</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-             <li><a href="<?php echo base_url('admin/barang') ?>"><i class="fa fa-plus"></i> Barang</a></li> 
-            <li><a href="<?php echo base_url('admin/total_barang') ?>"><i class="fa fa-table"></i> Total Masuk/Keluar</a></li>
-           
-            
-          </ul>
-        </li>  
+        <?php if($this->session->userdata('_status')!=="Pelanggan") {?>
              <li class="treeview">
           <a href="#">
             <i class="fa fa-gift"></i> <span>Infrastruktur</span>
@@ -128,6 +116,20 @@ Support by www.ketikanmd.tech
             
           </ul>
         </li>  
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-gift"></i> <span>Barang</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+             <li><a href="<?php echo base_url('admin/barang') ?>"><i class="fa fa-plus"></i> Barang</a></li> 
+            <li><a href="<?php echo base_url('admin/total_barang') ?>"><i class="fa fa-table"></i> Total Masuk/Keluar</a></li>
+           
+            
+          </ul>
+        </li>
             <li class="<?php if($page == 'barang_masuk/home_barang_masuk'){echo 'active';} ?>">
               <a href="<?php echo base_url(); ?>admin/barang_masuk">
                 <i class="fa fa-medkit"></i> <span>Barang Masuk</span>
@@ -139,18 +141,19 @@ Support by www.ketikanmd.tech
                 <i class="fa fa-ambulance"></i> <span>Barang Keluar</span>
               </a>
             </li>
-
+            <?php }; ?>
              <?php if($this->session->userdata('_status')=="Admin") {?>
              <li class="<?php if($page == 'user/manage_user'){echo 'active';} ?>">
               <a href="<?php echo base_url(); ?>user">
                 <i class="fa fa-user-plus"></i> <span>User</span>
               </a>
             </li>
-          
-           <li class="treeview">
-
-   
-            
+             <li class="<?php if($page == 'log/log'){echo 'active';} ?>">
+              <a href="<?php echo base_url(); ?>log">
+                <i class="fa fa-hard"></i> <span>Log</span>
+              </a>
+            </li>
+             
             <?php }; ?>
            
             

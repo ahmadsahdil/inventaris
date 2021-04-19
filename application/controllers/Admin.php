@@ -6,12 +6,23 @@ class Admin extends CI_Controller {
 		parent:: __construct();
 		cek_not_login();
 		$this->load->model('model_admin');
+		$this->load->model('daerah');
 
+	}
+
+	function pelanggan() {
+    
+		$a['kab']=$this->daerah->kabupaten();
+		$a['kec']=$this->daerah->kecamatan();
+		$a['desa']=$this->daerah->desa();
+		$a['page']="pelanggan/pelanggan";
+		$a['title']="Pelanggan";
+		$this->load->view('admin/index', $a);
 	}
 
 	function index() {
 		
-
+		delete_log();
 		$a['barang_masuk']=$this->model_admin->total_barang_masuk()->num_rows();
 		$a['barang_keluar']=$this->model_admin->total_barang_keluar()->num_rows();
 		$a['pemberi']=$this->model_admin->total_pemberi()->num_rows();
@@ -68,6 +79,7 @@ class Admin extends CI_Controller {
 			'msg'=> 'Data Berhasil di Tambah',
 			'status'=> 'success'
 		));
+		activity_log('tambah barang masuk',$id_barang);
 		redirect('admin/tambah_barang_masuk/'.$i->post('id_pemberi'), 'refresh');
 
 	}
@@ -87,6 +99,7 @@ class Admin extends CI_Controller {
 			'status'=> 'success'
 		));
 		$id_pemberi=$this->session->userdata('id_pemberi');
+		activity_log('Ubah barang masuk',$id);
 		redirect('admin/tambah_barang_masuk/'.$id_pemberi, 'refresh');
 
 	}
@@ -112,6 +125,7 @@ class Admin extends CI_Controller {
 			'msg'=> 'Data Berhasil di Hapus',
 			'status'=> 'success'
 		));
+		activity_log('Hapus barang masuk',$id);
 		redirect('admin/tambah_barang_masuk/'.$id_pemberi);
 
 	}
@@ -160,6 +174,7 @@ class Admin extends CI_Controller {
 			'status'=> 'success'
 		));
 		$id_penerima=$this->session->userdata('id_penerima');
+		activity_log('Ubah barang keluar',$id);
 		redirect('admin/tambah_barang_keluar/'.$id_penerima, 'refresh');
 
 	}
@@ -206,6 +221,7 @@ class Admin extends CI_Controller {
 				redirect('admin/tambah_barang_keluar/'.$i->post('id_penerima'));
 
 			}
+			activity_log('Tambah barang keluar',$id);
 			redirect('admin/tambah_barang_keluar/'.$i->post('id_penerima'));
 		}
 
@@ -234,6 +250,7 @@ class Admin extends CI_Controller {
 			'msg'=> 'Data Berhasil di Hapus',
 			'status'=> 'success'
 		));
+		activity_log('Hapus barang keluar',$id);
 		redirect('admin/tambah_barang_keluar/'.$segment3);
 	}
 
@@ -271,6 +288,7 @@ class Admin extends CI_Controller {
 			'msg'=> 'Data Berhasil di Tambah',
 			'status'=> 'success'
 		));
+		activity_log('Tambah Supplier',$i->post('nama_pemberi'));
 		redirect('admin/barang_masuk', 'refresh');
 	}
 
@@ -302,7 +320,7 @@ class Admin extends CI_Controller {
 			'msg'=> 'Data Berhasil di Ubah',
 			'status'=> 'success'
 		));
-		// echo "ini tidak kosong";
+		activity_log('Ubah Supplier',$i->post('nama_pemberi'));
 		redirect('admin/barang_masuk', 'refresh');
 
 	}
@@ -315,6 +333,7 @@ class Admin extends CI_Controller {
 			'msg'=> 'Data Berhasil di Hapus',
 			'status'=> 'success'
 		));
+		activity_log('Hapus Supplier',$id);
 		redirect('admin/barang_masuk', 'refresh');
 	}
 
@@ -367,6 +386,7 @@ class Admin extends CI_Controller {
 			'msg'=> 'Data Berhasil di Tambah',
 			'status'=> 'success'
 		));
+		activity_log('Tambah Barang',$i->post('nama_barang'));
 		redirect('admin/barang', 'refresh');
 	}
 
@@ -404,7 +424,7 @@ class Admin extends CI_Controller {
 			'status'=> 'success'
 		));
 
-		// echo "ini tidak kosong";
+		activity_log('Ubah Barang',$i->post('nama_barag'));
 		redirect('admin/barang/barang', 'refresh');
 
 	}
@@ -417,6 +437,7 @@ class Admin extends CI_Controller {
 			'msg'=> 'Data Berhasil di Hapus',
 			'status'=> 'success'
 		));
+		activity_log('Hapus Barang',$i);
 		redirect('admin/barang/barang', 'refresh');
 	}
 
@@ -457,6 +478,7 @@ class Admin extends CI_Controller {
 			'msg'=> 'Data Berhasil di Tambah',
 			'status'=> 'success'
 		));
+		activity_log('Tambah Penerima',$i->post('nama_penerima'));
 		redirect('admin/barang_keluar', 'refresh');
 	}
 
@@ -490,7 +512,7 @@ class Admin extends CI_Controller {
 			'msg'=> 'Data Berhasil di Ubah',
 			'status'=> 'success'
 		));
-		// echo "ini tidak kosong";
+		activity_log('Ubah Penerima',$i->post('nama_penerima'));
 		redirect('admin/barang_keluar', 'refresh');
 
 	}
@@ -503,6 +525,7 @@ class Admin extends CI_Controller {
 			'msg'=> 'Data Berhasil di Hapus',
 			'status'=> 'success'
 		));
+		activity_log('Hapus Penerima',$i);
 		redirect('admin/barang_keluar', 'refresh');
 	}
 
@@ -554,6 +577,7 @@ function insert_infrastruktur() {
 		'msg'=> 'Data Berhasil di Tambah',
 		'status'=> 'success'
 	));
+	activity_log('Tambah Infrastruktur',$i->post('nama_barang'));
 	redirect('admin/infrastruktur');
 }
 
@@ -592,7 +616,7 @@ function update_infrastruktur() {
 		'msg'=> 'Data Berhasil di Ubah',
 		'status'=> 'success'
 	));
-	// echo "ini tidak kosong";
+	activity_log('Ubah Infrastruktur',$i->post('nama_barang'));
 	redirect('admin/infrastruktur/infrastruktur');
 
 }
@@ -605,6 +629,7 @@ function hapus_infrastruktur($id) {
 		'msg'=> 'Data Berhasil di Hapus',
 		'status'=> 'success'
 	));;
+	activity_log('Hapus Infrastruktur',$i);
 	redirect('admin/infrastruktur/infrastruktur');
 }
 
@@ -637,6 +662,7 @@ function insert_wilayah() {
 		'msg'=> 'Data Berhasil di Tambah',
 		'status'=> 'success'
 	));
+	activity_log('Tambah Wilayah',$i->post('nama_wilayah'));
 	redirect('admin/wilayah');
 }
 
@@ -667,7 +693,7 @@ function update_wilayah() {
 		'msg'=> 'Data Berhasil di Ubah',
 		'status'=> 'success'
 	));
-	// echo "ini tidak kosong";
+	activity_log('Ubah Wilayah',$i->post('nama_wilayah'));
 	redirect('admin/wilayah/wilayah');
 
 }
@@ -680,6 +706,7 @@ function hapus_wilayah($id) {
 		'msg'=> 'Data Berhasil di Hapus',
 		'status'=> 'success'
 	));
+	activity_log('Hapus Wilayah',$i);
 	redirect('admin/wilayah/wilayah');
 }
 

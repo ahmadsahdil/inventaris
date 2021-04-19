@@ -19,7 +19,7 @@ class User extends CI_Controller {
 	}
 
 	function tambah_user() {
-admin();
+		admin();
 		$a['page']="user/tambah_user";
 		$a['title']="Tambah User";
 
@@ -27,7 +27,7 @@ admin();
 	}
 
 	function insert_user() {
-admin();
+		admin();
 
 		$username=xss_clean($this->input->post('username'));
 		$password=xss_clean($this->input->post('password'));
@@ -36,24 +36,22 @@ admin();
 
 		if ($user) {
 			// $this->session->set_flashdata('error', 'Username sudah ada');
-			$this->session->set_flashdata(array(
-				'msg'=> 'Username sudah ada',
-				'status'=> 'error'
-			));
+			$this->session->set_flashdata(array('msg'=> 'Username sudah ada',
+					'status'=> 'error'
+				));
 			redirect('user/tambah_user');
 		}
 
 		else {
-			$object=array(
-				'id_user'=> generate_string(100),
+			$object=array('id_user'=> generate_string(100),
 				'username'=> $username,
 				'password'=> password_hash($password, PASSWORD_DEFAULT),
 				'status'=> $status);
 			$this->user_model->insert_user($object);
-			$this->session->set_flashdata(array(
-				'msg'=> 'Data Berhasil di Tambah',
-				'status'=> 'success'
-			));
+			$this->session->set_flashdata(array('msg'=> 'Data Berhasil di Tambah',
+					'status'=> 'success'
+				));
+				activity_log('Tambah User',$username);
 			redirect('user');
 
 		}
@@ -79,77 +77,84 @@ admin();
 		$data=array('username'=> $username,
 			'password'=> password_hash($password, PASSWORD_DEFAULT),
 		);
-		if ($hak == "user") {
+
+		if ($hak=="user") {
 			$data['status']=$status;
-		} 
+		}
+
 		if (password_verify(xss_clean(htmlspecialchars($i->post('password_lama'))), $user->password)) {
 			$this->user_model->update_user($edit_id, $data);
-			$this->session->set_flashdata(array(
-				'msg'=> 'User Berhasil di Ubah',
-				'status'=> 'success'
-			));
+			$this->session->set_flashdata(array('msg'=> 'User Berhasil di Ubah',
+					'status'=> 'success'
+				));
+				activity_log('Ubah User',$username);
 		}
 
 		else {
-			$this->session->set_flashdata(array(
-				'msg'=> 'User Gagal di Ubah',
-				'status'=> 'error'
-			));
+			$this->session->set_flashdata(array('msg'=> 'User Gagal di Ubah',
+					'status'=> 'error'
+				));
 		}
 
-		if ($hak == "personal") {
+		if ($hak=="personal") {
 			redirect('admin');
-		} else {
+		}
+
+		else {
 			redirect('user');
 		}
-		
+
 
 
 	}
 
 
 	function hapus_user($id) {
-admin();
+		admin();
+		$user=$this->user_model->detail($id)->row();
 		$this->user_model->hapus_user($id);
-		$this->session->set_flashdata(array(
-			'msg'=> 'Data Berhasil di Hapus',
-			'status'=> 'success'
-		));
+		$this->session->set_flashdata(array('msg'=> 'Data Berhasil di Hapus',
+				'status'=> 'success'
+			));
+			activity_log('Hapus User',$user->username);
 		redirect('user');
 	}
 
 	function reset_password($id) {
 		admin();
-		$user=$this->user_model->detail($id)->row();	
+		$user=$this->user_model->detail($id)->row();
 		$data=array('password'=> password_hash($user->username, PASSWORD_DEFAULT));
-		if($this->user_model->update_user($id, $data)){
-			$this->session->set_flashdata(array(
-				'msg'=> 'Password Berhasil di Reset',
-				'status'=> 'success'
-			));
+
+		if($this->user_model->update_user($id, $data)) {
+			$this->session->set_flashdata(array('msg'=> 'Password Berhasil di Reset',
+					'status'=> 'success'
+				));
+				activity_log('Reset User',$user->username);
 			redirect('user');
-		}else{
-			$this->session->set_flashdata(array(
-				'msg'=> 'Password Berhasil di Reset',
-				'status'=> 'success'
-			));
+		}
+
+		else {
+			$this->session->set_flashdata(array('msg'=> 'Password Berhasil di Reset',
+					'status'=> 'success'
+				));
+				activity_log('Reset User',$user->username);
 			redirect('user');
 
 		}
-		
-		
+
+
 	}
 
 
 
 	function user_edit() {
-		$id = $this->encryption->decrypt($this->session->userdata('_user_id'));
+		$id=$this->encryption->decrypt($this->session->userdata('_user_id'));
 		$a['editdata']=$this->user_model->edit_user($id)->result_object();
 		$a['page']="user/user_edit";
 		$a['title']="Edit User";
 		$this->load->view('admin/index', $a);
 	}
 
-	
+
 
 }

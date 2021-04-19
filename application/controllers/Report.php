@@ -14,24 +14,29 @@ public function __construct(){
 	{
 		$data=$this->laporan->tampil_barang_masuk($id);
 	$this->load->view('admin/laporan/excel_barang_masuk',['data'=>$data]);
+	activity_log('Print','Laporan/excel_barang_masuk id');
+
 	
 	}
 	public function excel_masuk()
 	{
 		$data=$this->laporan->tampil_masuk();
 	$this->load->view('admin/laporan/excel_barang_masuk',['data'=>$data]);
+	activity_log('Print','Laporan/excel_barang_masuk');
 	
 	}
 	public function excel_barang()
 	{
 		$data=$this->laporan->tampil_barang();
 	$this->load->view('admin/laporan/excel_barang',['data'=>$data]);
+	activity_log('Print','Laporan/excel_barang');
 	
 	}
 		public function excel_barang_total()
 	{
 		$data=$this->laporan->tampil_barang_total();
 	$this->load->view('admin/laporan/excel_barang_total',['data'=>$data]);
+	activity_log('Print','Laporan/excel_barang_total');
 	
 	}
 	public function tampil_barang_keluar()
@@ -41,6 +46,7 @@ public function __construct(){
 	
 		$data=$this->laporan->tampil_keluar($id_pemberi,$tgl_keluar);
 		$this->load->view('admin/laporan/excel_barang_keluar',['data'=>$data]);
+		activity_log('Print','Laporan/excel_barang_keluar');
 	
 	}
 		public function excel_barang_keluar($id_penerima)
@@ -48,6 +54,7 @@ public function __construct(){
 
 		$data=$this->laporan->tampil_barang_keluar($id_penerima);
 		$this->load->view('admin/laporan/excel_barang_keluar',['data'=>$data]);
+		activity_log('Print','Laporan/excel_barang_keluar');
 	
 	}
 
@@ -55,6 +62,7 @@ public function __construct(){
 	{
 		$data=$this->laporan->tampil_semua_barang_keluar();
 		$this->load->view('admin/laporan/excel_barang_keluar',['data'=>$data]);
+		activity_log('Print','Laporan/excel_barang_keluar');
 	
 	}
 

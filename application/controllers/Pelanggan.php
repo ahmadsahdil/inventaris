@@ -4,14 +4,14 @@ class Pelanggan extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
-		$this->load->model('pelanggan');
-		$this->load->model('daerah');
-		$this->load->model('pelanggan_model');
-
+		// $this->load->model('pelanggan');
+		$this->load->model('daerah_model','daerah');
+		// $this->load->model('pelanggan_model');
+    }
     
         function index() {
     
-            $a['data']=$this->pelanggan_model->tampil_pelanggan()->result_object();
+            $a['kab']=$this->daerah->kabupaten();
             $a['page']="pelanggan/pelanggan";
             $a['title']="Pelanggan";
             $this->load->view('admin/index', $a);
@@ -128,7 +128,7 @@ class Pelanggan extends CI_Controller {
         }
     
     
-    }
+    
     
 
 }

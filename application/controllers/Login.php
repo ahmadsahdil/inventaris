@@ -29,12 +29,15 @@ class Login extends CI_Controller {
 				$this->session->set_userdata('_user_id', $this->encryption->encrypt($user->id_user));
 				$this->session->set_userdata('_username', $user->username);
 				$this->session->set_userdata('_status', $user->status);
+				activity_log('login berhasil',$username);
 				redirect('admin');
+				
 			} else {
 				$this->session->set_flashdata(array(
 					'msg'=> 'Username atau password salah',
 					'status'=> 'error'
 				));
+				activity_log('login gagal',$username);
 				redirect('login');
 			}
 		} else {
@@ -42,12 +45,14 @@ class Login extends CI_Controller {
 				'msg'=> 'Username atau password salah',
 				'status'=> 'error'
 			));
+			activity_log('login gagal',$username);
 			redirect('login');
 		}
 	}
 
 	public function logout()
 	{
+		activity_log('logout','berhasil');
 		$this->check_login->logout();
 	}
 

@@ -4,11 +4,12 @@ class Barang extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
+    $this->check_login->check();
+    admin_operator();
 		$this->load->model('model_admin');
 		  // $this->load->helper('currency_format_helper');
 	}
 function tambah_jenis(){
-		$this->check_login->check();
                     $i=$this->input;
 					$object = array(
 				  			'nama_barang' =>$i->post('nama_barang'),

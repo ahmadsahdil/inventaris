@@ -55,7 +55,7 @@
                         <td align="center">
                         <a href="<?php echo base_url(); ?>admin/edit_penerima/<?php echo $lihat->id_penerima?>" class="btn btn-sm btn-primary "><i class="fa fa-edit"></i> Edit</a>
                          <?php include 'hapus_penerima.php'; ?>
-                            <a href="<?php echo base_url(); ?>admin/tambah_barang_keluar/<?php echo $lihat->id_penerima?>" class="btn btn-sm btn-primary "><i class="fa fa-check-square-o"></i> Pilih</a>
+                            <a href="<?php echo base_url(); ?>admin/tambah_barang_keluar/<?php echo $lihat->id_penerima?>" class="btn btn-sm btn-success "><i class="fa fa-check-square-o"></i> Pilih</a>
                            
                         
                         </td>    

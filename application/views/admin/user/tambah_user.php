@@ -35,6 +35,7 @@
                     <select type="text" name="status" class="form-control">
                       <option value="Admin">Admin</option>
                       <option value="Operator">Operator</option>
+                      <option value="Pelanggan">Pelanggan</option>
                     </select>
                   </div>
                   <a href="<?php echo base_url(); ?>user" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Batal</a>

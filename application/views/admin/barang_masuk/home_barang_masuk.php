@@ -57,7 +57,7 @@
                           
                         <a href="<?php echo base_url(); ?>admin/edit_supplier/<?php echo $lihat->id_pemberi?>" class="btn btn-sm btn-primary "><i class="fa fa-edit"></i> Edit</a>
                            <?php include 'hapus_pemberi.php'; ?>
-                            <a href="<?php echo site_url('admin/tambah_barang_masuk/'.$lihat->id_pemberi) ?>" class="btn btn-sm btn-primary "><i class="fa fa-check-square-o"></i> Pilih</a>
+                            <a href="<?php echo site_url('admin/tambah_barang_masuk/'.$lihat->id_pemberi) ?>" class="btn btn-sm btn-success "><i class="fa fa-check-square-o"></i> Pilih</a>
                            
                         
                         </td>    

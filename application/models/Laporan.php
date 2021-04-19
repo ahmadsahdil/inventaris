@@ -100,4 +100,20 @@ public function tampil_barang_masuk($id_pemberi)
 		$query=$this->db->get();
 		return $query->result();
 	}
+
+	public function tampil_infrastruktur($id_wilayah)
+	{
+		$this->db->select('wilayah.*,
+							infrastruktur.*');
+		$this->db->from('infrastruktur');
+		
+		// join
+		$this->db->join('wilayah','infrastruktur.id_wilayah=wilayah.id_wilayah','LEFT');
+		// end join
+	$this->db->where('wilayah.id_wilayah',$id_wilayah);
+
+		$this->db->order_by('id_wilayah');
+		$query=$this->db->get();
+		return $query->result();
+	}
 }

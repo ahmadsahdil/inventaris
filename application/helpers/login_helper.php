@@ -20,3 +20,34 @@ function cek_not_login()
         redirect('login');
     }
 }
+
+
+ 
+function generate_string($strength = 16) {
+    $input= '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $input_length = strlen($input);
+    $random_string = '';
+    for($i = 0; $i < $strength; $i++) {
+        $random_character = $input[mt_rand(0, $input_length - 1)];
+        $random_string .= $random_character;
+    }
+ 
+    return $random_string;
+}
+
+function admin()
+{
+    $ci = &get_instance();
+    if ($ci->check_login->check()->status !== "Admin") {
+        redirect('error');
+    }
+}
+
+function admin_operator()
+{
+    $ci = &get_instance();
+    if ($ci->check_login->check()->status == "Pelanggan") {
+            redirect('error');
+    }
+}
+ 

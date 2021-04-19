@@ -32,8 +32,8 @@ Programmer Support : Muhammad (ketikanmd.tech)
 <header class="main-header">
     <!-- Logo -->
     <a href="<?php echo base_url('admin')?>" class="logo">
-      <span class="logo-mini"><b>JKS</b></span>
-      <span class="logo-lg"><b>JKS NTB</b></span>
+      <span class="logo-mini"><b>JKS NTB</b></span>
+      <span class="logo-lg"><b>DATA JKS NTB</b></span>
     </a>
     <nav class="navbar navbar-static-top">
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
@@ -56,6 +56,7 @@ Programmer Support : Muhammad (ketikanmd.tech)
                <li class="user-footer" >
                 
                 <div class="pull-right">
+                  <a href="<?php echo base_url('user/user_edit') ?>" class="btn btn-success btn-flat"><i class="fa fa-user"></i> Profile</a>
                   <a href="<?php echo base_url('login/logout') ?>" class="btn btn-success btn-flat"><i class="fa fa-sign-out"></i> Sign out</a>
                 </div>
               </li>

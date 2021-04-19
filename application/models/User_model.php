@@ -46,7 +46,7 @@ class User_model extends CI_Model {
     public function detail($id_user = null)
     {
         // $id = $this->encryption->encrypt('');
-        $this->db->select('id_user, username , status');
+        $this->db->select('*');
         $this->db->from('user');
         if ($id_user != null) {
             $this->db->where('id_user', $id_user);

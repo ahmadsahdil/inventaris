@@ -25,7 +25,7 @@ class Admin extends CI_Controller {
 	}
 
 	function barang_masuk() {
-		
+		admin_operator();
 		$a['data']=$this->model_admin->tampil_barang_masuk1();
 		$a['pemberi']=$this->model_admin->tampil_pemberi();
 		$a['page']="barang_masuk/home_barang_masuk";
@@ -35,7 +35,7 @@ class Admin extends CI_Controller {
 	}
 
 	function tambah_barang_masuk($id=0) {
-		
+		admin_operator();
 		$a['pemberi']=$this->model_admin->tampil_pemberi();
 		$a['barang']=$this->model_admin->tampil_barang_all();
 		$a['data']=$this->model_admin->tampil_barang_masuk($id);
@@ -48,7 +48,7 @@ class Admin extends CI_Controller {
 	}
 
 	function insert_barang_masuk() {
-		
+		admin_operator();
 		$i=$this->input;
 		$id_barang=$i->post('id_barang');
 		$jumlah=$i->post('jumlah');
@@ -74,7 +74,7 @@ class Admin extends CI_Controller {
 
 
 	function update_barang_masuk() {
-		
+		admin_operator();
 		$id=$this->input->post('id_barang_masuk');
 
 		$i=$this->input;
@@ -94,7 +94,7 @@ class Admin extends CI_Controller {
 
 
 	function hapus_barang_masuk($id) {
-		
+		admin_operator();
 		$id_pemberi=$this->session->userdata('id_pemberi');
 
 
@@ -121,7 +121,7 @@ class Admin extends CI_Controller {
 	// function barang barang
 
 	function barang_keluar() {
-		
+		admin_operator();
 		// $a['data']	= $this->model_admin->tampil_barang_keluar();
 		$a['dataprint']=$this->model_admin->tampil_barang_print();
 		$a['penerima']=$this->model_admin->tampil_penerima();
@@ -133,7 +133,7 @@ class Admin extends CI_Controller {
 	}
 
 	function tambah_barang_keluar($id=0) {
-		
+		admin_operator();
 		$a['penerima']=$this->model_admin->tampil_penerima();
 		$a['barang']=$this->model_admin->tampil_barang1();
 		$a['data']=$this->model_admin->tampil_barang_keluar($id);
@@ -147,7 +147,7 @@ class Admin extends CI_Controller {
 	}
 
 	function update_barang_keluar() {
-		
+		admin_operator();
 		$id=$this->input->post('id_barang_keluar');
 
 		$i=$this->input;
@@ -166,6 +166,7 @@ class Admin extends CI_Controller {
 
 
 	function insert_barang_keluar() {
+		admin_operator();
 		$i=$this->input;
 		$id_barang=$i->post('id_barang');
 		if ($id_barang !="") {
@@ -216,6 +217,7 @@ class Admin extends CI_Controller {
 	}
 
 	function hapus_barang_keluar($id) {
+		admin_operator();
 		$segment3=$this->session->userdata('id_penerima');
 		
 		$id_keluar=$this->model_admin->detailbarangkeluar($id);
@@ -240,7 +242,7 @@ class Admin extends CI_Controller {
 
 	// Fungsi Supplier (pemberi)
 	function supplier() {
-		
+		admin_operator();
 		$a['data']=$this->model_admin->tampil_pemberi();
 		$a['page']="pemberi/pemberi";
 		$a['title']="Supplier";
@@ -248,7 +250,7 @@ class Admin extends CI_Controller {
 	}
 
 	function tambah_supplier() {
-		
+		admin_operator();
 		$a['page']="pemberi/tambah_pemberi";
 		$a['title']="Tambah Supplier";
 
@@ -256,7 +258,7 @@ class Admin extends CI_Controller {
 	}
 
 	function insert_supplier() {
-		
+		admin_operator();
 		$i=$this->input;
 		$object=array(
 			'nama_pemberi'=>$i->post('nama_pemberi'),
@@ -276,7 +278,7 @@ class Admin extends CI_Controller {
 
 	function edit_supplier($id) {
 
-		
+		admin_operator();
 		$a['editdata']=$this->db->get_where('pemberi', array('id_pemberi'=>$id))->result_object();
 		$a['page']="pemberi/edit_pemberi";
 		$a['title']="Edit Supplier";
@@ -285,7 +287,7 @@ class Admin extends CI_Controller {
 	}
 
 	function update_supplier() {
-		
+		admin_operator();
 		$id=$this->input->post('id');
 
 		$i=$this->input;
@@ -306,7 +308,7 @@ class Admin extends CI_Controller {
 	}
 
 	function hapus_supplier($id) {
-		
+		admin_operator();
 
 		$this->model_admin->hapus_pemberi($id);
 		$this->session->set_flashdata(array(
@@ -321,6 +323,7 @@ class Admin extends CI_Controller {
 
 	// ==========================Fungsi Jenis barang==========================================
 	function get_detail_barang() {
+		admin_operator();
 		$id['id_barang']=$this->input->post('id_barang');
 		$data=array('detail_barang'=>$this->model_admin->getSelectedData('barang', $id)->result(),
 		);
@@ -328,15 +331,15 @@ class Admin extends CI_Controller {
 	}
 
 	function total_barang() {
-		
+		admin_operator();
 		$a['data']=$this->model_admin->tampil_barang_all();
 		$a['page']="barang/barang_total";
-		$a['title']="barang Masuk Dan Keluar";
+		$a['title']="Barang Masuk Dan Keluar";
 		$this->load->view('admin/index', $a);
 	}
 
 	function barang() {
-		
+		admin_operator();
 		$a['data']=$this->model_admin->tampil_barang_all();
 		$a['page']="barang/barang";
 		$a['title']="Barang";
@@ -344,7 +347,7 @@ class Admin extends CI_Controller {
 	}
 
 	function tambah_barang() {
-		
+		admin_operator();
 		$a['page']="barang/tambah_barang";
 		$a['title']="Tambah barang";
 
@@ -352,7 +355,7 @@ class Admin extends CI_Controller {
 	}
 
 	function insert_barang() {
-		
+		admin_operator();
 		$i=$this->input;
 		$object=array(
 			'nama_barang'=>$i->post('nama_barang'),
@@ -372,7 +375,7 @@ class Admin extends CI_Controller {
 
 	function edit_barang($id) {
 
-		
+		admin_operator();
 		$a['editdata']=$this->db->get_where('barang', array('id_barang'=>$id))->result_object();
 		$a['page']="barang/edit_barang";
 		$a['title']="Edit Barang";
@@ -381,7 +384,7 @@ class Admin extends CI_Controller {
 	}
 
 	function update_barang() {
-		
+		admin_operator();
 		$id=$this->input->post('id');
 
 		$i=$this->input;
@@ -408,7 +411,7 @@ class Admin extends CI_Controller {
 
 	function hapus_barang($id) {
 		
-
+		admin_operator();
 		$this->model_admin->hapus_barang($id);
 		$this->session->set_flashdata(array(
 			'msg'=> 'Data Berhasil di Hapus',
@@ -424,7 +427,7 @@ class Admin extends CI_Controller {
 
 	// ===========================Fungsi penerima======================================
 	function penerima() {
-		
+		admin_operator();
 		$a['data']=$this->model_admin->tampil_penerima();
 		$a['page']="penerima/penerima";
 		$a['title']="penerima";
@@ -432,7 +435,7 @@ class Admin extends CI_Controller {
 	}
 
 	function tambah_penerima() {
-		
+		admin_operator();
 		$a['page']="penerima/tambah_penerima";
 		$a['title']="Tambah penerima";
 
@@ -440,7 +443,7 @@ class Admin extends CI_Controller {
 	}
 
 	function insert_penerima() {
-		
+		admin_operator();
 		$i=$this->input;
 		$object=array(
 			'nama_penerima'=>$i->post('nama_penerima'),
@@ -461,7 +464,7 @@ class Admin extends CI_Controller {
 
 	function edit_penerima($id) {
 
-		
+		admin_operator();
 		$a['editdata']=$this->db->get_where('penerima', array('id_penerima'=>$id))->result_object();
 		$a['page']="penerima/edit_penerima";
 		$a['title']="Edit penerima";
@@ -470,7 +473,7 @@ class Admin extends CI_Controller {
 	}
 
 	function update_penerima() {
-		
+		admin_operator();
 		$id=$this->input->post('id');
 
 		$i=$this->input;
@@ -494,7 +497,7 @@ class Admin extends CI_Controller {
 
 	function hapus_penerima($id) {
 		
-
+		admin_operator();
 		$this->model_admin->hapus_penerima($id);
 		$this->session->set_flashdata(array(
 			'msg'=> 'Data Berhasil di Hapus',
@@ -506,7 +509,7 @@ class Admin extends CI_Controller {
 
 	// ===========================Fungsi inventory======================================
 	function inventory() {
-		
+		admin_operator();
 		$a['data']=$this->model_admin->tampil_inventory();
 		$a['page']="inventory/inventory";
 		$a['title']="Inventory";
@@ -518,7 +521,7 @@ class Admin extends CI_Controller {
 
 // ========================== Infrasktruktur =================================
 function infrastruktur() {
-	
+	admin_operator();
 	$a['data']=$this->model_admin->tampil_infrastruktur();
 	$a['page']="infrastruktur/infrastruktur";
 	$a['title']="Infrastruktur";
@@ -526,7 +529,7 @@ function infrastruktur() {
 }
 
 function tambah_infrastruktur() {
-	
+	admin_operator();
 	$a['page']="infrastruktur/tambah_infrastruktur";
 	$a['title']="Tambah Infrastruktur";
 	$a['wilayah']=$this->model_admin->tampil_wilayah();
@@ -534,7 +537,7 @@ function tambah_infrastruktur() {
 }
 
 function insert_infrastruktur() {
-	
+	admin_operator();
 	$i=$this->input;
 	$object=array(
 		'nama_barang'=>$i->post('nama_barang'),
@@ -559,7 +562,7 @@ function insert_infrastruktur() {
 
 function edit_infrastruktur($id) {
 
-	
+	admin_operator();
 	$a['editdata']=$this->db->get_where('infrastruktur', array('id_infrastruktur'=>$id))->result_object();
 	$a['wilayah']=$this->model_admin->tampil_wilayah();
 	$a['page']="infrastruktur/edit_infrastruktur";
@@ -569,7 +572,7 @@ function edit_infrastruktur($id) {
 }
 
 function update_infrastruktur() {
-	
+	admin_operator();
 	$id=$this->input->post('id');
 
 	$i=$this->input;
@@ -596,7 +599,7 @@ function update_infrastruktur() {
 
 function hapus_infrastruktur($id) {
 	
-
+	admin_operator();
 	$this->model_admin->hapus_infrastruktur($id);
 	$this->session->set_flashdata(array(
 		'msg'=> 'Data Berhasil di Hapus',
@@ -608,7 +611,7 @@ function hapus_infrastruktur($id) {
 
 // ========================== Wilayah =================================
 function wilayah() {
-	
+	admin_operator();
 	$a['data']=$this->model_admin->tampil_wilayah();
 	$a['page']="wilayah/wilayah";
 	$a['title']="Wilayah";
@@ -616,7 +619,7 @@ function wilayah() {
 }
 
 function tambah_wilayah() {
-	
+	admin_operator();
 	$a['page']="wilayah/tambah_wilayah";
 	$a['title']="Tambah Wilayah";
 
@@ -624,7 +627,7 @@ function tambah_wilayah() {
 }
 
 function insert_wilayah() {
-	
+	admin_operator();
 	$i=$this->input;
 	$object=array(
 		'nama_wilayah'=>$i->post('nama_wilayah'),
@@ -641,7 +644,7 @@ function insert_wilayah() {
 
 function edit_wilayah($id) {
 
-	
+	admin_operator();
 	$a['editdata']=$this->db->get_where('wilayah', array('id_wilayah'=>$id))->result_object();
 	$a['page']="wilayah/edit_wilayah";
 	$a['title']="Edit Wilayah";
@@ -650,7 +653,7 @@ function edit_wilayah($id) {
 }
 
 function update_wilayah() {
-	
+	admin_operator();
 	$id=$this->input->post('id');
 
 	$i=$this->input;
@@ -671,7 +674,7 @@ function update_wilayah() {
 
 function hapus_wilayah($id) {
 	
-
+	admin_operator();
 	$this->model_admin->hapus_wilayah($id);
 	$this->session->set_flashdata(array(
 		'msg'=> 'Data Berhasil di Hapus',
@@ -682,7 +685,7 @@ function hapus_wilayah($id) {
 
 function lihat_infra($id) {
 
-	
+	admin_operator();
 	$a['data']=$this->model_admin->tampil_infra_wilayah($id);
 	$a['wilayah']=$this->model_admin->tampil_wilayah();
 	$a['page']="wilayah/infrastruktur";

@@ -11,7 +11,7 @@ class User extends CI_Controller {
 
 	/* ========================Fungsi Manage User============================= */
 	function index() {
-
+		admin();
 		$a['data']=$this->user_model->tampil_user()->result_object();
 		$a['page']="user/manage_user";
 		$a['title']="User";
@@ -19,7 +19,7 @@ class User extends CI_Controller {
 	}
 
 	function tambah_user() {
-
+admin();
 		$a['page']="user/tambah_user";
 		$a['title']="Tambah User";
 
@@ -27,7 +27,7 @@ class User extends CI_Controller {
 	}
 
 	function insert_user() {
-
+admin();
 
 		$username=xss_clean($this->input->post('username'));
 		$password=xss_clean($this->input->post('password'));
@@ -44,7 +44,9 @@ class User extends CI_Controller {
 		}
 
 		else {
-			$object=array('username'=> $username,
+			$object=array(
+				'id_user'=> generate_string(100),
+				'username'=> $username,
 				'password'=> password_hash($password, PASSWORD_DEFAULT),
 				'status'=> $status);
 			$this->user_model->insert_user($object);
@@ -71,34 +73,43 @@ class User extends CI_Controller {
 		$edit_id=xss_clean(htmlspecialchars($this->input->post('id')));
 		$username=xss_clean(htmlspecialchars($i->post('username')));
 		$password=xss_clean(htmlspecialchars($i->post('password')));
-		$user=$this->user_model->login($username);
+		$status=xss_clean(htmlspecialchars($i->post('status')));
+		$hak=xss_clean(htmlspecialchars($i->post('hak')));
+		$user=$this->user_model->detail($edit_id)->row();
 		$data=array('username'=> $username,
 			'password'=> password_hash($password, PASSWORD_DEFAULT),
 		);
-
+		if ($hak == "user") {
+			$data['status']=$status;
+		} 
 		if (password_verify(xss_clean(htmlspecialchars($i->post('password_lama'))), $user->password)) {
 			$this->user_model->update_user($edit_id, $data);
 			$this->session->set_flashdata(array(
-				'msg'=> 'Data Berhasil di Ubah',
+				'msg'=> 'User Berhasil di Ubah',
 				'status'=> 'success'
 			));
-			redirect('user');
 		}
 
 		else {
 			$this->session->set_flashdata(array(
-				'msg'=> 'Data Gagal di Ubah',
+				'msg'=> 'User Gagal di Ubah',
 				'status'=> 'error'
 			));
+		}
+
+		if ($hak == "personal") {
+			redirect('/');
+		} else {
 			redirect('user');
 		}
+		
 
 
 	}
 
 
 	function hapus_user($id) {
-
+admin();
 		$this->user_model->hapus_user($id);
 		$this->session->set_flashdata(array(
 			'msg'=> 'Data Berhasil di Hapus',
@@ -108,6 +119,7 @@ class User extends CI_Controller {
 	}
 
 	function reset_password($id) {
+		admin();
 		$user=$this->user_model->detail($id)->row();	
 		$data=array('password'=> password_hash($user->username, PASSWORD_DEFAULT));
 		if($this->user_model->update_user($id, $data)){
@@ -128,5 +140,16 @@ class User extends CI_Controller {
 		
 	}
 
+
+
+	function user_edit() {
+		$id = $this->encryption->decrypt($this->session->userdata('_user_id'));
+		$a['editdata']=$this->user_model->edit_user($id)->result_object();
+		$a['page']="user/user_edit";
+		$a['title']="Edit User";
+		$this->load->view('admin/index', $a);
+	}
+
+	
 
 }

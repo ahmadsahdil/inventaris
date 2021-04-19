@@ -39,15 +39,24 @@
                   </div>
                   <div class="form-group">
                     <label>Status</label>
-                    <select type="text" name="status" class="form-control">
-                      <option value="Admin"  <?php if($data->status=="Admin"){ echo "selected";} ?>>Admin</option>
-                      <option value="Operator"  <?php if($data->status=="Operator"){ echo "selected";} ?>>Operator</option>
-                      <option value="Pelanggan"  <?php if($data->status=="Pelanggan"){ echo "selected";} ?>>Pelanggan</option>
+                    <select type="text" name="status" class="form-control" disabled>
+                    <?php 
+                    if($data->status=="Admin"){
+                      echo '<option value="Admin"  selected >Admin</option>';
+                    }elseif($data->status=="Operator"){
+                      echo '<option value="Operator"  selected >Admin</option>';
+                    }else{
+                      echo '<option value="Pelanggan"  selected >Admin</option>';
+                    }
+                    
+                    ?>
+                      
+                     
                     </select>
                   </div>
                   <input type="hidden" name="id" value="<?php echo $data->id_user ?>">
-                  <input type="hidden" name="hak" value="user">
-                  <a href="<?php echo base_url(); ?>user" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Batal</a>
+                  <input type="hidden" name="hak" value="personal">
+                  <a href="<?php echo base_url(); ?>" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Batal</a>
                   <button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Simpan</button>
                 <?php endforeach ?>
                 <?php echo form_close(); ?>

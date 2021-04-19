@@ -6,18 +6,7 @@ class Admin extends CI_Controller {
 		parent:: __construct();
 		cek_not_login();
 		$this->load->model('model_admin');
-		$this->load->model('daerah');
 
-	}
-
-	function pelanggan() {
-    
-		$a['kab']=$this->daerah->kabupaten();
-		$a['kec']=$this->daerah->kecamatan();
-		$a['desa']=$this->daerah->desa();
-		$a['page']="pelanggan/pelanggan";
-		$a['title']="Pelanggan";
-		$this->load->view('admin/index', $a);
 	}
 
 	function index() {

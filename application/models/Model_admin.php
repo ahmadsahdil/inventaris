@@ -57,17 +57,13 @@ public function getSelectedData($table,$data)
 	public function tampil_barang_masuk1()
 	{
 		$this->db->select('barang_masuk.*,
-							pemberi.nama_pemberi,barang.nama_barang');
+							pemberi.*,barang.nama_barang');
 		$this->db->from('barang_masuk');
 		
 		// join
 		$this->db->join('pemberi','pemberi.id_pemberi=barang_masuk.id_pemberi','LEFT');
 		$this->db->join('barang','barang.id_barang=barang_masuk.id_barang','LEFT');
-	// 	// end join
-	// $this->db->where('barang_masuk.id_pemberi',$id_pemberi);
-
-	// error ketika dipakai
-		// $this->db->group_by('pemberi.nama_pemberi');
+		$this->db->order_by('tgl_pemberi','DESC');
 		$query=$this->db->get();
 		return $query->result();
 	}
@@ -87,13 +83,13 @@ public function getSelectedData($table,$data)
 	public function tampil_barang_keluar1()
 	{
 		$this->db->select('barang_keluar.*,
-						penerima.nama_penerima,barang.*');
+						penerima.*,barang.*');
 		$this->db->from('barang_keluar');
 		$this->db->join('penerima','penerima.id_penerima=barang_keluar.id_penerima','LEFT');
 		$this->db->join('barang','barang.id_barang=barang_keluar.id_barang','LEFT');
 		
 
-		$this->db->order_by('tgl_keluar','DESC');
+		$this->db->order_by('tgl_penerima','DESC');
 		$query=$this->db->get();
 		return $query->result();
 	}
@@ -194,7 +190,7 @@ public function total_jenis_penerima($idpenerima,$idjenisbarang)
 							);
 		$this->db->from('pemberi');
 		
-		$this->db->order_by('id_pemberi');
+		$this->db->order_by('tgl_pemberi', 'DESC');
 		$query=$this->db->get();
 		return $query->result();
 	}
@@ -228,7 +224,7 @@ public function total_jenis_penerima($idpenerima,$idjenisbarang)
 							);
 		$this->db->from('penerima');
 		
-		$this->db->order_by('id_penerima');
+		$this->db->order_by('tgl_penerima','DESC');
 		$query=$this->db->get();
 		return $query->result();
 	}

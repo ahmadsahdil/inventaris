@@ -43,10 +43,15 @@
                     <label for="keterangan">Keterangan</label>
                       <input type="text" class="form-control" name="keterangan" value="<?php echo $data->keterangan_penerima ?>"  />
                   </div>
+                  <div class="form-group">
+                  <label for="tgl_penerima">Tanggal :</label>
+                    <input type="date" class="form-control" 
+                        name="tgl_penerima" id="tgl_penerima" value="<?php echo $data->tgl_penerima ?>" required >bulan/tanggal/tahun
+                </div>
                
                   <input type="hidden" name="id" value="<?php echo $data->id_penerima ?>">
-                  <a href="<?php echo base_url(); ?>admin/penerima" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Batal</a>
-                  <button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Simpan</button>
+                  <a href="<?php echo base_url(); ?>admin/barang_keluar" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Batal</a>
+                  <button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Ubah</button>
                 <?php endforeach ?>
                 <?php echo form_close(); ?>
               </div><!-- /.box-body -->

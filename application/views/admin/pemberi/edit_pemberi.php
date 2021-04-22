@@ -43,6 +43,11 @@
                     <label for="keterangan">Keterangan</label>
                       <input type="text" class="form-control" name="keterangan" value="<?php echo $data->keterangan_pemberi ?>"  />
                   </div>
+                  <div class="form-group">
+                  <label for="tgl_pemberi">Tanggal :</label>
+                    <input type="date" class="form-control" 
+                        name="tgl_pemberi" id="tgl_pemberi" value="<?php echo $data->tgl_pemberi ?>" required >bulan/tanggal/tahun
+                </div>
                
                   <input type="hidden" name="id" value="<?php echo $data->id_pemberi ?>">
                   <a href="<?php echo base_url(); ?>admin/barang_masuk" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Batal</a>

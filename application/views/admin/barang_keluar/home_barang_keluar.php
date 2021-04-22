@@ -38,6 +38,7 @@
                         <th>Atas Nama</th>
                         <th>Alamat</th>
                         <th>Keterangan</th>
+                        <th>Tanggal</th>
                         <th>Aksi</th>
                     </thead>
                     <tbody>
@@ -51,6 +52,7 @@
                         <td><?php echo $lihat->atas_nama ?></td>
                         <td><?php echo $lihat->alamat ?></td>
                         <td><?php echo $lihat->keterangan_penerima ?></td>
+                        <td><?php echo $lihat->tgl_penerima ?></td>
                           
                         <td align="center">
                         <a href="<?php echo base_url(); ?>admin/edit_penerima/<?php echo $lihat->id_penerima?>" class="btn btn-sm btn-primary "><i class="fa fa-edit"></i> Edit</a>

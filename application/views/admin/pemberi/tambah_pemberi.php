@@ -40,6 +40,11 @@
                     <label for="keterangan">Keterangan</label>
                       <input type="text" class="form-control" name="keterangan" placeholder="Masukkan Keterangan"  />
                   </div>
+                  <div class="form-group">
+                  <label for="tgl_pemberi">Tanggal :</label>
+                    <input type="date" class="form-control" 
+                        name="tgl_pemberi" id="tgl_pemberi" value="<?php echo date("Y-m-d"); ?>" required >bulan/tanggal/tahun
+                </div>
              
                  
                   <a href="<?php echo base_url(); ?>admin/barang_masuk" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Batal</a>

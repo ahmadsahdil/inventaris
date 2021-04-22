@@ -6,6 +6,7 @@ class Report extends CI_Controller {
 public function __construct(){
 	parent::__construct();
 	$this->check_login->check();
+	admin_operator();
 	$this->load->model('model_admin');
 	$this->load->model('laporan');
 	$this->load->model('daerah_model','daerah');

@@ -21,7 +21,7 @@
                 <div class="box-header">
                   <h3 class="box-title">
                   <a href="<?php echo base_url(); ?>pelanggan/tambah_pelanggan" class="btn btn-sm btn-primary " style="margin-right: 20px "><i class="fa fa-plus"></i> Tambah</a>
-                  <?php include 'print.php'; ?>
+                  <?php if($this->session->userdata('_status')!=="Korlap") {include 'print.php'; }?>
                   </h3>
                   <div class="box-tools">
 

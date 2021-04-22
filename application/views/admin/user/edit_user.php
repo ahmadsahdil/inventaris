@@ -29,23 +29,23 @@
                 ?>
                   <div class="form-group">
                     <label for="nama">Nama</label>
-                      <input type="text" class="form-control" name="nama" value="<?php echo $data->nama ?>" />
+                      <input type="text" class="form-control" name="nama" value="<?php echo $data->nama ?>" required/>
                   </div>
                   <div class="form-group">
                     <label for="username">Username</label>
-                      <input type="text" class="form-control" name="username" value="<?php echo $data->username ?>" />
+                      <input type="text" class="form-control" name="username" value="<?php echo $data->username ?>" /required>
                   </div>
                   <div class="form-group">
                     <label for="password">Password Baru</label>
-                      <input type="password" class="form-control" name="password" placeholder="Password Baru"/>
+                      <input type="password" class="form-control" name="password" placeholder="Password Baru"required/>
                   </div>
                   <div class="form-group">
                     <label for="password_lama">Password Lama</label>
-                      <input type="password" class="form-control" name="password_lama" placeholder="Password Lama"/>
+                      <input type="password" class="form-control" name="password_lama" placeholder="Password Lama"required/>
                   </div>
                   <div class="form-group">
                     <label>Status</label>
-                    <select type="text" name="status" class="form-control">
+                    <select type="text" name="status" class="form-control" required>
                       <option value="Admin"  <?php if($data->status=="Admin"){ echo "selected";} ?>>Admin</option>
                       <option value="Operator"  <?php if($data->status=="Operator"){ echo "selected";} ?>>Operator</option>
                       <option value="Korlap"  <?php if($data->status=="Korlap"){ echo "selected";} ?>>Korlap</option>

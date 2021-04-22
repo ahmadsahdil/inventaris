@@ -28,19 +28,19 @@
                 ?>
                   <div class="form-group">
                     <label for="nama">Nama</label>
-                      <input type="text" class="form-control" name="nama" value="<?php echo $data->nama ?>" />
+                      <input type="text" class="form-control" name="nama" value="<?php echo $data->nama ?>" required/>
                   </div>
                   <div class="form-group">
                     <label for="username">Username</label>
-                      <input type="text" class="form-control" name="username" value="<?php echo $data->username ?>" />
+                      <input type="text" class="form-control" name="username" value="<?php echo $data->username ?>" required/>
                   </div>
                   <div class="form-group">
                     <label for="password">Password Baru</label>
-                      <input type="password" class="form-control" name="password" placeholder="Password Baru"/>
+                      <input type="password" class="form-control" name="password" placeholder="Password Baru" required/>
                   </div>
                   <div class="form-group">
                     <label for="password_lama">Password Lama</label>
-                      <input type="password" class="form-control" name="password_lama" placeholder="Password Lama"/>
+                      <input type="password" class="form-control" name="password_lama" placeholder="Password Lama" required/>
                   </div>
                   <div class="form-group">
                     <label>Status</label>

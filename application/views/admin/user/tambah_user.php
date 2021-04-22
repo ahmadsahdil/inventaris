@@ -25,19 +25,19 @@
                 <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
                    <div class="form-group">
                     <label for="nama">nama</label>
-                      <input type="text" class="form-control" name="nama" placeholder="Nama"/>
+                      <input type="text" class="form-control" name="nama" placeholder="Nama" required/>
                   </div>
                    <div class="form-group">
                     <label for="username">Username</label>
-                      <input type="text" class="form-control" name="username" placeholder="Username"/>
+                      <input type="text" class="form-control" name="username" placeholder="Username" required/>
                   </div>
                   <div class="form-group">
                     <label for="password">Password</label>
-                      <input type="password" class="form-control" name="password" placeholder="Password"/>
+                      <input type="password" class="form-control" name="password" placeholder="Password" required/>
                   </div>
                   <div class="form-group">
                     <label>Status</label>
-                    <select type="text" name="status" class="form-control">
+                    <select type="text" name="status" class="form-control" required>
                       <option value="Admin">Admin</option>
                       <option value="Operator">Operator</option>
                       <option value="Korlap">Korlap</option>

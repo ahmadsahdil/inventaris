@@ -4,93 +4,144 @@ class Pelanggan extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
-		// $this->load->model('pelanggan');
+		$this->check_login->check();
 		$this->load->model('daerah_model','daerah');
-		// $this->load->model('pelanggan_model');
+		$this->load->model('pelanggan_model','pelanggan');
     }
     
         function index() {
-    
-            $a['kab']=$this->daerah->kabupaten();
-            $a['page']="pelanggan/pelanggan";
-            $a['title']="Pelanggan";
-            $this->load->view('admin/index', $a);
+            if($this->session->userdata('_status') == "Korlap") {
+                $pelanggan = $this->pelanggan->tampil_pelanggan_korlap($this->session->userdata('_user_id'));
+            } else {
+                $pelanggan = $this->pelanggan->tampil_pelanggan();
+            }
+            
+            $data = array(
+                'hasil' => $pelanggan,
+                'daerah' => $this->daerah,
+                'korlap' => $this->pelanggan->korlap(),
+                'page' => "pelanggan/pelanggan",
+                'title' => "Pelanggan"
+            );
+            $this->load->view('admin/index', $data);
         }
     
         function tambah_pelanggan() {
-    
-            $a['page']="pelanggan/tambah_pelanggan";
-            $a['title']="Tambah Pelanggan";
-    
-            $this->load->view('admin/index', $a);
+            $data = array(
+                'kab' => $this->daerah->kabupaten(),
+                'korlap' => $this->pelanggan->korlap(),
+                'page' => "pelanggan/tambah_pelanggan",
+                'title' => "Tambah Pelanggan"
+            );
+            $this->load->view('admin/index', $data);
         }
     
         function insert_pelanggan() {
     
     
-            $pelangganname=xss_clean($this->input->post('pelangganname'));
-            $password=xss_clean($this->input->post('password'));
-            $status=xss_clean($this->input->post('status'));
-            $pelanggan=$this->pelanggan_model->login($pelangganname);
-    
-            if ($pelanggan) {
-                // $this->session->set_flashdata('error', 'Pelangganname sudah ada');
-                $this->session->set_flashdata(array(
-                    'msg'=> 'Pelangganname sudah ada',
-                    'status'=> 'error'
-                ));
-                redirect('pelanggan/tambah_pelanggan');
-            }
-    
-            else {
-                $object=array('pelangganname'=> $pelangganname,
-                    'password'=> password_hash($password, PASSWORD_DEFAULT),
-                    'status'=> $status);
-                $this->pelanggan_model->insert_pelanggan($object);
-                $this->session->set_flashdata(array(
-                    'msg'=> 'Data Berhasil di Tambah',
-                    'status'=> 'success'
-                ));
-                redirect('pelanggan');
-    
-            }
+            $nama_perusahaan=xss_clean(addslashes(htmlspecialchars($this->input->post('nama_perusahaan'))));
+            $nama_pic=xss_clean(addslashes(htmlspecialchars($this->input->post('nama_pic'))));
+            $nomor_pic=xss_clean(addslashes(htmlspecialchars($this->input->post('nomor_pic'))));
+            $jabatan=xss_clean(addslashes(htmlspecialchars($this->input->post('jabatan'))));
+            $kabupaten=xss_clean(addslashes(htmlspecialchars($this->input->post('kabupaten'))));
+            $kecamatan=xss_clean(addslashes(htmlspecialchars($this->input->post('kecamatan'))));
+            $desa=xss_clean(addslashes(htmlspecialchars($this->input->post('desa'))));
+            $alamat=xss_clean(addslashes(htmlspecialchars($this->input->post('alamat'))));
+            $email=xss_clean(addslashes(htmlspecialchars($this->input->post('email'))));
+            $status=xss_clean(addslashes(htmlspecialchars($this->input->post('status'))));
+            $kategori=xss_clean(addslashes(htmlspecialchars($this->input->post('kategori'))));
+            $jenis=xss_clean(addslashes(htmlspecialchars($this->input->post('jenis'))));
+            $bandwidth=xss_clean(addslashes(htmlspecialchars($this->input->post('bandwidth'))));
+            $id_user = $this->encryption->decrypt($this->session->userdata('_user_id'));
+            $korlap= $this->session->userdata('_status')== 'Korlap'? $id_user : xss_clean(addslashes(htmlspecialchars($this->input->post('korlap'))));
+            
+            
+            $object=array(
+                'id_pelanggan' => generate_string(50),
+                'nama_usaha'=> $nama_perusahaan,
+                'pic'=> $nama_pic,
+                'no_pic'=> $nomor_pic,
+                'jabatan'=> $jabatan,
+                'kabupaten'=> $kabupaten,
+                'kecamatan'=> $kecamatan,
+                'desa'=> $desa,
+                'alamat'=> $alamat,
+                'email'=> $email,
+                'status'=> $status,
+                'kategori'=> $kategori,
+                'jenis'=> $jenis,
+                'bandwidth'=> $bandwidth,
+                'id_korlap'=> $korlap,
+                'create_by'=> $this->session->userdata('_nama'),
+                'create_at'=> date("Y-m-d h:i:s")
+            );
+            $this->pelanggan->insert_pelanggan($object);
+            $this->session->set_flashdata(array(
+                'msg'=> 'Data Berhasil di Tambah',
+                'status'=> 'success'
+            ));
+            activity_log('Tambah Pelanggan',$nama_perusahaan);
+            redirect('pelanggan');
         }
     
         function edit_pelanggan($id) {
-    
-            $a['editdata']=$this->pelanggan_model->edit_pelanggan($id)->result_object();
-            $a['page']="pelanggan/edit_pelanggan";
-            $a['title']="Edit Pelanggan";
-    
-            $this->load->view('admin/index', $a);
+            $data = array(
+                'daerah' => $this->daerah,
+                'kab' => $this->daerah->kabupaten(),
+                'korlap' => $this->pelanggan->korlap(),
+                'editdata' => $this->pelanggan->edit_pelanggan($id)->result_object(),
+                'page' => "pelanggan/edit_pelanggan",
+                'title' => "Edit Pelanggan"
+            );
+            $this->load->view('admin/index', $data);
         }
     
         function update_pelanggan() {
             $i=$this->input;
             $edit_id=xss_clean(htmlspecialchars($this->input->post('id')));
-            $pelangganname=xss_clean(htmlspecialchars($i->post('pelangganname')));
-            $password=xss_clean(htmlspecialchars($i->post('password')));
-            $pelanggan=$this->pelanggan_model->login($pelangganname);
-            $data=array('pelangganname'=> $pelangganname,
-                'password'=> password_hash($password, PASSWORD_DEFAULT),
+            $nama_perusahaan=xss_clean(addslashes(htmlspecialchars($this->input->post('nama_perusahaan'))));
+            $nama_pic=xss_clean(addslashes(htmlspecialchars($this->input->post('nama_pic'))));
+            $nomor_pic=xss_clean(addslashes(htmlspecialchars($this->input->post('nomor_pic'))));
+            $jabatan=xss_clean(addslashes(htmlspecialchars($this->input->post('jabatan'))));
+            $kabupaten=xss_clean(addslashes(htmlspecialchars($this->input->post('kabupaten'))));
+            $kecamatan=xss_clean(addslashes(htmlspecialchars($this->input->post('kecamatan'))));
+            $desa=xss_clean(addslashes(htmlspecialchars($this->input->post('desa'))));
+            $alamat=xss_clean(addslashes(htmlspecialchars($this->input->post('alamat'))));
+            $email=xss_clean(addslashes(htmlspecialchars($this->input->post('email'))));
+            $status=xss_clean(addslashes(htmlspecialchars($this->input->post('status'))));
+            $kategori=xss_clean(addslashes(htmlspecialchars($this->input->post('kategori'))));
+            $jenis=xss_clean(addslashes(htmlspecialchars($this->input->post('jenis'))));
+            $bandwidth=xss_clean(addslashes(htmlspecialchars($this->input->post('bandwidth'))));
+            $id_user = $this->encryption->decrypt($this->session->userdata('_user_id'));
+            $korlap= $this->session->userdata('_status')== 'Korlap'? $id_user : xss_clean(addslashes(htmlspecialchars($this->input->post('korlap'))));
+            
+            
+            $object=array(
+                'nama_usaha'=> $nama_perusahaan,
+                'pic'=> $nama_pic,
+                'no_pic'=> $nomor_pic,
+                'jabatan'=> $jabatan,
+                'kabupaten'=> $kabupaten,
+                'kecamatan'=> $kecamatan,
+                'desa'=> $desa,
+                'alamat'=> $alamat,
+                'email'=> $email,
+                'status'=> $status,
+                'kategori'=> $kategori,
+                'jenis'=> $jenis,
+                'bandwidth'=> $bandwidth,
+                'id_korlap'=> $korlap,
+                'create_by'=> $this->session->userdata('_nama'),
+                'create_at'=> date("Y-m-d h:i:s")
             );
-    
-            if (password_verify(xss_clean(htmlspecialchars($i->post('password_lama'))), $pelanggan->password)) {
-                $this->pelanggan_model->update_pelanggan($edit_id, $data);
-                $this->session->set_flashdata(array(
-                    'msg'=> 'Data Berhasil di Ubah',
-                    'status'=> 'success'
-                ));
-                redirect('pelanggan');
-            }
-    
-            else {
-                $this->session->set_flashdata(array(
-                    'msg'=> 'Data Gagal di Ubah',
-                    'status'=> 'error'
-                ));
-                redirect('pelanggan');
-            }
+            $this->pelanggan->update_pelanggan($edit_id, $object);
+            $this->session->set_flashdata(array(
+                'msg'=> 'Data Berhasil di Ubah',
+                'status'=> 'success'
+            ));
+            activity_log('Ubah Pelanggan',$nama_perusahaan);
+            redirect('pelanggan');
+
     
     
         }
@@ -98,37 +149,15 @@ class Pelanggan extends CI_Controller {
     
         function hapus_pelanggan($id) {
     
-            $this->pelanggan_model->hapus_pelanggan($id);
+            $this->pelanggan->hapus_pelanggan($id);
             $this->session->set_flashdata(array(
                 'msg'=> 'Data Berhasil di Hapus',
                 'status'=> 'success'
             ));
+            activity_log('Hapus Pelanggan',$id);
             redirect('pelanggan');
         }
     
-        function reset_password($id) {
-            $pelanggan=$this->pelanggan_model->detail($id)->row();	
-            $data=array('password'=> password_hash($pelanggan->pelangganname, PASSWORD_DEFAULT));
-            if($this->pelanggan_model->update_pelanggan($id, $data)){
-                $this->session->set_flashdata(array(
-                    'msg'=> 'Password Berhasil di Reset',
-                    'status'=> 'success'
-                ));
-                redirect('pelanggan');
-            }else{
-                $this->session->set_flashdata(array(
-                    'msg'=> 'Password Berhasil di Reset',
-                    'status'=> 'success'
-                ));
-                redirect('pelanggan');
-    
-            }
-            
-            
-        }
-    
-    
-    
-    
+           
 
 }

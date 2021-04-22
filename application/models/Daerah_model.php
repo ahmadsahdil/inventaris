@@ -46,4 +46,18 @@ class Daerah_model extends CI_Model
         $query=$this->db->get();
 		return $query->result();
     }
+
+    public function detail($id)
+    {
+        $this->db->select('*');
+        $this->db->from('daerah');
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+        $queryResult = $query->result();
+
+        if (count($queryResult) > 0) {
+
+            return $query->row();
+        }
+    }
 }

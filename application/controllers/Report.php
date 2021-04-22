@@ -5,8 +5,10 @@ class Report extends CI_Controller {
 
 public function __construct(){
 	parent::__construct();
+	$this->check_login->check();
 	$this->load->model('model_admin');
 	$this->load->model('laporan');
+	$this->load->model('daerah_model','daerah');
 }
 
 	// print berdasarkan id
@@ -63,6 +65,29 @@ public function __construct(){
 		$data=$this->laporan->tampil_semua_barang_keluar();
 		$this->load->view('admin/laporan/excel_barang_keluar',['data'=>$data]);
 		activity_log('Print','Laporan/excel_barang_keluar');
+	
+	}
+	public function tampil_pelanggan()
+	{
+		$object = array(
+			'data' => $this->laporan->tampil_pelanggan(),
+			'daerah' => $this->daerah
+
+		);
+		$this->load->view('admin/laporan/excel_pelanggan',$object);
+		activity_log('Print','Laporan/excel_pelanggan');
+	
+	}
+	public function tampil_pelanggan_korlap()
+	{
+		$id_korlap=$this->input->post('korlap');
+		$object = array(
+			'data' => $this->laporan->tampil_pelanggan_korlap($id_korlap),
+			'daerah' => $this->daerah
+
+		);
+		$this->load->view('admin/laporan/excel_pelanggan',$object);
+		activity_log('Print','Laporan/excel_pelanggan_korlap');
 	
 	}
 

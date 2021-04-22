@@ -22,6 +22,11 @@
               <div class="box-body">
                 <!-- form start -->
                 <?php echo form_open('user/insert_user'); ?>
+                <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
+                   <div class="form-group">
+                    <label for="nama">nama</label>
+                      <input type="text" class="form-control" name="nama" placeholder="Nama"/>
+                  </div>
                    <div class="form-group">
                     <label for="username">Username</label>
                       <input type="text" class="form-control" name="username" placeholder="Username"/>
@@ -35,7 +40,7 @@
                     <select type="text" name="status" class="form-control">
                       <option value="Admin">Admin</option>
                       <option value="Operator">Operator</option>
-                      <option value="Pelanggan">Pelanggan</option>
+                      <option value="Korlap">Korlap</option>
                     </select>
                   </div>
                   <a href="<?php echo base_url(); ?>user" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Batal</a>

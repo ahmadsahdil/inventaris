@@ -26,6 +26,9 @@ Support by www.ketikanmd.tech
   <link rel="stylesheet" href="<?php echo base_url()?>/assets/datatables.min.css">
   <link rel="stylesheet" href="<?php echo base_url()?>/assets/toastr.min.css">
   <link rel="stylesheet" href="<?php echo base_url()?>/assets/sweetalert2.min.css">
+  <link rel="stylesheet" href="<?php echo base_url()?>/assets/select2.min.css">
+  <link rel="stylesheet" href="<?php echo base_url()?>/assets/select2-bootstrap4.min.css">
+
   <script src="<?php echo base_url()?>/assets/bower_components/jquery/dist/jquery.min.js"></script>
 
    
@@ -52,7 +55,7 @@ Support by www.ketikanmd.tech
           <li class="dropdown user user-menu" >
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               
-          <span class="hidden-xs"><?php echo ucwords($this->session->userdata('_username')) ?>  </span>
+          <span class="hidden-xs"><?php echo ucwords($this->session->userdata('_nama')) ?>  </span>
             </a>
             <ul class="dropdown-menu">
                <li class="user-footer" >
@@ -79,7 +82,7 @@ Support by www.ketikanmd.tech
 <img src="  <?php  echo base_url() ?>assets/JKS-192x192.png" class="img-circle"> 
  </div>
  <div class="pull-left info">  
-  <p> <?php echo ucwords($this->session->userdata('_username')) ?></p>
+  <p> <?php echo ucwords($this->session->userdata('_nama')) ?></p>
 <i class="fa fa-circle text-success"> </i> Online
 
 
@@ -90,7 +93,7 @@ Support by www.ketikanmd.tech
             <li class="header">MAIN NAVIGATION</li>
               <li class="treeview">
           <a href="#">
-            <i class="fa fa-user"></i> <span><?php echo ucwords($this->session->userdata('_username')) ?></span>
+            <i class="fa fa-user"></i> <span><?php echo ucwords($this->session->userdata('_nama')) ?></span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -101,7 +104,12 @@ Support by www.ketikanmd.tech
             
           </ul>
         </li>  
-        <?php if($this->session->userdata('_status')!=="Pelanggan") {?>
+        <li class="<?php if($page == 'pelanggan/pelanggan'){echo 'active';} ?>">
+              <a href="<?php echo base_url(); ?>pelanggan">
+                <i class="fa fa-th-list"></i> <span>Pelanggan</span>
+              </a>
+            </li>
+        <?php if($this->session->userdata('_status')!=="Korlap") {?>
              <li class="treeview">
           <a href="#">
             <i class="fa fa-gift"></i> <span>Infrastruktur</span>
@@ -163,9 +171,7 @@ Support by www.ketikanmd.tech
 </section>
       </aside>
  
-      
   <?php $this->load->view('admin/'.$page); ?>  
-
       <p>&nbsp;</p>
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
@@ -173,7 +179,7 @@ Support by www.ketikanmd.tech
         </div>
         <strong>Copyright &copy; <?php echo date('Y') ?> .</strong> All rights reserved.
       </footer>
-    </div>
+  
 
   <script src="<?php echo base_url()?>/assets/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="<?php echo base_url()?>/assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -185,7 +191,8 @@ Support by www.ketikanmd.tech
 <script src="<?php echo base_url()?>/assets/dist/js/demo.js"></script>
 <script src="<?php echo base_url()?>/assets/toastr.min.js"></script>
 <script src="<?php echo base_url()?>/assets/sweetalert2.min.js"></script>
-<!-- <script src="<?php echo base_url()?>/assets/print.js"></script> -->
+<script src="<?php echo base_url()?>/assets/select2.min.js"></script>
+
 
 <script>
   $(function () {
@@ -197,10 +204,6 @@ Support by www.ketikanmd.tech
       'ordering'    : true,
       'info'        : true,
       'autoWidth'   : false,
-      'dom': 'Bfrtip',
-        'buttons': [
-            'print'
-        ]
     })
   })
 var status = "<?= $this->session->flashdata('status')?>";
@@ -219,6 +222,12 @@ var status = "<?= $this->session->flashdata('status')?>";
               showConfirmButton: false,
               timer: 2500
             })}
+
+            $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    });
+
+
 </script>
 </body>
 </html>

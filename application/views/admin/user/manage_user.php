@@ -33,6 +33,7 @@
                     <thead>
                       <tr>
                         <th>No</th>
+                        <th>Nama</th>
                         <th>Username</th>
                         <th>Status</th>
                         <th>Aksi</th>
@@ -44,6 +45,7 @@
                         ?>
                     	<tr>
                         <td><?php echo $no++ ?></td>
+                        <td><?php echo ucwords($lihat->nama)?></td>
                         <td><?php echo ucwords($lihat->username)?></td>
                         <td><?php echo ucwords($lihat->status)?></td>
                     	

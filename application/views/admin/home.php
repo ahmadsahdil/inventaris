@@ -14,7 +14,7 @@
 
         <!-- Main content -->
         <section class="content">
-        <?php if($this->session->userdata('_status')!=="Pelanggan") {?>
+        <?php if($this->session->userdata('_status')!=="Korlap") {?>
           <!-- Small boxes (Stat box) -->
                      <div class="col-lg-3 col-xs-6">
               <!-- small box -->

@@ -116,4 +116,26 @@ public function tampil_barang_masuk($id_pemberi)
 		$query=$this->db->get();
 		return $query->result();
 	}
+
+	public function tampil_pelanggan()
+	{
+		$this->db->select('pelanggan.*,
+							user.nama');
+		$this->db->from('pelanggan');
+		$this->db->join('user','user.id_user=pelanggan.id_korlap','LEFT');
+        $this->db->order_by('id_korlap');
+		$query=$this->db->get();
+		return $query->result();
+	}
+	public function tampil_pelanggan_korlap($id)
+	{
+		$this->db->select('pelanggan.*,
+							user.nama');
+		$this->db->from('pelanggan');
+		$this->db->join('user','user.id_user=pelanggan.id_korlap','LEFT');
+        $this->db->where('id_korlap', $id);
+       
+		$query=$this->db->get();
+		return $query->result();
+	}
 }

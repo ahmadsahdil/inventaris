@@ -30,6 +30,7 @@ class User extends CI_Controller {
 		admin();
 
 		$username=xss_clean($this->input->post('username'));
+		$nama=xss_clean($this->input->post('nama'));
 		$password=xss_clean($this->input->post('password'));
 		$status=xss_clean($this->input->post('status'));
 		$user=$this->user_model->login($username);
@@ -45,6 +46,7 @@ class User extends CI_Controller {
 		else {
 			$object=array('id_user'=> generate_string(100),
 				'username'=> $username,
+				'nama'=> $nama,
 				'password'=> password_hash($password, PASSWORD_DEFAULT),
 				'status'=> $status);
 			$this->user_model->insert_user($object);
@@ -70,11 +72,14 @@ class User extends CI_Controller {
 		$i=$this->input;
 		$edit_id=xss_clean(htmlspecialchars($this->input->post('id')));
 		$username=xss_clean(htmlspecialchars($i->post('username')));
+		$nama=xss_clean(htmlspecialchars($i->post('nama')));
 		$password=xss_clean(htmlspecialchars($i->post('password')));
 		$status=xss_clean(htmlspecialchars($i->post('status')));
 		$hak=xss_clean(htmlspecialchars($i->post('hak')));
 		$user=$this->user_model->detail($edit_id)->row();
-		$data=array('username'=> $username,
+		$data=array(
+			'username'=> $username,
+			'nama'=> $nama,
 			'password'=> password_hash($password, PASSWORD_DEFAULT),
 		);
 

@@ -46,7 +46,7 @@ function admin()
 function admin_operator()
 {
     $ci = &get_instance();
-    if ($ci->check_login->check()->status == "Pelanggan") {
+    if ($ci->check_login->check()->status == "Korlap") {
             redirect('error');
     }
 }

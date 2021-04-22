@@ -28,6 +28,7 @@ class Login extends CI_Controller {
 			if (password_verify($this->db->escape_str($password), $user->password)) {
 				$this->session->set_userdata('_user_id', $this->encryption->encrypt($user->id_user));
 				$this->session->set_userdata('_username', $user->username);
+				$this->session->set_userdata('_nama', $user->nama);
 				$this->session->set_userdata('_status', $user->status);
 				activity_log('login berhasil',$username);
 				redirect('admin');

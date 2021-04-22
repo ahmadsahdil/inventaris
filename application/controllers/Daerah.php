@@ -5,7 +5,6 @@ class Daerah extends CI_Controller {
 	function __construct(){
 		parent::__construct();
     $this->check_login->check();
-    admin_operator();
     $this->load->model('daerah_model','daerah');
     }
 

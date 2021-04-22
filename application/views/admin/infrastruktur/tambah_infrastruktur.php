@@ -56,7 +56,7 @@
                     <select name="wilayah" class="form-control">
                       <?php  
                          foreach ($wilayah as $wilayah): ?>
-                            <option value="<?= $wilayah->id_wilayah ?>"><?= $wilayah->nama_wilayah ?></option>
+                            <option value="<?= $wilayah->id_wilayah ?>" ><?= $wilayah->nama_wilayah ?></option>
                         <?php endforeach ?>
                         </select>
                   </div>

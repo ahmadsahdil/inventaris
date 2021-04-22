@@ -22,9 +22,15 @@
               <div class="box-body">
                 <!-- form start -->
                 <?php echo form_open('user/update_user'); ?>
+                <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
                 <?php  
+                
                 foreach ($editdata as $data):
                 ?>
+                  <div class="form-group">
+                    <label for="nama">Nama</label>
+                      <input type="text" class="form-control" name="nama" value="<?php echo $data->nama ?>" />
+                  </div>
                   <div class="form-group">
                     <label for="username">Username</label>
                       <input type="text" class="form-control" name="username" value="<?php echo $data->username ?>" />
@@ -42,7 +48,7 @@
                     <select type="text" name="status" class="form-control">
                       <option value="Admin"  <?php if($data->status=="Admin"){ echo "selected";} ?>>Admin</option>
                       <option value="Operator"  <?php if($data->status=="Operator"){ echo "selected";} ?>>Operator</option>
-                      <option value="Pelanggan"  <?php if($data->status=="Pelanggan"){ echo "selected";} ?>>Pelanggan</option>
+                      <option value="Korlap"  <?php if($data->status=="Korlap"){ echo "selected";} ?>>Korlap</option>
                     </select>
                   </div>
                   <input type="hidden" name="id" value="<?php echo $data->id_user ?>">

@@ -17,7 +17,7 @@ function cek_not_login()
             'msg'=> 'Anda belum login',
             'status'=> 'error'
         ));
-        redirect('login');
+        redirect(base_url());
     }
 }
 

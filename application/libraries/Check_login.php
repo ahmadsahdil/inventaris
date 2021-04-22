@@ -20,6 +20,6 @@ class Check_login
 	public function logout()
 	{
 		$this->CI->session->sess_destroy();
-		redirect('login','refresh');
+		redirect(base_url());
 	}
 }

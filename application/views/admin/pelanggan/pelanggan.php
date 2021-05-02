@@ -3,7 +3,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-               <?= $title ?> 
+               <?= $title." | Korlap: ".$this->user_model->detail($this->uri->segment(3))->row()->nama ?> 
            
           </h1>
           <ol class="breadcrumb">
@@ -20,11 +20,12 @@
           		<div class="box">
                 <div class="box-header">
                   <h3 class="box-title">
-                  <a href="<?php echo base_url(); ?>pelanggan/tambah_pelanggan" class="btn btn-sm btn-primary " style="margin-right: 20px "><i class="fa fa-plus"></i> Tambah</a>
-                  <?php if($this->session->userdata('_status')!=="Korlap") {include 'print.php'; }?>
-                  </h3>
+                  <?php if($this->session->userdata('_status')!=="Korlap") {?>
+                  <a href="<?php echo base_url('pelanggan')?> " class="btn btn-sm btn-success " style="margin-right: 20px "><i class="fa fa-backward"></i> Kembali</a>
+                  <?php } ?>
+                  <a href="<?php echo base_url('pelanggan/tambah_pelanggan/'.$this->uri->segment(3)); ?> " class="btn btn-sm btn-primary " style="margin-right: 20px "><i class="fa fa-plus"></i> Tambah</a>
+  </h3>
                   <div class="box-tools">
-
                   </div>
                 </div>
                 <div class="box-body table-responsive no-padding">

@@ -104,26 +104,17 @@ Support by www.ketikanmd.tech
             
           </ul>
         </li>  
-        <li class="<?php if($page == 'pelanggan/pelanggan'){echo 'active';} ?>">
-              <a href="<?php echo base_url(); ?>pelanggan">
+        <li class="<?php if($page == 'pelanggan/v_pelanggan'){echo 'active';} ?>">
+              <a href="<?php echo $this->session->userdata('_status') == "Korlap"?   base_url('pelanggan/lihat/'.$this->encryption->decrypt($this->session->userdata('_user_id'))):  base_url('pelanggan'); ?>">
                 <i class="fa fa-th-list"></i> <span>Pelanggan</span>
               </a>
             </li>
         <?php if($this->session->userdata('_status')!=="Korlap") {?>
-             <li class="treeview">
-          <a href="#">
-            <i class="fa fa-gift"></i> <span>Infrastruktur</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-             <li><a href="<?php echo base_url('admin/infrastruktur') ?>"><i class="fa fa-plus"></i> Infrastruktur</a></li> 
-            <li><a href="<?php echo base_url('admin/wilayah') ?>"><i class="fa fa-table"></i> Wilayah</a></li>
-           
-            
-          </ul>
-        </li>  
+          <li class="<?php if($page == 'wilayah/wilayah'){echo 'active';} ?>">
+              <a href="<?= base_url('admin/wilayah') ?>">
+                <i class="fa fa-th-list"></i> <span>Infrastruktur</span>
+              </a>
+            </li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-gift"></i> <span>Barang</span>

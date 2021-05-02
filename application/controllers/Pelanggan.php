@@ -7,36 +7,46 @@ class Pelanggan extends CI_Controller {
 		$this->check_login->check();
 		$this->load->model('daerah_model','daerah');
 		$this->load->model('pelanggan_model','pelanggan');
+		$this->load->model('user_model','user');
     }
     
         function index() {
+        
+            $data = array(
+                'pelanggan' => $this->pelanggan->korlap(),
+                'page' => "pelanggan/v_pelanggan",
+                'title' => "Korlap"
+            );
+            $this->load->view('admin/index', $data);
+        }
+        function lihat($id="") {
             if($this->session->userdata('_status') == "Korlap") {
                 $pelanggan = $this->pelanggan->tampil_pelanggan_korlap($this->session->userdata('_user_id'));
             } else {
-                $pelanggan = $this->pelanggan->tampil_pelanggan();
+                $pelanggan = $this->pelanggan->tampil_pelanggan($id);
             }
             
             $data = array(
                 'hasil' => $pelanggan,
                 'daerah' => $this->daerah,
-                'korlap' => $this->pelanggan->korlap(),
                 'page' => "pelanggan/pelanggan",
                 'title' => "Pelanggan"
             );
             $this->load->view('admin/index', $data);
         }
     
-        function tambah_pelanggan() {
+        function tambah_pelanggan($id) {
             $data = array(
                 'kab' => $this->daerah->kabupaten(),
                 'korlap' => $this->pelanggan->korlap(),
+                'detail'=>$this->user->detail($id),
                 'page' => "pelanggan/tambah_pelanggan",
                 'title' => "Tambah Pelanggan"
             );
             $this->load->view('admin/index', $data);
         }
     
-        function insert_pelanggan() {
+        function insert_pelanggan($korlap) {
     
     
             $nama_perusahaan=xss_clean(addslashes(htmlspecialchars($this->input->post('nama_perusahaan'))));
@@ -52,8 +62,6 @@ class Pelanggan extends CI_Controller {
             $kategori=xss_clean(addslashes(htmlspecialchars($this->input->post('kategori'))));
             $jenis=xss_clean(addslashes(htmlspecialchars($this->input->post('jenis'))));
             $bandwidth=xss_clean(addslashes(htmlspecialchars($this->input->post('bandwidth'))));
-            $id_user = $this->encryption->decrypt($this->session->userdata('_user_id'));
-            $korlap= $this->session->userdata('_status')== 'Korlap'? $id_user : xss_clean(addslashes(htmlspecialchars($this->input->post('korlap'))));
             
             
             $object=array(
@@ -81,7 +89,7 @@ class Pelanggan extends CI_Controller {
                 'status'=> 'success'
             ));
             activity_log('Tambah Pelanggan',$nama_perusahaan);
-            redirect('pelanggan');
+            redirect('pelanggan/lihat/'.$korlap);
         }
     
         function edit_pelanggan($id) {
@@ -112,10 +120,8 @@ class Pelanggan extends CI_Controller {
             $kategori=xss_clean(addslashes(htmlspecialchars($this->input->post('kategori'))));
             $jenis=xss_clean(addslashes(htmlspecialchars($this->input->post('jenis'))));
             $bandwidth=xss_clean(addslashes(htmlspecialchars($this->input->post('bandwidth'))));
-            $id_user = $this->encryption->decrypt($this->session->userdata('_user_id'));
-            $korlap= $this->session->userdata('_status')== 'Korlap'? $id_user : xss_clean(addslashes(htmlspecialchars($this->input->post('korlap'))));
-            
-            
+            $korlap=xss_clean(addslashes(htmlspecialchars($this->input->post('korlap'))));
+  
             $object=array(
                 'nama_usaha'=> $nama_perusahaan,
                 'pic'=> $nama_pic,
@@ -130,7 +136,6 @@ class Pelanggan extends CI_Controller {
                 'kategori'=> $kategori,
                 'jenis'=> $jenis,
                 'bandwidth'=> $bandwidth,
-                'id_korlap'=> $korlap,
                 'create_by'=> $this->session->userdata('_nama'),
                 'create_at'=> date("Y-m-d h:i:s")
             );
@@ -140,7 +145,7 @@ class Pelanggan extends CI_Controller {
                 'status'=> 'success'
             ));
             activity_log('Ubah Pelanggan',$nama_perusahaan);
-            redirect('pelanggan');
+            redirect('pelanggan/lihat/'.$korlap);
 
     
     
@@ -148,14 +153,18 @@ class Pelanggan extends CI_Controller {
     
     
         function hapus_pelanggan($id) {
-    
+            
+            $pelanggan = $this->pelanggan->detail($id)->row();
             $this->pelanggan->hapus_pelanggan($id);
             $this->session->set_flashdata(array(
                 'msg'=> 'Data Berhasil di Hapus',
                 'status'=> 'success'
             ));
             activity_log('Hapus Pelanggan',$id);
-            redirect('pelanggan');
+            redirect('pelanggan/lihat/'.$pelanggan->id_korlap);
+        }
+        function detail_user($id) {
+return $this->user->detail($id);
         }
     
            

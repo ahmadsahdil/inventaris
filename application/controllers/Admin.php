@@ -540,7 +540,7 @@ function infrastruktur() {
 	$this->load->view('admin/index', $a);
 }
 
-function tambah_infrastruktur() {
+function tambah_infrastruktur($id) {
 	admin_operator();
 	$a['page']="infrastruktur/tambah_infrastruktur";
 	$a['title']="Tambah Infrastruktur";
@@ -548,7 +548,7 @@ function tambah_infrastruktur() {
 	$this->load->view('admin/index', $a);
 }
 
-function insert_infrastruktur() {
+function insert_infrastruktur($id_wilayah) {
 	admin_operator();
 	$i=$this->input;
 	$object=array(
@@ -559,7 +559,7 @@ function insert_infrastruktur() {
 		'satuan'=>$i->post('satuan'),
 		'kondisi'=>$i->post('kondisi'),
 		'keterangan'=>$i->post('keterangan'),
-		'id_wilayah'=>$i->post('wilayah')
+		'id_wilayah'=>$id_wilayah
 	);
 	$this->db->insert('infrastruktur', $object);
 	$this->session->set_flashdata(array(
@@ -567,7 +567,7 @@ function insert_infrastruktur() {
 		'status'=> 'success'
 	));
 	activity_log('Tambah Infrastruktur',$i->post('nama_barang'));
-	redirect('admin/infrastruktur');
+	redirect('admin/lihat_infra/'.$id_wilayah);
 }
 
 
@@ -596,8 +596,7 @@ function update_infrastruktur() {
 		'jumlah'=>$i->post('jumlah'),
 		'satuan'=>$i->post('satuan'),
 		'kondisi'=>$i->post('kondisi'),
-		'keterangan'=>$i->post('keterangan'),
-		'id_wilayah'=>$i->post('wilayah')
+		'keterangan'=>$i->post('keterangan')
 	);
 	$this->db->where('id_infrastruktur', $id);
 	$this->db->update('infrastruktur', $object);
@@ -606,20 +605,21 @@ function update_infrastruktur() {
 		'status'=> 'success'
 	));
 	activity_log('Ubah Infrastruktur',$i->post('nama_barang'));
-	redirect('admin/infrastruktur/infrastruktur');
+	redirect('admin/lihat_infra/'.$i->post('wilayah'));
 
 }
 
 function hapus_infrastruktur($id) {
 	
 	admin_operator();
+	$infra = $this->model_admin->detailinfrastruktur($id);
 	$this->model_admin->hapus_infrastruktur($id);
 	$this->session->set_flashdata(array(
 		'msg'=> 'Data Berhasil di Hapus',
 		'status'=> 'success'
 	));;
 	activity_log('Hapus Infrastruktur',$i);
-	redirect('admin/infrastruktur/infrastruktur');
+	redirect('admin/lihat_infra/'.$infra->id_wilayah);
 }
 
 

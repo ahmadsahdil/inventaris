@@ -7,17 +7,18 @@ class Pelanggan_model extends CI_Model {
         $this->db->select('*');
         $this->db->from('user');
         $this->db->where('status','Korlap');
+        $this->db->or_where('status','pelanggan');
         $this->db->order_by('nama', 'ASC');
         $query=$this->db->get();
 		return $query->result();
     }
-	public function tampil_pelanggan()
+	public function tampil_pelanggan($id)
 	{
 		$this->db->select('pelanggan.*,
 							user.nama');
 		$this->db->from('pelanggan');
 		$this->db->join('user','user.id_user=pelanggan.id_korlap','LEFT');
-        $this->db->order_by('id_korlap');
+        $this->db->where('id_korlap',$id);
 		$query=$this->db->get();
 		return $query->result();
 	}

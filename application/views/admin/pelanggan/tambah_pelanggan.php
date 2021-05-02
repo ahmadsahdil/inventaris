@@ -21,7 +21,7 @@
 			</div>
 			<div class="box-body">
 				<!-- form start -->
-				<?php echo form_open('pelanggan/insert_pelanggan'); ?>
+				<?php echo form_open('pelanggan/insert_pelanggan/'.$this->uri->segment(3)); ?>
                 <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
 				<div class="form-group">
 					<label>Nama Perusahaan</label>
@@ -73,7 +73,7 @@
 				</div>
 				<div class="form-group">
 					<label for="email">Email</label>
-					<input type="text" class="form-control" name="email" placeholder="Masukkan Email" />
+					<input type="email" class="form-control" name="email" placeholder="Masukkan Email" />
 				</div>
 				<div class="form-group">
 					<label for="status">Status/Keterangan</label>
@@ -93,22 +93,6 @@
 					<input type="number" class="form-control" name="bandwidth" placeholder="Masukkan Bandwidth"
 						required />
 				</div>
-                <?php if($this->session->userdata('_status')!=='Korlap'){ ?>
-				<div class="form-group">
-					<label for="korlap">Korlap</label>
-					<select name="korlap" id="korlap" class="form-control" <?php if($this->session->userdata('_status')=='Korlap'){echo 'disabled';}else{echo 'required';} ?> >
-						<option value="">Pilih</option>
-						<?php
-          foreach($korlap as $korlap1):?>
-            <option value="<?= $korlap1->id_user ?>"><?= $korlap1->nama?></option>
-            <?php endforeach ?>
-          ?>
-					</select>
-				</div>
-<?php } ?>
-
-				<a href="<?php echo base_url(); ?>pelanggan" class="btn btn-warning"><i class="fa fa-arrow-left"></i>
-					Batal</a>
 				<button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Simpan</button>
 				<?php echo form_close(); ?>
 

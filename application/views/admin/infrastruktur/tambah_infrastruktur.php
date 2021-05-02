@@ -9,7 +9,7 @@
             </h1>
             <ol class="breadcrumb">
               <li><i class="fa fa-dashboard"></i> Home</a></li>
-              <li><a href="<?php echo base_url(); ?>admin/infrastruktur">Infrastruktur</a></li>
+              <li><a href="<?php echo base_url(); ?>admin/wilayah">Wilayah</a></li>
               <li class="active">Tambah</li>
 
             </ol>
@@ -18,11 +18,11 @@
           <section class="content">
             <div class="box box-info">
               <div class="box-header with-border">
-                <h3 class="box-title">Form Data Tambah Infrastruktur</h3>
+                <h3 class="box-title">Wilayah <?= ": ".$this->model_admin->detailwilayah($this->uri->segment(3))->nama_wilayah ?></h3>
               </div>
               <div class="box-body">
                 <!-- form start -->
-                <?php echo form_open('admin/insert_infrastruktur'); ?>
+                <?php echo form_open('admin/insert_infrastruktur/'.$this->uri->segment(3)); ?>
                 <div class="form-group">
                     <label for="nama_barang">Nama Perangkat</label>
                       <input type="text" class="form-control" name="nama_barang" value="" required />
@@ -50,20 +50,9 @@
                   <div class="form-group">
                     <label for="keterangan">Keterangan</label>
                       <input type="text" class="form-control" name="keterangan" value=""  />
-                  </div>
-                  <div class="form-group">
-                    <label for="wilayah">Wilayah</label>
-                    <select name="wilayah" class="form-control">
-                      <?php  
-                         foreach ($wilayah as $wilayah): ?>
-                            <option value="<?= $wilayah->id_wilayah ?>" ><?= $wilayah->nama_wilayah ?></option>
-                        <?php endforeach ?>
-                        </select>
-                  </div>
-                 
-                 
-                 
-                  <a href="<?php echo base_url(); ?>admin/infrastruktur/infrastruktur" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Batal</a>
+                  </div>          
+                                 
+                  <a href="<?php echo base_url('admin/lihat_infra/'.$this->uri->segment(3)); ?>" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Batal</a>
                   <button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Simpan</button>
                 <?php echo form_close(); ?>
                 

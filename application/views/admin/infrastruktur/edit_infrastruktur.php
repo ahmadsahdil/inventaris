@@ -18,7 +18,7 @@
           <section class="content">
             <div class="box box-info">
               <div class="box-header with-border">
-                <h3 class="box-title">Form Data Edit Infrastruktur</h3>
+              <h3 class="box-title">Wilayah :  <b><?=$this->model_admin->detailwilayah($this->uri->segment(3))->nama_wilayah ?></b></h3>
               </div>
               <div class="box-body">
                 <!-- form start -->
@@ -55,21 +55,11 @@
                     <label for="keterangan">Keterangan</label>
                       <input type="text" class="form-control" name="keterangan" value="<?php echo $data->keterangan ?>"  />
                   </div>
-                  <div class="form-group">
-                    <label for="wilayah">Wilayah</label>
-                    <select name="wilayah" class="form-control">
-                      <?php  
-                         foreach ($wilayah as $wilayah): ?>
-                            <option value="<?= $wilayah->id_wilayah ?>" <?php if ($wilayah->id_wilayah==$data->id_wilayah) {
-                              echo "selected";
-                            } ?>><?= $wilayah->nama_wilayah ?></option>
-                        <?php endforeach ?>
-                        </select>
-                  </div>
-                
+               
+                  <input type="hidden" name="wilayah" value="<?php echo $data->id_wilayah ?>">
                   <input type="hidden" name="id" value="<?php echo $data->id_infrastruktur ?>">
-                  <a href="<?php echo base_url(); ?>admin/infrastruktur" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Batal</a>
-                  <button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Simpan</button>
+                  <a href="<?php echo base_url('admin/lihat_infra/'.$this->uri->segment(3)); ?>" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Batal</a>
+                  <button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Ubah</button>
                 <?php endforeach ?>
                 <?php echo form_close(); ?>
               </div><!-- /.box-body -->

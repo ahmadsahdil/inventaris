@@ -15,7 +15,7 @@
                     <select name="korlap" class="form-control" >
                     <option value="">--Pilih--</option>
                     <!-- <option value="semua">Semua</option> -->
-                        <?php foreach ($korlap as $lihat) {?>   
+                        <?php foreach ($pelanggan as $lihat) {?>   
 
                      <option value="<?php 
                       echo $lihat->id_user?>"><?php echo $lihat->nama?></option>

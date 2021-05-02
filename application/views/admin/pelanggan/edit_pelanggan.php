@@ -28,6 +28,8 @@
                 
                 foreach ($editdata as $data):
                 ?>
+				<input type="hidden" name="korlap" value="<?= $data->id_korlap; ?>"
+						required />
 				<input type="hidden" name="id" value="<?= $data->id_pelanggan; ?>"
 						required />
 				<div class="form-group">
@@ -103,22 +105,6 @@ echo "selected";
 					<input type="number" class="form-control" name="bandwidth" value="<?= $data->bandwidth ?>"
 						required />
 				</div>
-                <?php if($this->session->userdata('_status')!=='Korlap'){ ?>
-				<div class="form-group">
-					<label for="korlap">Korlap</label>
-					<select name="korlap" id="korlap" class="form-control" <?php if($this->session->userdata('_status')=='Korlap'){echo 'disabled';}else{echo 'required';} ?> >
-						<option value="">Pilih</option>
-						<?php
-          foreach($korlap as $korlap1):?>
-            <option value="<?= $korlap1->id_user ?>" <?php if ($korlap1->id_user == $data->id_korlap) {
-
-echo "selected";
-} ?>><?= $korlap1->nama?></option>
-            <?php endforeach ?>
-          ?>
-					</select>
-				</div>
-<?php } ?>
 				<?php endforeach ?>																																																																		
 				<a href="<?php echo base_url(); ?>pelanggan" class="btn btn-warning"><i class="fa fa-arrow-left"></i>
 					Batal</a>

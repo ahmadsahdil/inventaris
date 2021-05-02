@@ -42,7 +42,6 @@
                         <th>Satuan</th>
                         <th>Kondisi</th>
                         <th>Keterangan</th>
-                        <th>Wilayah</th>
                         <th>Aksi</th>
                     </thead>
                     <tbody>

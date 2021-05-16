@@ -91,6 +91,27 @@ public function __construct(){
 		activity_log('Print','Laporan/excel_pelanggan_korlap');
 	
 	}
+	public function tampil_infrastruktur()
+	{
+		$object = array(
+			'data' => $this->laporan->tampil_infrastruktur()
+
+		);
+		$this->load->view('admin/laporan/excel_infrastruktur',$object);
+		activity_log('Print','Laporan/excel_infrastruktur');
+	
+	}
+	public function tampil_infrastruktur_wilayah()
+	{
+		$id_wilayah=$this->input->post('wilayah');
+		$object = array(
+			'data' => $this->laporan->tampil_infrastruktur_wilayah($id_wilayah),
+
+		);
+		$this->load->view('admin/laporan/excel_infrastruktur',$object);
+		activity_log('Print','Laporan/excel_infrastruktur_wilayah');
+	
+	}
 
 }
 

@@ -19,6 +19,8 @@ public function getSelectedData($table,$data)
 		return $query->result();
 	}
 
+	
+
 
 	public function tampil_barang()
 	{
@@ -151,6 +153,7 @@ public function tampil_wilayah()
 						);
 	$this->db->from('wilayah');
 	
+	$this->db->group_by('id_wilayah');
 	$this->db->order_by('id_wilayah','DESC');
 	$query=$this->db->get();
 	return $query->result();

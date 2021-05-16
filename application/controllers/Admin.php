@@ -695,7 +695,7 @@ function hapus_wilayah($id) {
 		'msg'=> 'Data Berhasil di Hapus',
 		'status'=> 'success'
 	));
-	activity_log('Hapus Wilayah',$i);
+	activity_log('Hapus Wilayah',$id);
 	redirect('admin/wilayah/wilayah');
 }
 
